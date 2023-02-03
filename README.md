@@ -4,4 +4,4 @@
 
 ---
 
-[Github][https://github.com/cavinhartono/ujikom-pos.git]
+[Github](https://github.com/cavinhartono/ujikom-pos.git)
