@@ -1,0 +1,55 @@
+:root {
+    --primary-color: hsl(208, 100%, 25%);
+    --secondary-color: hsl(44, 100%, 69%);
+    --third-color: linear-gradient(
+        to right,
+        hsl(207, 90%, 77%),
+        hsl(207, 96%, 45%)
+    );
+    --fourth-color: linear-gradient(
+        to right,
+        hsl(23, 100%, 79%),
+        hsl(344, 99%, 72%)
+    );
+    --fifth-color: linear-gradient(
+        to right,
+        hsl(175, 53%, 68%),
+        hsl(171, 93%, 42%)
+    );
+    --black-primary: hsl(0, 0%, 13%);
+    --black-secondary: hsla(0, 0%, 13%, 0.75);
+    --white-primary: hsl(0, 0%, 100%);
+    --white-secondary: #f5f5f5;
+    --boxShadow-primary: 0px 8px 45px rgba(34, 34, 34, 0.1);
+    --boxShadow-secondary: 8px 8px 45px var(--white-primary),
+        -8px -8px 45px rgba(34, 34, 34, 0.1);
+    --sm: 1rem;
+    --md: 1.5rem;
+    --lg: 2rem;
+    --xl: 3rem;
+    --button: var(--md) var(--sm);
+    --fm-first: "Sharp Sans", sans-serif;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--fm-first);
+}
+
+svg {
+    width: 24px;
+    height: 24px;
+    color: inherit;
+}
+
+.photo {
+    width: initial;
+    height: inherit;
+}
