@@ -1,1 +1,249 @@
 @import url("master.css");
+
+body {
+    background: var(--white-third);
+}
+
+.container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 325px;
+    height: 100vh;
+    display: flex;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+}
+
+.navbar-side.active {
+    background: var(--white-primary);
+}
+
+.navbar-side {
+    width: 80px;
+    height: 100%;
+    padding: var(--md);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--white-third);
+    transition: 1s;
+}
+
+.navbar-side.active .btn {
+    box-shadow: var(--boxShadow-primary);
+}
+
+.navbar-brand {
+    padding: var(--md);
+    width: 100%;
+    background: var(--white-primary);
+    transform: none;
+    visibility: visible;
+    transition: 0.3s;
+    z-index: -1;
+}
+
+.navbar-brand.active {
+    visibility: hidden;
+    transform: translateX(-100%);
+}
+
+.content {
+    position: relative;
+    width: calc(100% - 325px);
+    transition: 0.3s;
+}
+
+.content.active {
+    width: calc(100% - 80px);
+}
+
+.top,
+.bottom {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: var(--sm);
+    color: var(--black-primary);
+}
+
+.list .photo {
+    margin: 10px 0;
+    border-radius: 8px;
+    width: var(--lg);
+    height: var(--lg);
+}
+
+.profile-name {
+    margin: 10px 0;
+    padding: 8px 0;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+}
+
+.profile-name .title {
+    font-size: 16px;
+}
+
+.profile-name .subtitle {
+    font-size: 12px;
+}
+
+.nav-item {
+    margin: var(--md) 0;
+}
+
+.nav-item .list {
+    margin-bottom: 8px;
+}
+
+.nav-item .link {
+    display: flex;
+    align-items: center;
+    gap: var(--sm);
+    color: var(--black-secondary);
+}
+
+.nav-item .list.active .link {
+    color: var(--black-primary);
+}
+
+.nav-item .icon {
+    width: 16px;
+    height: 16px;
+}
+
+.nav-item .link {
+    display: flex;
+    align-items: center;
+}
+
+.content .header {
+    position: fixed;
+    width: calc(100% - 325px);
+    padding: var(--sm) var(--md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+    z-index: 10;
+}
+
+.content .header .action {
+    display: flex;
+    gap: 8px;
+}
+
+.action .list {
+    box-shadow: var(--boxShadow-primary);
+}
+
+.header .input {
+    width: 280px;
+    display: flex;
+    gap: var(--sm);
+    padding: 8px;
+    background: var(--white-primary);
+    border-radius: 45px;
+    box-shadow: 0px 8px 90px rgba(34, 34, 34, 0.1);
+}
+
+.content.active .header {
+    width: calc(100% - 80px);
+}
+
+.logo .title {
+    color: var(--black-primary);
+}
+
+.card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin: var(--sm) 0;
+}
+
+.overview {
+    margin: var(--xl) 0;
+}
+
+.card .list {
+    position: relative;
+    width: 500px;
+    height: 200px;
+    padding: var(--lg);
+    overflow: hidden;
+    border-radius: 4px;
+}
+
+.card .list::before,
+.card .list::after {
+    content: "";
+    /* content: "80%";
+    display: flex;
+    justify-content: center;
+    align-items: center; */
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: var(--white-third);
+    opacity: 0.5;
+    border-radius: 50%;
+}
+
+.card .list::before {
+    top: -25px;
+    right: -40px;
+}
+
+.card .list::after {
+    bottom: -25px;
+    right: 30px;
+}
+
+.card .subtitle {
+    font-size: var(--md);
+    font-weight: 700;
+    color: var(--white-fourth);
+}
+
+.label .title {
+    font-weight: 700;
+}
+
+.subtitle.value {
+    font-size: var(--sm);
+    font-weight: 600;
+    color: var(--white-primary);
+}
+
+.charts {
+    display: flex;
+    justify-content: space-between;
+}
+
+.gap {
+    gap: var(--sm);
+}
+
+.full-content .table {
+    margin: var(--sm) 0;
+}
+
+.charts .list {
+    width: var(--width);
+    padding: var(--md);
+    background: var(--white-primary);
+    border-radius: 4px;
+}

@@ -1,5 +1,6 @@
 :root {
     --primary-color: hsl(208, 100%, 25%);
+    --primary-color-700: rgba(0, 68, 128, 0.75);
     --secondary-color: hsl(44, 100%, 69%);
     --third-color: linear-gradient(
         to right,
@@ -20,6 +21,8 @@
     --black-secondary: hsla(0, 0%, 13%, 0.75);
     --white-primary: hsl(0, 0%, 100%);
     --white-secondary: #f5f5f5;
+    --white-third: #fedeff;
+    --white-fourth: rgba(255, 255, 255, 0.75);
     --boxShadow-primary: 0px 8px 45px rgba(34, 34, 34, 0.1);
     --boxShadow-secondary: 8px 8px 45px var(--white-primary),
         -8px -8px 45px rgba(34, 34, 34, 0.1);
@@ -44,12 +47,94 @@
 }
 
 svg {
-    width: 24px;
-    height: 24px;
+    width: inherit;
+    height: inherit;
     color: inherit;
 }
 
 .photo {
     width: initial;
     height: inherit;
+}
+
+input {
+    outline: none;
+    border: none;
+    background: transparent;
+    padding-right: 45px;
+}
+
+.full-content {
+    position: relative;
+
+    width: 100%;
+}
+
+.link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.btn {
+    background: var(--white-primary);
+}
+
+.rounded {
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    font-size: var(--md);
+    font-weight: 600;
+}
+
+.subtitle {
+    font-size: var(--sm);
+    font-weight: 600;
+}
+
+.list {
+    list-style-type: none;
+}
+
+.overview {
+    padding: var(--md);
+}
+
+.between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.table {
+    border-collapse: collapse;
+    background: var(--white-primary);
+    border-radius: 4px;
+}
+
+th {
+    text-align: left;
+    border-bottom: 1px solid var(--black-secondary);
+}
+
+td,
+th {
+    padding: var(--sm) var(--md);
+}
+
+tr:nth-child(even) td {
+    border-top: 1px solid var(--black-primary);
+    border-bottom: 1px solid var(--black-primary);
+}
+
+td {
+    font-weight: 500;
+    color: var(--black-primary);
 }
