@@ -5,7 +5,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="../../css/styles.css" />
-        <link rel="stylesheet" href="/public/assets/js/plugins/apexchart.css" />
         <title>Document</title>
     </head>
     <body>
@@ -256,236 +255,24 @@
                     </ul>
                 </header>
                 <div class="overview">
-                    <div class="label">
-                        <h2 class="title">Dashboard</h2>
-                    </div>
-                    <div class="full-content gap">
-                        <ul class="card">
-                            <li
-                                class="list"
-                                style="background: var(--fifth-color)"
-                            >
-                                <h2 class="subtitle">Total Sales</h2>
-                                <h2 class="subtitle value">IDR. 90.000.000</h2>
-                            </li>
-                            <li
-                                class="list"
-                                style="background: var(--third-color)"
-                            >
-                                <h2 class="subtitle">Orders</h2>
-                                <h2 class="subtitle value">600 Orang</h2>
-                            </li>
-                            <li
-                                class="list"
-                                style="background: var(--fourth-color)"
-                            >
-                                <h2 class="subtitle">Customers</h2>
-                                <h2 class="subtitle value">900 Orang</h2>
-                            </li>
-                        </ul>
-                        <ul class="full-content charts gap">
-                            <li
-                                class="list"
-                                style="--width: calc(100% - 350px)"
-                            >
-                                <h2 class="subtitle">Revenue</h2>
-                                <div class="full-content">
-                                    <div id="totalSales"></div>
-                                </div>
-                            </li>
-                            <li class="list" style="--width: 350px">
-                                <h2 class="subtitle">Kategori</h2>
-                                <div class="content">
-                                    <div id="category"></div>
-                                </div>
-                            </li>
-                        </ul>
-                        <div class="full-content">
-                            <div class="full-content customer">
-                                <table class="table full-content">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Last Seen</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Marselinus Cavin Hartono</td>
-                                            <td>2 jam yang lalu</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Divarianty Calista Hartono</td>
-                                            <td>5 jam yang lalu</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                    <div class="full-content">
+                        <div class="label">
+                            <h2 class="title">Edit Form Coca Cola</h2>
+                            <h2 class="subtitle">Mengedit suatu produk</h2>
                         </div>
+                        <form action="" method="POST" class="form">
+                            @csrf @method('PUT')
+                            <div class="img">
+                                <img src="" class="photo" />
+                            </div>
+                            <div class="field">
+                                <div class="input"></div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </section>
         <script src="/public/assets/js/script.js"></script>
-        <script src="/public/assets/js/plugins/apexchart.min.js"></script>
-        <script>
-            var AreaOptions = {
-                series: [
-                    {
-                        name: "series1",
-                        data: [31, 40, 28, 51, 42, 109, 100],
-                    },
-                    {
-                        name: "series2",
-                        data: [11, 32, 45, 32, 34, 52, 41],
-                    },
-                ],
-                chart: {
-                    height: 350,
-                    type: "area",
-                },
-                dataLabels: {
-                    enabled: false,
-                },
-                stroke: {
-                    curve: "smooth",
-                },
-                xaxis: {
-                    type: "datetime",
-                    categories: [
-                        "2018-09-19T00:00:00.000Z",
-                        "2018-09-19T01:30:00.000Z",
-                        "2018-09-19T02:30:00.000Z",
-                        "2018-09-19T03:30:00.000Z",
-                        "2018-09-19T04:30:00.000Z",
-                        "2018-09-19T05:30:00.000Z",
-                        "2018-09-19T06:30:00.000Z",
-                    ],
-                },
-                tooltip: {
-                    x: {
-                        format: "dd/MM/yy HH:mm",
-                    },
-                },
-            };
-
-            var Area = new ApexCharts(
-                document.querySelector("#totalSales"),
-                AreaOptions
-            );
-            Area.render();
-
-            var PieOptions = {
-                chart: {
-                    type: "donut",
-                    width: 400,
-                },
-                colors: ["#2196f3", "#e2a03f", "#8738a7"],
-                dataLabels: {
-                    enabled: false,
-                },
-                legend: {
-                    position: "bottom",
-                    horizontalAlign: "center",
-                    fontSize: "16px",
-                    markers: {
-                        width: 10,
-                        height: 10,
-                    },
-                    itemMargin: {
-                        horizontal: 0,
-                        vertical: 8,
-                    },
-                },
-                plotOptions: {
-                    pie: {
-                        donut: {
-                            size: "65%",
-                            background: "transparent",
-                            labels: {
-                                show: true,
-                                name: {
-                                    show: true,
-                                    fontSize: "29px",
-                                    fontFamily: "Sharp Sans, sans-serif",
-                                    color: undefined,
-                                    offsetY: -10,
-                                },
-                                value: {
-                                    show: true,
-                                    fontSize: "26px",
-                                    fontFamily: "Quicksand, sans-serif",
-                                    color: "20",
-                                    offsetY: 16,
-                                    formatter: function (val) {
-                                        return val;
-                                    },
-                                },
-                                total: {
-                                    show: true,
-                                    showAlways: true,
-                                    label: "Total",
-                                    color: "#888ea8",
-                                    formatter: function (w) {
-                                        return w.globals.seriesTotals.reduce(
-                                            function (a, b) {
-                                                return a + b;
-                                            },
-                                            0
-                                        );
-                                    },
-                                },
-                            },
-                        },
-                    },
-                },
-                stroke: {
-                    show: true,
-                    width: 25,
-                },
-                series: [100, 100, 800],
-                labels: ["Kaos", "Hoodie", "Others"],
-                responsive: [
-                    {
-                        breakpoint: 1599,
-                        options: {
-                            chart: {
-                                width: "500px",
-                                height: "400px",
-                            },
-                            legend: {
-                                position: "bottom",
-                            },
-                        },
-                        breakpoint: 1439,
-                        options: {
-                            chart: {
-                                width: "300px",
-                                height: "390px",
-                            },
-                            legend: {
-                                position: "bottom",
-                            },
-                            plotOptions: {
-                                pie: {
-                                    donut: {
-                                        size: "65%",
-                                    },
-                                },
-                            },
-                        },
-                    },
-                ],
-            };
-
-            var Pie = new ApexCharts(
-                document.querySelector("#category"),
-                PieOptions
-            );
-            Pie.render();
-        </script>
     </body>
 </html>
