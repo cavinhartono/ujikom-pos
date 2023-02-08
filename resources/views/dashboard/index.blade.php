@@ -16,7 +16,7 @@
     </li>
     <li class="list" style="background: var(--fourth-color)">
       <h2 class="subtitle">Customers</h2>
-      <h2 class="subtitle value">900 Orang</h2>
+      <h2 class="subtitle value">{{ $customers->count() }} Orang</h2>
     </li>
   </ul>
   <ul class="full-content charts gap">
@@ -48,13 +48,174 @@
           <td>Marselinus Cavin Hartono</td>
           <td>2 jam yang lalu</td>
         </tr>
+        @forelse($customers as $customer)
         <tr>
-          <td>2</td>
-          <td>Calista Hartono Putri</td>
-          <td>5 jam yang lalu</td>
+          <td>{{ $customer->id }}</td>
+          <td>{{ $customer->name }}</td>
+          <td>{{ $customer->created_by }}</td>
         </tr>
+        @empty
+
+        @endforelse
       </tbody>
     </table>
   </div>
 </div>
 @endsection
+
+@push('js')
+<script src="{{ asset('assets/js/plugins/apexchart.min.js') }}"></script>
+<script>
+  var AreaOptions = {
+    series: [{
+        name: "series1",
+        data: [31, 40, 28, 51, 42, 109, 100],
+      },
+      {
+        name: "series2",
+        data: [11, 32, 45, 32, 34, 52, 41],
+      },
+    ],
+    chart: {
+      height: 350,
+      type: "area",
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      curve: "smooth",
+    },
+    xaxis: {
+      type: "datetime",
+      categories: [
+        "2018-09-19T00:00:00.000Z",
+        "2018-09-19T01:30:00.000Z",
+        "2018-09-19T02:30:00.000Z",
+        "2018-09-19T03:30:00.000Z",
+        "2018-09-19T04:30:00.000Z",
+        "2018-09-19T05:30:00.000Z",
+        "2018-09-19T06:30:00.000Z",
+      ],
+    },
+    tooltip: {
+      x: {
+        format: "dd/MM/yy HH:mm",
+      },
+    },
+  };
+
+  var Area = new ApexCharts(
+    document.querySelector("#totalSales"),
+    AreaOptions
+  );
+  Area.render();
+
+  var PieOptions = {
+    chart: {
+      type: "donut",
+      width: 400,
+    },
+    colors: ["#2196f3", "#e2a03f", "#8738a7"],
+    dataLabels: {
+      enabled: false,
+    },
+    legend: {
+      position: "bottom",
+      horizontalAlign: "center",
+      fontSize: "16px",
+      markers: {
+        width: 10,
+        height: 10,
+      },
+      itemMargin: {
+        horizontal: 0,
+        vertical: 8,
+      },
+    },
+    plotOptions: {
+      pie: {
+        donut: {
+          size: "65%",
+          background: "transparent",
+          labels: {
+            show: true,
+            name: {
+              show: true,
+              fontSize: "29px",
+              fontFamily: "Sharp Sans, sans-serif",
+              color: undefined,
+              offsetY: -10,
+            },
+            value: {
+              show: true,
+              fontSize: "26px",
+              fontFamily: "Quicksand, sans-serif",
+              color: "20",
+              offsetY: 16,
+              formatter: function(val) {
+                return val;
+              },
+            },
+            total: {
+              show: true,
+              showAlways: true,
+              label: "Total",
+              color: "#888ea8",
+              formatter: function(w) {
+                return w.globals.seriesTotals.reduce(
+                  function(a, b) {
+                    return a + b;
+                  },
+                  0
+                );
+              },
+            },
+          },
+        },
+      },
+    },
+    stroke: {
+      show: true,
+      width: 25,
+    },
+    series: [100, 100, 800],
+    labels: ["Kaos", "Hoodie", "Others"],
+    responsive: [{
+      breakpoint: 1599,
+      options: {
+        chart: {
+          width: "500px",
+          height: "400px",
+        },
+        legend: {
+          position: "bottom",
+        },
+      },
+      breakpoint: 1439,
+      options: {
+        chart: {
+          width: "300px",
+          height: "390px",
+        },
+        legend: {
+          position: "bottom",
+        },
+        plotOptions: {
+          pie: {
+            donut: {
+              size: "65%",
+            },
+          },
+        },
+      },
+    }, ],
+  };
+
+  var Pie = new ApexCharts(
+    document.querySelector("#category"),
+    PieOptions
+  );
+  Pie.render();
+</script>
+@endpush

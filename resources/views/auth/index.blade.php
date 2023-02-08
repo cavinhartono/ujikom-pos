@@ -72,12 +72,14 @@
     });
 
     var login = document.querySelector(".login");
-    var btn = document.querySelector('#btn');
+    var btn = document.querySelectorAll('#btn');
 
-    btn.onclick = function() {
-      document.querySelector('body').classList.toggle('aktif');
-      login.classList.toggle('aktif');
-    }
+    btn.forEach((item) => {
+      item.onclick = () => {
+        document.querySelector('body').classList.toggle('aktif');
+        login.classList.toggle('aktif');
+      }
+    });
   </script>
 </body>
 

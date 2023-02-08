@@ -90,10 +90,4 @@ class AuthController extends Controller
     {
         return view("guest.index");
     }
-
-    public function dashboard()
-    {
-        $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
-        return view('dashboard.index', compact(['users']));
-    }
 }

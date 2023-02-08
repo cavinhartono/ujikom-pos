@@ -103,6 +103,16 @@ textarea {
     color: var(--white-primary);
 }
 
+.online {
+    position: absolute;
+    top: 4px;
+    left: -4px;
+    width: var(--sm);
+    height: var(--sm);
+    background: var(--primary-color-700);
+    border-radius: 50%;
+}
+
 .rounded {
     padding: 8px;
     border-radius: 50%;

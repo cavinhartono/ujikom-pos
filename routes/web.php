@@ -20,23 +20,20 @@ use Illuminate\Support\Facades\Route;
 Route::controller(AuthController::class)->group(function () {
     Route::get('/auth', 'index');
     Route::post('/auth/login', 'login');
-    Route::post('/auth/register', 'login');
+    Route::post('/auth/register', 'register');
+    Route::get('/auth/logout', 'logout');
 });
 
 Route::middleware('IsLogin')->group(function () {
-    Route::middleware('can: kasir')->group(function () {
-        Route::controller(KasirController::class)->group(function () {
-            Route::get('/', 'index');
-            Route::post('/bayar', 'payment');
-        });
+    Route::controller(KasirController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::post('/bayar', 'payment');
     });
 
-    Route::middleware('can: admin')->group(function () {
-        Route::get('/', [DashboardController::class, 'index']);
-        Route::controller(ProductsController::class)->group(function () {
-            Route::get('/', 'index');
-            Route::get('/', 'index');
-            Route::get('/', 'index');
-        });
+    Route::get('/', [DashboardController::class, 'index']);
+    Route::controller(ProductsController::class)->group(function () {
+        Route::get('/product', 'index');
+        Route::get('/product/edit/{id}', 'edit');
+        Route::get('/product/delete/{id}', 'delete');
     });
 });

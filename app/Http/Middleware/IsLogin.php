@@ -20,7 +20,7 @@ class IsLogin
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
-            $lastSeen = now()->addMinutes(1);
+            $lastSeen = now()->addMinutes(2);
             Cache::put('user-isOnline' . Auth::user()->id, TRUE, $lastSeen);
             User::where('id', Auth::user()->id)->update(['last_seen' => now()]);
             return $next($request);

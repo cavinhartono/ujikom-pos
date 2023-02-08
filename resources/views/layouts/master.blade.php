@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
   <title>@stack('title')</title>
   @stack('css')
 </head>
@@ -56,10 +57,10 @@
             </a>
           </li>
           <li class="list btn rounded">
-            <a href="#" class="link">
+            <a href="/auth/logout" class="link">
               <span class="icon center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
-                  <title>ionicons-v5-o</title>
+                  <title>Keluar</title>
                   <path d="M160,240H320V96a16,16,0,0,0-16-16H64A16,16,0,0,0,48,96V416a16,16,0,0,0,16,16H304a16,16,0,0,0,16-16V272H160Z" />
                   <path d="M459.31,244.69,368,153.37,345.37,176l64,64H320v32h89.37l-64,64L368,358.63l91.31-91.32a16,16,0,0,0,0-22.62Z" />
                 </svg>
@@ -73,8 +74,8 @@
           <h2 class="title">Shop<b>cube</b></h2>
         </div>
         <div class="profile-name">
-          <h2 class="title">John Doe</h2>
-          <h2 class="subtitle">Admin</h2>
+          <h2 class="title">{{ Auth::user()->name }}</h2>
+          <h2 class="subtitle" style="text-transform: capitalize;">{{ Auth::user()->roles->first()->name }}</h2>
         </div>
         <ul class="nav-item">
           <li class="list active">
@@ -114,6 +115,26 @@
             </a>
           </li>
         </ul>
+
+        <ul class="friends">
+          @foreach($users as $user)
+          <li class="list center gap" style="position: relative;">
+            @if(Cache::has('user-isOnline'. $user->id))
+            <span class="online"></span>
+            @endif
+            <img src="{{ asset('assets/download.jpg') }}" class="photo">
+            <div class="field">
+              <h2 class="subtitle">{{ $user->name }}</h2>
+              <h2 class="subtitle" style="text-transform: capitalize;">
+                @foreach($user->roles as $role)
+                {{ $role->name }}
+                @endforeach
+              </h2>
+            </div>
+          </li>
+          @endforeach
+        </ul>
+
       </div>
     </nav>
     <div class="content">
@@ -123,7 +144,7 @@
             <a href="#" class="link">
               <span class="icon center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
-                  <title>ionicons-v5-l</title>
+                  <title>Pesan</title>
                   <path d="M128,464V384H56a24,24,0,0,1-24-24V72A24,24,0,0,1,56,48H456a24,24,0,0,1,24,24V360a24,24,0,0,1-24,24H245.74ZM456,80h0Z" />
                 </svg>
               </span>
@@ -133,7 +154,7 @@
             <a href="#" class="link">
               <span class="icon center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="auto" height="auto" fill="currentColor" viewBox="0 0 512 512">
-                  <title>ionicons-v5-j</title>
+                  <title>Notifikasi</title>
                   <path d="M256,480a80.09,80.09,0,0,0,73.3-48H182.7A80.09,80.09,0,0,0,256,480Z" />
                   <path d="M400,288V227.47C400,157,372.64,95.61,304,80l-8-48H216l-8,48c-68.88,15.61-96,76.76-96,147.47V288L64,352v48H448V352Z" />
                 </svg>
@@ -147,6 +168,7 @@
       </div>
     </div>
   </section>
+  <script src="{{ asset('assets/js/script.js') }}"></script>
   @stack('js')
 </body>
 

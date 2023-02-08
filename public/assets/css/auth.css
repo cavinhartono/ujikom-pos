@@ -5,7 +5,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: var(--first-color);
+    background: var(--primary-color-700);
     transition: 0.5s;
 }
 
@@ -45,7 +45,7 @@ body.aktif {
 }
 
 .login.aktif .blurBx .box h1 {
-    color: var(--first-color);
+    color: var(--primary-color-700);
 }
 
 .login .blurBx .box h1 {
@@ -56,7 +56,7 @@ body.aktif {
 }
 
 .login.aktif .blurBx .box button {
-    background: var(--first-color);
+    background: var(--primary-color-700);
     color: white;
 }
 
@@ -68,7 +68,7 @@ body.aktif {
     margin-top: 10px;
     background: var(--white-secondary);
     border-radius: 8px;
-    color: var(--first-color);
+    color: var(--primary-color-700);
     opacity: 0.75;
     transition: 0.5s;
 }
@@ -135,7 +135,7 @@ body.aktif {
     width: 13px;
     height: 13px;
     border-radius: 75% 15%;
-    border: 1px solid var(--first-color);
+    border: 1px solid var(--primary-color-700);
     background: var(--white-secondary);
     transform: rotate(45deg);
     cursor: pointer;
@@ -149,7 +149,7 @@ body.aktif {
     display: block;
     width: 5px;
     height: 5px;
-    border: 1px solid var(--first-color);
+    border: 1px solid var(--primary-color-700);
     background: var(--white-secondary);
     border-radius: 50%;
 }
@@ -161,7 +161,7 @@ body.aktif {
     height: 13px;
     border-radius: 75% 15%;
     /* border: 1px solid ; */
-    background: var(--first-color);
+    background: var(--primary-color-700);
     transform: rotate(45deg);
     cursor: pointer;
 }
@@ -175,7 +175,7 @@ body.aktif {
     width: 5px;
     height: 5px;
     border: 1px solid var(--white-secondary);
-    background: var(--first-color);
+    background: var(--primary-color-700);
     border-radius: 50%;
 }
 
@@ -205,7 +205,7 @@ body.aktif {
 .login .loginBx .form form h1 {
     font-size: 1.5em;
     margin-bottom: 10px;
-    color: var(--first-color);
+    color: var(--primary-color-700);
 }
 
 .login .loginBx .form form input {
@@ -220,7 +220,7 @@ body.aktif {
 
 .login .loginBx .form form input[type="submit"] {
     color: white;
-    background: var(--first-color);
+    background: var(--primary-color-700);
     opacity: 0.75;
     transition: 0.5s;
 }
