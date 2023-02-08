@@ -15,15 +15,15 @@
     <div class="field flex gap">
       <div class="input">
         <label for="name">Nama</label>
-        <input type="text" name="name" id="name" placeholder="Merek" value="{{ $product->name }}" />
+        <input class="input-form" type="text" name="name" id="name" placeholder="Merek" value="{{ $product->name }}" />
       </div>
       <div class="input">
         <label for="price">Harga</label>
-        <input type="number" name="price" id="price" placeholder="IDR. XXX" value="{{ $product->price }}" />
+        <input class="input-form" type="number" name="price" id="price" placeholder="IDR. XXX" value="{{ $product->price }}" />
       </div>
     </div>
     <div class="field">
-      <select name="category_id" id="category">
+      <select class="input-form" name="category_id" id="category">
         <option value="">Pilih</option>
         <option value="">Minuman</option>
         <option value="">Makanan</option>
@@ -32,7 +32,7 @@
     <div class="field">
       <div class="input">
         <label for="desc">Deskripsi</label>
-        <textarea name="desc" id="desc">{{ $product->desc }}</textarea>
+        <textarea class="input-form" name="desc" id="desc">{{ $product->desc }}</textarea>
       </div>
     </div>
     <div class="field">

@@ -247,3 +247,11 @@ body {
     background: var(--white-primary);
     border-radius: 4px;
 }
+
+.products,
+.customers {
+    position: relative;
+    padding: var(--md);
+    width: 100%;
+    background: var(--white-primary);
+}

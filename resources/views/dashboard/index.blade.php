@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@push('title')
+Dashboard | ShopCube
+@endpush
+
 @section('overview')
 <div class="label">
   <h2 class="title">Dashboard</h2>
@@ -33,8 +37,11 @@
       </div>
     </li>
   </ul>
-  <div class="full-content">
-    <table class="table full-content">
+  <div class="customers full-content" style="margin: var(--md) 0">
+    <div class="label">
+      <h2 class="subtitle">Pelanggan Terakhir</h2>
+    </div>
+    <table class="table full-content" style="margin-top: var(--md)">
       <thead>
         <tr>
           <th>ID</th>
@@ -180,7 +187,7 @@
       width: 25,
     },
     series: [100, 100, 800],
-    labels: ["Kaos", "Hoodie", "Others"],
+    labels: ['Makanan', 'Minunan', 'Lain-lain'],
     responsive: [{
       breakpoint: 1599,
       options: {

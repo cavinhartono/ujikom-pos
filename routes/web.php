@@ -30,10 +30,11 @@ Route::middleware('IsLogin')->group(function () {
         Route::post('/bayar', 'payment');
     });
 
-    Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::controller(ProductsController::class)->group(function () {
-        Route::get('/product', 'index');
-        Route::get('/product/edit/{id}', 'edit');
-        Route::get('/product/delete/{id}', 'delete');
+        Route::get('/products', 'index');
+        Route::get('/products/create', 'create');
+        Route::put('/products/edit/{id}', 'edit');
+        Route::get('/products/delete/{id}', 'delete');
     });
 });

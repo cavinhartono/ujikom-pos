@@ -4,14 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
     public function index()
     {
+        $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
         $products = Product::with('categories')->get();
-        return view('products.index', compact(['products']));
+        return view('products.index', compact(['products', 'users']));
+    }
+
+    public function create()
+    {
+        $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
+        $categories = Categories::all();
+        return view('products.create', compact(['categories', 'users']));
     }
 
     public function edit($id)

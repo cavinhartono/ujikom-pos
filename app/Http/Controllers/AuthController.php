@@ -34,7 +34,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($get)) {
             $name = explode(' ', trim(Auth::user()->name))[0];
-            return redirect('/')->with('success', "Selamat kembali, $name.");
+            return redirect('/dashboard')->with('success', "Selamat kembali, $name.");
         } else {
             return redirect('/auth')->withErrors('Email dan Password harus disesuaikan');
         }
@@ -84,10 +84,5 @@ class AuthController extends Controller
     {
         Auth::logout();
         return redirect('/auth');
-    }
-
-    public function homepage()
-    {
-        return view("guest.index");
     }
 }

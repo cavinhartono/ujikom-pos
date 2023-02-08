@@ -26,7 +26,7 @@
           <li class="list">
             <img src="/public/assets/download.jpg" class="photo" />
           </li>
-          <li class="list btn rounded" id="menu">
+          <li class="list btn whited rounded" id="menu">
             <span class="icon center">
               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
                 <title>ionicons-v5-j</title>
@@ -36,7 +36,7 @@
           </li>
         </ul>
         <ul class="bottom">
-          <li class="list btn rounded">
+          <li class="list btn whited rounded">
             <a href="#" class="link">
               <span class="icon center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
@@ -46,7 +46,7 @@
               </span>
             </a>
           </li>
-          <li class="list btn rounded">
+          <li class="list btn whited rounded">
             <a href="#" class="link">
               <span class="icon center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
@@ -56,7 +56,7 @@
               </span>
             </a>
           </li>
-          <li class="list btn rounded">
+          <li class="list btn whited rounded">
             <a href="/auth/logout" class="link">
               <span class="icon center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
@@ -78,8 +78,8 @@
           <h2 class="subtitle" style="text-transform: capitalize;">{{ Auth::user()->roles->first()->name }}</h2>
         </div>
         <ul class="nav-item">
-          <li class="list active">
-            <a href="#" class="link">
+          <li class="list {{ (request()->is('dashboard')) ? 'active' : '' }}">
+            <a href="/dashboard" class="link">
               <span class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="auto" fill="currentColor" height="auto" viewBox="0 0 512 512">
                   <title>ionicons-v5-i</title>
@@ -89,8 +89,8 @@
               <span class="subtitle">Dashboard</span>
             </a>
           </li>
-          <li class="list">
-            <a href="#" class="link">
+          <li class="list {{ (request()->is('transactions')) ? 'active' : '' }}">
+            <a href="/transactions" class="link">
               <span class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="auto" fill="currentColor" height="auto" viewBox="0 0 512 512">
                   <title>ionicons-v5-j</title>
@@ -101,8 +101,8 @@
               <span class="subtitle">Transaksi</span>
             </a>
           </li>
-          <li class="list">
-            <a href="#" class="link">
+          <li class="list {{ (request()->is('products')) ? 'active' : '' }}">
+            <a href="/products" class="link">
               <span class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="auto" fill="currentColor" height="auto" viewBox="0 0 512 512">
                   <title>ionicons-v5-h</title>
@@ -140,7 +140,7 @@
     <div class="content">
       <header class="header">
         <ul class="action">
-          <li class="list btn rounded">
+          <li class="list btn whited rounded">
             <a href="#" class="link">
               <span class="icon center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
@@ -150,7 +150,7 @@
               </span>
             </a>
           </li>
-          <li class="list btn rounded">
+          <li class="list btn whited rounded">
             <a href="#" class="link">
               <span class="icon center">
                 <svg xmlns="http://www.w3.org/2000/svg" width="auto" height="auto" fill="currentColor" viewBox="0 0 512 512">
