@@ -57,11 +57,22 @@ svg {
     height: inherit;
 }
 
-input {
+button {
+    border: none;
+    outline: none;
+}
+
+input,
+select,
+textarea {
+    margin: var(--sm) 0;
+    resize: none;
     outline: none;
     border: none;
-    background: transparent;
-    padding-right: 45px;
+    width: 100%;
+    padding: var(--sm);
+    border-radius: 4px;
+    background: var(--white-primary);
 }
 
 .full-content {
@@ -151,4 +162,20 @@ tr:nth-child(even) td {
 td {
     font-weight: 500;
     color: var(--black-primary);
+}
+
+.flex {
+    display: flex;
+}
+
+.field {
+    width: 100%;
+}
+
+.input {
+    width: 100%;
+}
+
+.field label {
+    font-weight: 600;
 }

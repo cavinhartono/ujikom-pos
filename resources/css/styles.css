@@ -133,7 +133,7 @@ body {
     width: calc(100% - 325px);
     padding: var(--sm) var(--md);
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     transition: 0.3s;
     z-index: 10;

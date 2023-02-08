@@ -65,7 +65,7 @@ class AuthController extends Controller
         ];
 
         $user = User::create($create);
-        $user->assignRole('customer');
+        $user->assignRole('user');
 
         $get = [
             'email' => $request->email,
