@@ -55,11 +55,11 @@ Dashboard | ShopCube
           <td>Marselinus Cavin Hartono</td>
           <td>2 jam yang lalu</td>
         </tr>
-        @forelse($customers as $customer)
+        @forelse($customerLast as $customer)
         <tr>
           <td>{{ $customer->id }}</td>
           <td>{{ $customer->name }}</td>
-          <td>{{ $customer->created_by }}</td>
+          <td>{{ Carbon\Carbon::parse($customer->created_at)->diffForHumans() }}</td>
         </tr>
         @empty
 
@@ -73,6 +73,10 @@ Dashboard | ShopCube
 @push('js')
 <script src="{{ asset('assets/js/plugins/apexchart.min.js') }}"></script>
 <script>
+  var foods = <?php echo json_encode($foods) ?>;
+  var drinks = <?php echo json_encode($drinks) ?>;
+  var others = <?php echo json_encode($others) ?>;
+
   var AreaOptions = {
     series: [{
         name: "series1",
@@ -186,7 +190,7 @@ Dashboard | ShopCube
       show: true,
       width: 25,
     },
-    series: [100, 100, 800],
+    series: [foods, drinks, others],
     labels: ['Makanan', 'Minunan', 'Lain-lain'],
     responsive: [{
       breakpoint: 1599,

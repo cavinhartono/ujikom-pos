@@ -12,8 +12,11 @@ class DashboardController extends Controller
     public function index()
     {
         $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
-        $categories = Categories::all();
+        $foods = Categories::where('name', 'LIKE', "makanan")->count();
+        $drinks = Categories::where('name', 'LIKE', "minunan")->count();
+        $others = Categories::where('name', 'NOT LIKE', "makanan")->where('name', 'NOT LIKE', "minunan")->count();
         $customers = Customer::all();
-        return view('dashboard.index', compact(['users', 'customers', 'categories']));
+        $customerLast = Customer::orderBy('created_at', 'DESC')->paginate(5);
+        return view('dashboard.index', compact(['users', 'customers', 'customerLast', 'foods', 'drinks', 'others']));
     }
 }

@@ -115,7 +115,7 @@ body {
 }
 
 .nav-item .list.active .link {
-    color: var(--black-primary);
+    color: var(--primary-color);
 }
 
 .nav-item .icon {

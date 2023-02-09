@@ -114,7 +114,7 @@ body.aktif {
 
 .login .loginBx .form .passwordBx input {
     border: none;
-    margin-bottom: 0;
+    margin: 0;
 }
 
 .passwordBx .lihatPassword {

@@ -4,6 +4,9 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KasirController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +31,21 @@ Route::middleware('IsLogin')->group(function () {
     Route::controller(KasirController::class)->group(function () {
         Route::get('/', 'index');
         Route::post('/bayar', 'payment');
+    });
+    
+    Route::controller(ReportsController::class)->group(function() {
+        Route::get('/reports', 'index');
+        Route::get('/print', 'print');
+    });
+
+    Route::controller(UsersController::class)->group(function() {
+        Route::get('/users', 'index');
+        Route::put('/users/{id}', 'edit');
+        Route::post('/users/{id}/store', 'update');
+    });
+
+    Route::controller(TransactionController::class)->group(function() {
+        Route::get('/transactions', 'index');
     });
 
     Route::get('/dashboard', [DashboardController::class, 'index']);

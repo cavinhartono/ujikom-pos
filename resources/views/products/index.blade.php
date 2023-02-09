@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@push('css')
+<link rel="stylesheet" href="{{ asset('assets/js/plugins/jquery.dataTables.min.css') }}">
+@endpush
+
 @section('overview')
 <div class="label" style="margin-bottom: var(--md);">
   <h2 class="title">Produk</h2>
@@ -13,7 +17,7 @@
       </div>
     </div>
   </div>
-  <table class="table" style="margin-top: var(--md)">
+  <table class="table" id="table" style="margin-top: var(--md)">
     <thead>
       <tr>
         <th>ID</th>
@@ -61,5 +65,35 @@
     </tbody>
   </table>
 </div>
-
 @endsection
+
+@push('js')
+<!-- <script src="{{ asset('assets/js/plugins/jquery.js') }}"></script>
+<script src="{{ asset('assets/js/plugins/jquery.dataTables.min.js') }}"></script> -->
+<!-- <script>
+  $(document).ready(function() {
+    $('#table').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: '{{ url()->current() }}',
+      columns: [{
+          data: 'id',
+          name: 'id'
+        },
+        {
+          data: 'name',
+          name: 'name'
+        },
+        {
+          data: 'image',
+          name: 'image'
+        },
+        {
+          data: 'image',
+          name: 'image'
+        },
+      ]
+    });
+  });
+</script> -->
+@endpush
