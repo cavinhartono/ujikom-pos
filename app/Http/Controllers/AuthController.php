@@ -14,17 +14,45 @@ class AuthController extends Controller
         return view('auth.index');
     }
 
-    public function settings($id)
+    public function settings()
     {
-        $user = User::find($id);
+        $user = User::with('roles')->findOrFail(Auth::user()->id);
         $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
-        return view('auth.settings', compact(['user', 'users']));
+        if ($user) {
+            return view('auth.settings', compact(['user', 'users']));
+        } else {
+            return "Gagal";
+        }
     }
 
-    public function update(Request $request, $id)
+    public function updateSettings(Request $request)
     {
-        $user = User::find($id);
-        $user->update($request->all());
+        $request->validate(
+            [
+                'name' => 'required',
+                'password' => 'required',
+            ],
+            [
+                'name.required' => 'Nama harus disesuaikan',
+                'password.required' => 'Password harus disesuaikan',
+            ]
+        );
+
+        $user = User::with('roles')->findOrFail(Auth::user()->id);
+
+        $update = [
+            $user->update([
+                'name' => $request->name,
+                'password' => Hash::make($request->password),
+            ])
+        ];
+
+        if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
+            $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
+        }
+
+        $user->update($update);
+
         return redirect('/dashboard')->with('success', `$request->name telah dirubah.`);
     }
 
@@ -75,7 +103,6 @@ class AuthController extends Controller
             'name' => $request->name,
             'password' => Hash::make($request->password),
             'email' => $request->email,
-            'phone_number' => $request->phone_number
         ];
 
         $user = User::create($create);

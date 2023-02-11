@@ -37,7 +37,7 @@
         </ul>
         <ul class="bottom">
           <li class="list btn whited rounded">
-            <a href="/auth/settings/{{ Auth::user()->id }}" class="link">
+            <a href="/auth/settings" class="link">
               <span class="icon center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
                   <title>Pengaturan</title>
@@ -146,7 +146,7 @@
             @if(Cache::has('user-isOnline'. $user->id))
             <span class="online"></span>
             @endif
-            <img src="{{ asset('assets/download.jpg') }}" class="photo">
+            <img src="{{ $user->getFirstMediaUrl('avatar', 'thumb') }}" class="photo">
             <div class="field">
               <h2 class="subtitle">{{ $user->name }}</h2>
               <h2 class="subtitle" style="text-transform: capitalize;">

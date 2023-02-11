@@ -5,7 +5,7 @@
   <h2 class="title">Pengaturan</h2>
 </div>
 <div class="auth">
-  <form action="/auth/update/{{ $user->id }}" method="POST" class="form">
+  <form action="/auth/update" method="POST" class="form" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="field">
