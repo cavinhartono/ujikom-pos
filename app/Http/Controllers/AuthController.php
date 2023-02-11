@@ -17,7 +17,15 @@ class AuthController extends Controller
     public function settings($id)
     {
         $user = User::find($id);
-        return view('auth.settings', compact(['user']));
+        $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
+        return view('auth.settings', compact(['user', 'users']));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::find($id);
+        $user->update($request->all());
+        return redirect('/dashboard')->with('success', `$request->name telah dirubah.`);
     }
 
     public function login(Request $request)

@@ -25,7 +25,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/auth/login', 'login');
     Route::post('/auth/register', 'register');
     Route::get('/auth/logout', 'logout');
-    Route::put('/auth/settings/{$id}', 'settings')->middleware('IsLogin');
+    Route::get('/auth/settings/{id}', 'settings')->middleware('IsLogin');
+    Route::put('/auth/update/{id}', 'update')->middleware('IsLogin');
 });
 
 Route::middleware('IsLogin')->group(function () {

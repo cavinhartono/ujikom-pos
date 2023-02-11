@@ -218,3 +218,7 @@ td {
     background: var(--white-primary);
     box-shadow: var(--boxShadow-primary);
 }
+
+.input-form[type="file"] {
+    border: 1px solid var(--primary-color-700);
+}

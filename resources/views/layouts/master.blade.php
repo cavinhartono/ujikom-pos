@@ -24,7 +24,7 @@
             </span>
           </li>
           <li class="list">
-            <img src="/public/assets/download.jpg" class="photo" />
+            <img src="{{ Auth::user()->getFirstMediaUrl('avatar', 'thumb') }}" class="photo" />
           </li>
           <li class="list btn whited rounded" id="menu">
             <span class="icon center">
