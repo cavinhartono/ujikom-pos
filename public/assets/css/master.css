@@ -35,6 +35,10 @@
     --fm-first: "Sharp Sans", sans-serif;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 .container {
     position: relative;
     width: 100%;
@@ -163,6 +167,13 @@ textarea {
     border-collapse: collapse;
     background: var(--white-primary);
     box-shadow: var(--boxShadow-secondary);
+    border-radius: 12px;
+}
+
+.form {
+    background: var(--white-primary);
+    box-shadow: 0px 8px 12px rgba(34, 34, 34, 0.1);
+    padding: var(--md);
     border-radius: 12px;
 }
 

@@ -32,7 +32,7 @@ class ProductsController extends Controller
 
     public function store(Request $request)
     {
-        $product = Product::create([$request->all()]);
+        $product = Product::create($request->all());
         if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
             $product->addMediaFromRequest('avatar')->toMediaCollection('avatar');
         }

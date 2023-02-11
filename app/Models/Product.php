@@ -4,20 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Psy\CodeCleaner\AssignThisVariablePass;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Product extends Model
+class Product extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
+
+    protected $table = 'products';
+    protected $fillable = [
+        'category_id', 'name', 'barcode', 'qty', 'price'
+    ];
 
     public function categories()
     {
         return $this->belongsTo(Categories::class);
-    }
-
-    public function getImageAttribute()
-    {
-        return $this->getMedia('image')->last();
     }
 }

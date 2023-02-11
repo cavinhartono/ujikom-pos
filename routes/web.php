@@ -25,6 +25,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/auth/login', 'login');
     Route::post('/auth/register', 'register');
     Route::get('/auth/logout', 'logout');
+    Route::put('/auth/settings/{$id}', 'settings')->middleware('IsLogin');
 });
 
 Route::middleware('IsLogin')->group(function () {
@@ -32,25 +33,26 @@ Route::middleware('IsLogin')->group(function () {
         Route::get('/', 'index');
         Route::post('/bayar', 'payment');
     });
-    
-    Route::controller(ReportsController::class)->group(function() {
+
+    Route::controller(ReportsController::class)->group(function () {
         Route::get('/reports', 'index');
         Route::get('/print', 'print');
     });
 
-    Route::controller(UsersController::class)->group(function() {
+    Route::controller(UsersController::class)->group(function () {
         Route::get('/users', 'index');
         Route::put('/users/{id}', 'edit');
         Route::post('/users/{id}/store', 'update');
     });
 
-    Route::controller(TransactionController::class)->group(function() {
+    Route::controller(TransactionController::class)->group(function () {
         Route::get('/transactions', 'index');
     });
 
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::controller(ProductsController::class)->group(function () {
         Route::get('/products', 'index');
+        Route::post('/products/store', 'store');
         Route::get('/products/create', 'create');
         Route::put('/products/edit/{id}', 'edit');
         Route::get('/products/delete/{id}', 'delete');

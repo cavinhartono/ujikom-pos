@@ -14,6 +14,12 @@ class AuthController extends Controller
         return view('auth.index');
     }
 
+    public function settings($id)
+    {
+        $user = User::find($id);
+        return view('auth.settings', compact(['user']));
+    }
+
     public function login(Request $request)
     {
         $request->validate(

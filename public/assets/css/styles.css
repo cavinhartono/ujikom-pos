@@ -255,3 +255,7 @@ body {
     width: 100%;
     background: var(--white-primary);
 }
+
+.label .field .input-form {
+    margin: 0;
+}
