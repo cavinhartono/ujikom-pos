@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KasirController;
 use App\Http\Controllers\ProductsController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Contracts\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +33,7 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::middleware('IsLogin')->group(function () {
     Route::controller(KasirController::class)->group(function () {
-        Route::get('/', 'index');
+        Route::get('/dashboard/cashier', 'index');
         Route::post('/bayar', 'payment');
     });
 
@@ -55,7 +57,11 @@ Route::middleware('IsLogin')->group(function () {
         Route::get('/products', 'index');
         Route::post('/products/store', 'store');
         Route::get('/products/create', 'create');
+        Route::post('/products/search', 'search');
         Route::put('/products/edit/{id}', 'edit');
         Route::get('/products/delete/{id}', 'delete');
     });
+
+    Route::resource('/dashboard/carts', CartController::class);
+    Route::post('/carts/scan', [CartController::class, 'scan']);
 });

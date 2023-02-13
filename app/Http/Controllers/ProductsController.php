@@ -52,4 +52,11 @@ class ProductsController extends Controller
         $product->delete();
         return redirect('/products')->with('success', `$request->name telah dihapus`);
     }
+
+    public function search(Request $request)
+    {
+        $products = Product::where('name', 'like', '%' . $request->search . '%')->get();
+
+        return json_encode($products);
+    }
 }

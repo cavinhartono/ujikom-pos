@@ -76,7 +76,10 @@ class AuthController extends Controller
 
         if (Auth::attempt($get)) {
             $name = explode(' ', trim(Auth::user()->name))[0];
-            return redirect('/dashboard')->with('success', "Selamat kembali, $name.");
+            if (Auth::user()->roles->first()->name == 'admin') {
+                return redirect('/dashboard')->with('success', "Selamat kembali, $name.");
+            }
+            return redirect('/dashboard/cashier')->with('success', "Selamat kembali, $name.");
         } else {
             return redirect('/auth')->withErrors('Email dan Password harus disesuaikan');
         }
