@@ -2,7 +2,6 @@
 
 @push('css')
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<link rel="stylesheet" href="{{ asset('assets/js/plugins/jquery.dataTables.min.css') }}">
 @endpush
 
 @push('title')
@@ -11,17 +10,19 @@ Cashier | Shopcube
 
 @section('overview')
 <div class="content full-content between gap">
-  <form class="form" style="margin: var(--md) 0;">
-    <div class="field">
-      <div class="input flex gap">
-        <input type="text" placeholder="Barcode" id="productCode" class="input-form">
-        <button class="btn primary" id="find" style="display: block">Cari</button>
+  <div class="content" style="width: 900px;">
+    <form class="form" style="margin: var(--md) 0;">
+      <div class="field">
+        <div class="input flex gap">
+          <input type="text" placeholder="Barcode" id="productCode" class="input-form">
+          <button class="btn primary" id="find" style="display: block">Cari</button>
+        </div>
       </div>
-    </div>
+    </form>
     <ul class="products flex" style="margin: var(--md) 0; gap: var(--sm)">
       @forelse($products as $product)
       <li class="list">
-        <button class="btn card" id="card" style="cursor: pointer; border: none;" value="{{ $product->id }}">
+        <button type="button" class="btn card" id="item" style="cursor: pointer; border: none;" value="{{ $product->id }}">
           <div class="img">
             <img src="{{ $product->getFirstMediaUrl('avatar', 'thumb') }}" class="photo">
           </div>
@@ -37,9 +38,9 @@ Cashier | Shopcube
       </li>
       @endforelse
     </ul>
-  </form>
+  </div>
   <div class="dashboard">
-    <table class="table">
+    <table class="table" style="overflow: scroll;">
       <div class="field">
         <div class="input">
           <input type="text" class="input-form" id="search">
@@ -52,30 +53,36 @@ Cashier | Shopcube
           <th>Harga</th>
         </tr>
       </thead>
-      <tbody></tbody>
+      <tbody id="tbody"></tbody>
     </table>
     <form action="/transaction/store" method="POST" class="form">
       @csrf
-      <div class="field">
-        <div class="input" style="text-align: right;">
+      <div class="field flex gap" style="justify-content: flex-end; align-items: flex-end;">
+        <div class="input flex" style="flex-direction: column; align-items: flex-end;">
           <label for="total">Total</label>
-          <input type="number" value="" class="input-form" name="price" id="total" readonly>
+          <div class="center gap">
+            <input type="number" style="padding: 0; text-align: end;" value="" class="title" name="price" id="total" readonly disabled>
+            <h2 class="title">IDR </h2>
+          </div>
         </div>
       </div>
-      <div class="field flex gap">
-        <div class="input">
-          <label for="accept">Uang Tunai</label>
-          <input type="number" class="input-form" name="accept" id="accept">
-        </div>
+      <div class="field between gap" style="margin: var(--md) 0;">
         <div class="input">
           <label for="return">Kembalian</label>
-          <input type="number" value="" class="input-form" name="return" id="return" readonly>
+          <div class="center gap">
+            <h2 class="title">IDR </h2>
+            <input type="number" style="padding: 0;" value="" class="title" name="return" id="return" readonly disabled>
+          </div>
+        </div>
+        <div class="input flex" style="flex-direction: column;">
+          <label for="accept" style="text-align: end;">Uang Tunai</label>
+          <div class="center gap">
+            <input type="number" style="padding: 0;" class="title" name="accept" id="accept">
+            <h2 class="title">IDR</h2>
+          </div>
         </div>
       </div>
-      <div class="field flex gap">
-        <div class="input">
-          <button class="btn danger">Cancel</button>
-        </div>
+      <div class="field" style="margin: var(--md) 0;">
         <div class="input">
           <button class="btn primary">Pay</button>
         </div>
@@ -87,20 +94,20 @@ Cashier | Shopcube
 
 @push('js')
 <script src="{{ asset('assets/js/plugins/jquery.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/jquery.dataTables.min.js') }}"></script>
 <script>
   $(document).ready(function() {
+    // Sukses
     function getCarts() {
       $.ajax({
         type: 'get',
-        url: '/dashboard/cashier/carts',
+        url: 'carts',
         dataType: 'json',
-        success: (response) => {
-          let total = 0
-          $('tbody').html("")
-          $.each(response.carts, (key, product) => {
+        success: function(response) {
+          let total = 0;
+          $('#tbody').html("");
+          $.each(response.carts, function(key, product) {
             total += product.price * product.qty
-            $('tbody').append(`
+            $('#tbody').append(`
               <tr>
                 <td>${product.name}</td>
                 <td class="flex">
@@ -112,7 +119,7 @@ Cashier | Shopcube
                   ))}
                   </select>
                   <input type="hidden" id="cartId" class="input-form" value="${product.id}">
-                  <button class="btn danger" value="${product.id}">Delete</button>
+                  <button type="button" class="btn danger" value="${product.id}">Delete</button>
                 </td>
                 <td style="text-align: right;">
                   ${product.qty * product.price}
@@ -120,13 +127,14 @@ Cashier | Shopcube
               </tr>
             `)
           });
-          const value = $('#total').attr('value', `${total}`);
+          const value = $('#total').attr('value', total);
         },
       });
     }
 
     getCarts();
 
+    // Sukses
     $(document).on('change', '#accept', function() {
       const received = $(this).val();
       const total = $('#total').val();
@@ -146,12 +154,12 @@ Cashier | Shopcube
 
       $.ajax({
         type: 'put',
-        url: `/dashboard/cashier/carts/${cartId}`,
+        url: `/carts/${cartId}`,
         data: {
           qty
         },
         dataType: 'json',
-        success: (response) => {
+        success: function(response) {
           if (response.status === 400) {
             alert(response.message);
           }
@@ -160,6 +168,7 @@ Cashier | Shopcube
       })
     })
 
+    // Sukses
     $(document).on('keyup', '#search', function() {
       const search = $(this).val();
 
@@ -176,12 +185,12 @@ Cashier | Shopcube
           search
         },
         dataType: 'json',
-        success: (response) => {
+        success: function(response) {
           $('.products').html("");
-          $.each(response, (key, product) => {
+          $.each(response, function(key, product) {
             $('.products').append(`
             <li class="list">
-              <button class="btn card" style="cursor: pointer; border: none;" value="${product.id}">
+              <button type="button" class="btn card" id="item" style="cursor: pointer; border: none;" value="${product.id}">
                 <div class="img">
                   <img src="" class="photo" />  
                 </div>
@@ -208,8 +217,8 @@ Cashier | Shopcube
 
       $.ajax({
         type: 'delete',
-        url: `/dashboard/cashier/carts/${cartId}`,
-        success: (response) => {
+        url: `/carts/${cartId}`,
+        success: function(response) {
           if (response.status === 400) {
             alert(response.message);
           }
@@ -229,12 +238,12 @@ Cashier | Shopcube
 
       $.ajax({
         type: 'post',
-        url: `/dashboard/cashier/carts`,
+        url: `/carts`,
         data: {
           productCode
         },
         dataType: 'json',
-        success: (response) => {
+        success: function(response) {
           if (response.status === 400 || response.status === 500) {
             alert(response.message);
           }
@@ -243,7 +252,7 @@ Cashier | Shopcube
       })
     });
 
-    $(document).on('click', '#card', () => {
+    $(document).on('click', '#item', function() {
       const productId = $(this).val();
 
       $.ajaxSetup({
@@ -254,12 +263,12 @@ Cashier | Shopcube
 
       $.ajax({
         type: 'post',
-        url: '/dashboard/cashier/carts',
+        url: '/carts',
         data: {
           productId
         },
         dataType: 'json',
-        success: (response) => {
+        success: function(response) {
           if (response.status === 400) {
             alert(response.message);
           }
@@ -267,7 +276,7 @@ Cashier | Shopcube
         }
       })
 
-    })
+    });
 
   });
 </script>

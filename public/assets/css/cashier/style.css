@@ -115,6 +115,15 @@
     height: 100%;
 }
 
+.dashboard {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: var(--md);
+    width: calc(100% - 700px);
+    height: 600px;
+}
+
 .card:hover {
     box-shadow: none;
 }

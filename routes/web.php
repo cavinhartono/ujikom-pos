@@ -33,9 +33,12 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::middleware('IsLogin')->group(function () {
     Route::controller(KasirController::class)->group(function () {
-        Route::get('/dashboard/cashier', 'index');
-        Route::post('/bayar', 'payment');
+        Route::get('/', 'index');
+        Route::post('/store', 'store');
     });
+
+    Route::resource('carts', CartController::class);
+    Route::post('carts/scan', [CartController::class, 'scan']);
 
     Route::controller(ReportsController::class)->group(function () {
         Route::get('/reports', 'index');
@@ -61,7 +64,4 @@ Route::middleware('IsLogin')->group(function () {
         Route::put('/products/edit/{id}', 'edit');
         Route::get('/products/delete/{id}', 'delete');
     });
-
-    Route::resource('/dashboard/carts', CartController::class);
-    Route::post('/carts/scan', [CartController::class, 'scan']);
 });

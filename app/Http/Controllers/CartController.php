@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Product;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +22,7 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
-        $request->product_id ? $product = Product::findOrFail($request->productId) : $product = Product::where('barcode', $request->productCode)->first();
+        $request->productId ? $product = Product::findOrFail($request->productId) : $product = Product::where('barcode', $request->productCode)->first();
 
         if ($product === null) {
             return response()->json([
@@ -47,14 +48,14 @@ class CartController extends Controller
         if ($product->qty < $itemQuantity || $product->qty < 1) {
             return response()->json([
                 'status' => 400,
-                'message' => 'product is empty'
+                'message' => 'Produk kosong'
             ]);
         }
 
         if ($isExist) {
             return response()->json([
                 'status' => 400,
-                'message' => 'product is already added'
+                'message' => 'Produk sudah tersedia'
             ]);
         } else {
             $carts = Cart::updateOrCreate([
@@ -72,6 +73,16 @@ class CartController extends Controller
                 'message' => 'success'
             ]);
         }
+    }
+
+    public function edit(Cart $cart): View
+    {
+        return view('admin.carts.edit', compact('cart'));
+    }
+
+    public function show(Cart $cart): View
+    {
+        return view('admin.carts.show', compact('cart'));
     }
 
     public function update(Request $request, Cart $cart)
@@ -97,7 +108,7 @@ class CartController extends Controller
             ]);
         }
 
-        $cart->update(['quantity' => $request->qty]);
+        $cart->update(['qty' => $request->qty]);
 
         return response()->json([
             'status' => 200,
@@ -137,14 +148,14 @@ class CartController extends Controller
         if ($product->qty < $itemQuantity || $product->qty < 1) {
             return response()->json([
                 'status' => 400,
-                'message' => 'product is empty'
+                'message' => 'Produk kosong'
             ]);
         }
 
         if ($isExist) {
             return response()->json([
                 'status' => 400,
-                'message' => 'product is already added'
+                'message' => 'Produk sudah tersedia'
             ]);
         } else {
             $carts = Cart::updateOrCreate([
