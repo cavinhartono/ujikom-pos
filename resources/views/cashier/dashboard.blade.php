@@ -40,7 +40,7 @@ Cashier | Shopcube
     </ul>
   </div>
   <div class="dashboard">
-    <table class="table" style="overflow: scroll;">
+    <table class="table">
       <div class="field">
         <div class="input">
           <input type="text" class="input-form" id="search">
