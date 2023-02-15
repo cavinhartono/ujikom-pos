@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
+use App\Models\Customer;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class KasirController extends Controller
 {
@@ -11,5 +16,52 @@ class KasirController extends Controller
     {
         $products = Product::all();
         return view('cashier.dashboard', compact(['products']));
+    }
+
+    public function store(Request $request)
+    {
+        $getOrder = $request->except(['name', 'phone']);
+        $getCustomer = [
+            'name' => $request->name,
+            'phone' => $request->phone
+        ];
+
+        $isTransaction = DB::transaction(function () use ($getOrder, $getCustomer) {
+            Customer::create($getCustomer);
+            $isOrder = Order::create($getOrder);
+            $carts = Cart::all();
+
+            if ($isOrder and $carts) {
+                foreach ($carts as $cart) {
+                    $orderItem = [
+                        'product_id' => $cart->product_id,
+                        'order_id' => $isOrder->id,
+                        'qty' => $cart->qty,
+                        'price' => $cart->price,
+                    ];
+
+                    $isOrderItem = OrderItem::create($orderItem);
+
+                    if ($isOrderItem) {
+                        $product = Product::findOrFail($cart->product_id);
+                        $product->qty -= $cart->qty;
+                        $product->save();
+                    }
+
+                    $cart->delete();
+                }
+            }
+
+            return $isOrder;
+        });
+
+        if ($isTransaction) {
+            return redirect('/')->with('success', 'Transaction sukses!');
+        }
+    }
+
+    public function print_struck(Order $order)
+    {
+        return view('cashier.stuck', compact(['order']));
     }
 }
