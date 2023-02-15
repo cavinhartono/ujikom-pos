@@ -51,13 +51,13 @@ Dashboard | ShopCube
       </thead>
       <tbody>
         <tr>
-          <td>1</td>
+          <td>C0000</td>
           <td>Marselinus Cavin Hartono</td>
           <td>2 jam yang lalu</td>
         </tr>
         @forelse($customerLast as $customer)
         <tr>
-          <td>{{ $customer->id }}</td>
+          <td>{{ $customer->customer_index }}</td>
           <td>{{ $customer->name }}</td>
           <td>{{ Carbon\Carbon::parse($customer->created_at)->diffForHumans() }}</td>
         </tr>
