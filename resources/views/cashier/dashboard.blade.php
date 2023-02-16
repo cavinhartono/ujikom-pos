@@ -2,6 +2,18 @@
 
 @push('css')
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<style>
+  thead,
+  tbody {
+    display: block;
+  }
+
+  tbody {
+    height: 250px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+</style>
 @endpush
 
 @push('title')
@@ -46,7 +58,7 @@ Cashier | Shopcube
           <input type="text" class="input-form" id="search">
         </div>
       </div>
-      <thead>
+      <thead class="between">
         <tr>
           <th>Produk</th>
           <th>Jumlah</th>

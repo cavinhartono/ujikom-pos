@@ -118,7 +118,6 @@
     position: fixed;
     top: 0;
     right: 0;
-    transform: translateY(80px);
     padding: var(--md);
     width: calc(100% - 900px);
     height: 100vh;
