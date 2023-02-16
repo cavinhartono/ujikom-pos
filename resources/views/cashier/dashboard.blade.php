@@ -21,86 +21,85 @@ Cashier | Shopcube
 @endpush
 
 @section('overview')
-<div class="content full-content between gap">
-  <div class="content" style="width: 900px;">
-    <form class="form" style="margin: var(--md) 0;">
-      <div class="field">
-        <div class="input flex gap">
-          <input type="text" placeholder="Barcode" id="productCode" class="input-form">
-          <button class="btn primary" id="find" style="display: block">Cari</button>
-        </div>
-      </div>
-    </form>
-    <ul class="products flex" style="margin: var(--md) 0; gap: var(--sm)">
-      @forelse($products as $product)
-      <li class="list">
-        <button type="button" class="btn card" id="item" style="cursor: pointer; border: none;" value="{{ $product->id }}">
-          <div class="img">
-            <img src="{{ $product->getFirstMediaUrl('avatar', 'thumb') }}" class="photo">
-          </div>
-          <div class="label center" style="flex-direction: column;">
-            <h2 class="title">{{ $product->name }}</h2>
-            <h2 class="subtitle">{{ $product->price }}</h2>
-          </div>
-        </button>
-      </li>
-      @empty
-      <li class="list">
-        tidak ada produk
-      </li>
-      @endforelse
-    </ul>
+<form class="form" style="margin: var(--md) 0;">
+  <div class="field">
+    <div class="input flex gap">
+      <input type="text" placeholder="Barcode" id="productCode" class="input-form">
+      <button class="btn primary" id="find" style="display: block">Cari</button>
+    </div>
   </div>
-  <div class="dashboard">
-    <table class="table">
-      <div class="field">
-        <div class="input">
-          <input type="text" class="input-form" id="search">
+</form>
+<ul class="products flex" style="margin: var(--md) 0; gap: var(--sm)">
+  @forelse($products as $product)
+  <li class="list">
+    <button type="button" class="btn card" id="item" style="cursor: pointer; border: none;" value="{{ $product->id }}">
+      <div class="img">
+        <img src="{{ $product->getFirstMediaUrl('avatar', 'thumb') }}" class="photo">
+      </div>
+      <div class="label center" style="flex-direction: column;">
+        <h2 class="title">{{ $product->name }}</h2>
+        <h2 class="subtitle">{{ $product->price }}</h2>
+      </div>
+    </button>
+  </li>
+  @empty
+  <li class="list">
+    tidak ada produk
+  </li>
+  @endforelse
+</ul>
+@endsection
+
+@section('dashboard')
+<div class="dashboard">
+  <table class="table">
+    <div class="field">
+      <div class="input">
+        <input type="text" class="input-form" id="search">
+      </div>
+    </div>
+    <thead class="between">
+      <tr>
+        <th>Produk</th>
+        <th>Jumlah</th>
+        <th>Harga</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+  </table>
+  <form action="/transaction/store" method="POST" class="form">
+    @csrf
+    <div class="field flex gap" style="justify-content: flex-end; align-items: flex-end;">
+      <div class="input flex" style="flex-direction: column; align-items: flex-end;">
+        <label for="total">Total</label>
+        <div class="center gap">
+          <input type="number" style="padding: 0; text-align: end;" value="" class="title" name="price" id="total" readonly disabled>
+          <h2 class="title">IDR </h2>
         </div>
       </div>
-      <thead class="between">
-        <tr>
-          <th>Produk</th>
-          <th>Jumlah</th>
-          <th>Harga</th>
-        </tr>
-      </thead>
-      <tbody id="tbody"></tbody>
-    </table>
-    <form action="/transaction/store" method="POST" class="form">
-      @csrf
-      <div class="field flex gap" style="justify-content: flex-end; align-items: flex-end;">
-        <div class="input flex" style="flex-direction: column; align-items: flex-end;">
-          <label for="total">Total</label>
-          <div class="center gap">
-            <input type="number" style="padding: 0; text-align: end;" value="" class="title" name="price" id="total" readonly disabled>
-            <h2 class="title">IDR </h2>
-          </div>
+    </div>
+    <div class="field between gap" style="margin: var(--md) 0;">
+      <div class="input">
+        <label for="return">Kembalian</label>
+        <div class="center gap">
+          <h2 class="title">IDR </h2>
+          <input type="number" style="padding: 0;" value="" class="title" name="return" id="return" readonly disabled>
         </div>
       </div>
-      <div class="field between gap" style="margin: var(--md) 0;">
-        <div class="input">
-          <label for="return">Kembalian</label>
-          <div class="center gap">
-            <h2 class="title">IDR </h2>
-            <input type="number" style="padding: 0;" value="" class="title" name="return" id="return" readonly disabled>
-          </div>
-        </div>
-        <div class="input flex" style="flex-direction: column;">
-          <label for="accept" style="text-align: end;">Uang Tunai</label>
-          <div class="center gap">
-            <input type="number" style="padding: 0;" class="title" name="accept" id="accept">
-            <h2 class="title">IDR</h2>
-          </div>
+      <div class="input flex" style="flex-direction: column;">
+        <label for="accept" style="text-align: end;">Uang Tunai</label>
+        <div class="center gap">
+          <input type="number" style="padding: 0;" class="title" name="accept" id="accept">
+          <h2 class="title">IDR</h2>
         </div>
       </div>
-      <div class="field" style="margin: var(--md) 0;">
-        <div class="input">
-          <button class="btn primary">Pay</button>
-        </div>
+    </div>
+    <div class="field" style="margin: var(--md) 0;">
+      <div class="input">
+        <button class="btn primary">Pay</button>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 </div>
 @endsection
 

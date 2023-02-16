@@ -5,7 +5,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    padding: 20px 100px;
+    padding: 20px 60px;
     background: var(--white-primary);
     color: var(--black-primary);
     z-index: 5;
@@ -121,6 +121,7 @@
     padding: var(--md);
     width: calc(100% - 900px);
     height: 100vh;
+    transform: translateY(-50px);
 }
 
 .card:hover {
