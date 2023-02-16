@@ -3,13 +3,19 @@
 @push('css')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <style>
+  thead tr {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
   thead,
   tbody {
     display: block;
   }
 
   tbody {
-    height: 250px;
+    height: 180px;
     overflow-y: scroll;
     overflow-x: hidden;
   }
@@ -21,15 +27,13 @@ Cashier | Shopcube
 @endpush
 
 @section('overview')
-<form class="form" style="margin: var(--md) 0;">
-  <div class="field">
-    <div class="input flex gap">
-      <input type="text" placeholder="Barcode" id="productCode" class="input-form">
-      <button class="btn primary" id="find" style="display: block">Cari</button>
-    </div>
+<form class="form" style="position: relative; margin: var(--lg) 0;">
+  <div class="input center gap">
+    <input type="text" placeholder="Barcode" id="productCode" class="input-form">
+    <button class="btn primary" id="find" style="padding: 12px 24px;">Cari</button>
   </div>
 </form>
-<ul class="products flex" style="margin: var(--md) 0; gap: var(--sm)">
+<ul class="products flex" style="margin: var(--md) 0; gap: 8px; flex-wrap: wrap;">
   @forelse($products as $product)
   <li class="list">
     <button type="button" class="btn card" id="item" style="cursor: pointer; border: none;" value="{{ $product->id }}">
@@ -55,7 +59,7 @@ Cashier | Shopcube
   <table class="table">
     <div class="field">
       <div class="input">
-        <input type="text" class="input-form" id="search">
+        <input type="text" placeholder="Mencari produk..." class="input-form" id="search">
       </div>
     </div>
     <thead class="between">

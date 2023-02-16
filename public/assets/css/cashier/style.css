@@ -121,7 +121,7 @@
     padding: var(--md);
     width: calc(100% - 900px);
     height: 100vh;
-    transform: translateY(-50px);
+    background: var(--white-primary);
 }
 
 .card:hover {
