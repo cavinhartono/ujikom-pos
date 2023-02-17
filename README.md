@@ -5,5 +5,7 @@
 ---
 
 [Github](https://github.com/cavinhartono/ujikom-pos.git)
-[Docs]();
+<br>
+[Docs]()
+<br>
 [Timeline](https://docs.google.com/spreadsheets/d/1dpeAddJRDlZfzng6-I19cshh6WBvTu56mOc81zVa1eQ/edit?usp=sharing)
