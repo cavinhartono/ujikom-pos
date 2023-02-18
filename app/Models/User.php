@@ -44,4 +44,9 @@ class User extends Authenticatable implements HasMedia
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class);
+    }
 }

@@ -9,6 +9,8 @@ class Order extends Model
 {
     use HasFactory;
 
+    protected $table = 'orders';
+
     protected $fillable = [
         'customer_id',
         'order_index',
@@ -16,6 +18,11 @@ class Order extends Model
         'return',
         'accept',
     ];
+
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
+    }
 
     public function order_items()
     {

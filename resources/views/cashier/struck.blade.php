@@ -22,11 +22,11 @@
         <header class="full-content between">
           <div class="content">
             <h2 class="subtitle">{{ date('d-m-Y') }}</h2>
-            <h2 class="subtitle">{{ }}</h2>
+            <h2 class="subtitle">{{ $order->order_index }}</h2>
           </div>
           <div class="content">
-            <h2 class="subtitle">{{ Auth()->user()->name }}</h2>
-            <h2 class="subtitle">{{ }}</h2>
+            <h2 class="subtitle">Dilayani oleh {{ Auth()->user()->name }}</h2>
+            <h2 class="subtitle">Pelanggan {{ $order->customer->name }}</h2>
           </div>
         </header>
       </div>
@@ -35,7 +35,7 @@
       <div class="content">
         <table class="table">
           <tbody>
-            @foreach($orderItem as $item)
+            @foreach($order as $item)
             <tr>
               <td colspan="3">{{ $item->product->name }}</td>
             </tr>

@@ -20,21 +20,16 @@ class KasirController extends Controller
 
     public function store(Request $request)
     {
-        $getOrder = [
-            'customer_id' => DB::getPdo()->lastInsertId(),
-            'accept' => $request->accept,
+        $customer = Customer::create($request->only(['name', 'phone']));
+
+        $isOrder = Order::create([
+            'customer_id' => $customer->id,
             'price' => $request->price,
-            'return' => $request->return
-        ];
+            'return' => $request->return,
+            'accept' => $request->accept,
+        ]);
 
-        $getCustomer = [
-            'name' => $request->name,
-            'phone' => $request->phone
-        ];
-
-        $isTransaction = DB::transaction(function () use ($getOrder, $getCustomer) {
-            Customer::create($getCustomer);
-            $isOrder = Order::create($getOrder);
+        $isTransaction = DB::transaction(function () use ($isOrder) {
             $carts = Cart::all();
 
             if ($isOrder and $carts) {
@@ -62,7 +57,7 @@ class KasirController extends Controller
         });
 
         if ($isTransaction) {
-            return dd($isTransaction);
+            return redirect('/struck', compact(['isTransaction' => 'order']));
         }
     }
 

@@ -98,7 +98,7 @@ Cashier | Shopcube
       <div class="input flex" style="flex-direction: column; align-items: flex-end;">
         <label for="total">Total</label>
         <div class="center gap">
-          <input type="number" style="padding: 0; text-align: end;" value="" class="title" name="price" id="total" readonly disabled>
+          <input type="number" style="padding: 0; text-align: end;" value="" class="title" name="price" id="total" readonly>
           <h2 class="title">IDR </h2>
         </div>
       </div>
@@ -108,7 +108,7 @@ Cashier | Shopcube
         <label for="return">Kembalian</label>
         <div class="center gap">
           <h2 class="title">IDR. </h2>
-          <input type="number" style="padding: 0;" value="" class="title" name="return" id="return" readonly disabled>
+          <input type="number" style="padding: 0;" value="" class="title" name="return" id="return" readonly>
         </div>
       </div>
       <div class="input flex" style="flex-direction: column;">

@@ -35,6 +35,7 @@ Route::middleware('IsLogin')->group(function () {
     Route::controller(KasirController::class)->group(function () {
         Route::get('/', 'index');
         Route::post('/transaction/store', 'store');
+        Route::get('/struck', 'print_struck');
     });
 
     Route::resource('carts', CartController::class);
