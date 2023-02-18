@@ -3,10 +3,24 @@
 @push('css')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <style>
+  table {
+    table-layout: fixed;
+  }
+
   thead tr {
     width: 100%;
     display: flex;
     justify-content: space-between;
+  }
+
+  thead th {
+    width: 100%;
+  }
+
+  tbody tr {
+    padding: 8px 12px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
   }
 
   thead,
@@ -61,21 +75,25 @@ Cashier | Shopcube
 
 @section('dashboard')
 <div class="dashboard">
-  <table class="table">
-    <div class="field">
-      <div class="input"></div>
-    </div>
-    <thead class="between">
-      <tr>
-        <th>Produk</th>
-        <th>Jumlah</th>
-        <th>Harga</th>
-      </tr>
-    </thead>
-    <tbody id="tbody"></tbody>
-  </table>
   <form action="/transaction/store" method="POST" class="form">
     @csrf
+    <div class="field flex gap">
+      <div class="input">
+        <input type="text" placeholder="Nama Customer" name="name" class="input-form">
+      </div>
+      <div class="input">
+        <input type="text" placeholder="Nomor Telepon" name="phone" class="input-form">
+      </div>
+    </div>
+    <table class="table" style="margin-bottom: var(--md);">
+      <thead class="between">
+        <tr>
+          <th colspan="2" style="text-align: end;">Jumlah</th>
+          <th style="text-align: end;">Harga</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
     <div class="field flex gap" style="justify-content: flex-end; align-items: flex-end;">
       <div class="input flex" style="flex-direction: column; align-items: flex-end;">
         <label for="total">Total</label>
@@ -89,7 +107,7 @@ Cashier | Shopcube
       <div class="input">
         <label for="return">Kembalian</label>
         <div class="center gap">
-          <h2 class="title">IDR </h2>
+          <h2 class="title">IDR. </h2>
           <input type="number" style="padding: 0;" value="" class="title" name="return" id="return" readonly disabled>
         </div>
       </div>
@@ -128,7 +146,7 @@ Cashier | Shopcube
             $('#tbody').append(`
               <tr>
                 <td>${product.name}</td>
-                <td class="flex">
+                <td colspan="2" class="flex gap">
                   <select class="input-form" id="qty">
                   ${[...Array(product.stock).keys()].map((x) => (
                     `<option ${product.qty == x + 1 ? 'selected' : null} value=${x + 1}>
@@ -136,8 +154,11 @@ Cashier | Shopcube
                     </option>`
                   ))}
                   </select>
-                  <input type="hidden" id="cartId" class="input-form" value="${product.id}">
-                  <button type="button" class="btn danger" value="${product.id}">Delete</button>
+                  <button type="button" style="margin: auto; padding: 8px;" class="btn danger" value="${product.id}">
+                    <span class="icon center">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512"><polygon points="337.46 240 312 214.54 256 270.54 200 214.54 174.54 240 230.54 296 174.54 352 200 377.46 256 321.46 312 377.46 337.46 352 281.46 296 337.46 240" style="fill:none"/><polygon points="337.46 240 312 214.54 256 270.54 200 214.54 174.54 240 230.54 296 174.54 352 200 377.46 256 321.46 312 377.46 337.46 352 281.46 296 337.46 240" style="fill:none"/><path d="M64,160,93.74,442.51A24,24,0,0,0,117.61,464H394.39a24,24,0,0,0,23.87-21.49L448,160ZM312,377.46l-56-56-56,56L174.54,352l56-56-56-56L200,214.54l56,56,56-56L337.46,240l-56,56,56,56Z"/><rect x="32" y="48" width="448" height="80" rx="12" ry="12"/></svg>
+                    </span>
+                  </button>
                 </td>
                 <td style="text-align: right;">
                   ${product.qty * product.price}

@@ -1,5 +1,10 @@
 @import url("../master.css");
 
+.icon {
+    width: 16px;
+    height: 16px;
+}
+
 .header {
     position: fixed;
     top: 0;
@@ -121,7 +126,6 @@
     padding: var(--md);
     width: calc(100% - 900px);
     height: 100vh;
-    background: var(--white-primary);
 }
 
 .card:hover {

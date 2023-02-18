@@ -20,7 +20,13 @@ class KasirController extends Controller
 
     public function store(Request $request)
     {
-        $getOrder = $request->except(['name', 'phone']);
+        $getOrder = [
+            'customer_id' => DB::getPdo()->lastInsertId(),
+            'accept' => $request->accept,
+            'price' => $request->price,
+            'return' => $request->return
+        ];
+
         $getCustomer = [
             'name' => $request->name,
             'phone' => $request->phone

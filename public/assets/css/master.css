@@ -108,6 +108,11 @@ textarea {
     color: var(--white-primary);
 }
 
+.danger {
+    background: hsl(344, 99%, 72%);
+    color: var(--white-primary);
+}
+
 .online {
     position: absolute;
     top: 4px;
