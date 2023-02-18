@@ -27,10 +27,15 @@ Cashier | Shopcube
 @endpush
 
 @section('overview')
-<form class="form" style="position: relative; margin: var(--lg) 0;">
-  <div class="input center gap">
-    <input type="text" placeholder="Barcode" id="productCode" class="input-form">
-    <button class="btn primary" id="find" style="padding: 12px 24px;">Cari</button>
+<form class="form" style="position: relative; margin: var(--lg) 0; padding: 0 var(--md)">
+  <div class="field flex gap">
+    <div class="input">
+      <input type="text" placeholder="Mencari produk..." class="input-form" id="search">
+    </div>
+    <div class="input center gap">
+      <input type="text" placeholder="Barcode" id="productCode" class="input-form">
+      <button class="btn primary" id="find" style="padding: 12px 24px;">Cari</button>
+    </div>
   </div>
 </form>
 <ul class="products flex" style="margin: var(--md) 0; gap: 8px; flex-wrap: wrap;">
@@ -58,9 +63,7 @@ Cashier | Shopcube
 <div class="dashboard">
   <table class="table">
     <div class="field">
-      <div class="input">
-        <input type="text" placeholder="Mencari produk..." class="input-form" id="search">
-      </div>
+      <div class="input"></div>
     </div>
     <thead class="between">
       <tr>
@@ -207,7 +210,7 @@ Cashier | Shopcube
             <li class="list">
               <button type="button" class="btn card" id="item" style="cursor: pointer; border: none;" value="${product.id}">
                 <div class="img">
-                  <img src="" class="photo" />  
+                  <img src="{{ $product->getFirstMediaUrl('avatar', 'thumb') }}" class="photo" />  
                 </div>
                 <div class="label center" style="flex-direction: column;">
                   <h2 class="title">${product.name}</h2>

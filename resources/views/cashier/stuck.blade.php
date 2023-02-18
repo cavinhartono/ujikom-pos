@@ -20,26 +20,34 @@
         <h2 class="title">Shop<b>cube</b></h2>
         <h2 class="subtitle">Jalan Baranangsiang</h2>
         <header class="full-content between">
-          <h2 class="subtitle">{{ date('d-m-Y') }}</h2>
-          <h2 class="subtitle">{{ Auth()->user()->name }}</h2>
+          <div class="content">
+            <h2 class="subtitle">{{ date('d-m-Y') }}</h2>
+            <h2 class="subtitle">{{ }}</h2>
+          </div>
+          <div class="content">
+            <h2 class="subtitle">{{ Auth()->user()->name }}</h2>
+            <h2 class="subtitle">{{ }}</h2>
+          </div>
         </header>
       </div>
     </header>
-    <div class="struck">
-      <table class="table">
-        <tbody>
-          @foreach($orderItem as $item)
-          <tr>
-            <td>{{ $item->product->name }}</td>
-          </tr>
-          <tr>
-            <td>
-              {{ $item->product->price }} X {{ $item->qty }}
-            </td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
+    <div class="struck" style="margin: var(--md) 0;">
+      <div class="content">
+        <table class="table">
+          <tbody>
+            @foreach($orderItem as $item)
+            <tr>
+              <td colspan="3">{{ $item->product->name }}</td>
+            </tr>
+            <tr>
+              <td>
+                {{ $item->product->price }} X {{ $item->qty }}
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </body>

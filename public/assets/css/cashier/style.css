@@ -5,7 +5,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    padding: 20px 60px;
+    padding: var(--md) 60px;
     background: var(--white-primary);
     color: var(--black-primary);
     z-index: 5;
