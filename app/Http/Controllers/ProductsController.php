@@ -14,31 +14,7 @@ class ProductsController extends Controller
     {
         $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
         $products = Product::with('categories')->get();
-        return view('products.index', compact(['users']));
-    }
-
-    public function search_query(Request $request)
-    {
-        if ($request->ajax()) {
-            $products = DB::table('products')->where('name', 'LIKE', `%$request->name%`)->get();
-            if ($products) {
-                foreach ($products as $key => $product) {
-                    $output = `
-                        <tr>
-                            <td>$product->id</td>
-                            <td><img src="$product->getFirstMediaUrl('avatar', 'thumb')" alt="" class="photo"> </td>
-                            <td>$product->name</td>
-                            <td>$product->barcode</td>
-                            <td>$product->price</td>
-                            <td>
-                                <a href="" class="link btn primary">View</a>
-                                <a href="" class="link btn danger">Delete</a>
-                            </td>
-                        </tr>
-                    `;
-                }
-            }
-        }
+        return view('products.index', compact(['users', 'products']));
     }
 
     public function create()
@@ -80,7 +56,10 @@ class ProductsController extends Controller
 
     public function search(Request $request)
     {
-        $products = Product::where('name', 'like', '%' . $request->search . '%')->get();
+        $products = Product::where('name', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('price', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('barcode', 'LIKE', '%' . $request->search . '%')
+            ->get();
 
         return json_encode($products);
     }

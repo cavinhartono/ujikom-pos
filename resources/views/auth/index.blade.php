@@ -6,38 +6,38 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="{{ asset('assets/css/auth.css') }}" />
-  <title>Auth</title>
+  <title>Shopcube | Point of Sale</title>
 </head>
 
 <body>
   <section class="login">
     <div class="blurBx">
       <div class="box SignIn">
-        <h1>Already on a Account</h1>
-        <button class="btn_SignIn" id="btn">Sign In</button>
+        <h1>Sudah punya akun?</h1>
+        <button class="btn_SignIn" id="btn">Masuk</button>
       </div>
       <div class="box SignUp">
-        <h1>Don't have an a Account?</h1>
-        <button class="btn_SignUp" id="btn">Sign Up</button>
+        <h1>Tidak punya akun?</h1>
+        <button class="btn_SignUp" id="btn">Daftar</button>
       </div>
     </div>
     <div class="loginBx">
       <div class="form SignIn">
         <form action="/auth/login" method="POST">
           @csrf
-          <h1>Login</h1>
+          <h1 class="title" style="margin: (--md) 0;">Shop<b>cube</b></h1>
           <input type="text" name="email" placeholder="Email" />
           <div class="passwordBx">
             <input type="password" name="password" id="showPassword" placeholder="Password" />
             <span class="lihatPassword"><span id="eye"></span></span>
           </div>
-          <input type="submit" value="Login" />
+          <input type="submit" value="Masuk" />
         </form>
       </div>
       <div class="form SignUp">
         <form action="/auth/register" method="POST">
           @csrf
-          <h1>Register</h1>
+          <h1 class="title">Buat Akun</h1>
           <input type="text" name="email" placeholder="Email" />
           <input type="text" name="name" placeholder="Username" />
           <div class="passwordBx">
@@ -48,7 +48,7 @@
             <input type="password" name="password" id="showPassword" placeholder="Confirm Password" />
             <span class="lihatPassword"><span id="eye"></span></span>
           </div>
-          <input type="submit" value="Register" />
+          <input type="submit" value="Daftar" />
         </form>
       </div>
     </div>
