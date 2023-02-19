@@ -57,13 +57,13 @@ class KasirController extends Controller
         });
 
         if ($isTransaction) {
-            return redirect('/struck', compact(['isTransaction' => 'order']));
+            return redirect('/struck', compact(['order' => $isTransaction]));
         }
     }
 
-    public function print_struck()
+    public function print_struck($id)
     {
-        $orderItem = OrderItem::with('order', 'customer')->get();
-        return view('cashier.stuck', compact(['orderItem']));
+        $orderItem = OrderItem::with('order', 'product')->findOrFail($id);
+        return view('cashier.stuck', compact(['order' => $orderItem]));
     }
 }

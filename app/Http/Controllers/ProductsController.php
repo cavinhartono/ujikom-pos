@@ -6,6 +6,7 @@ use App\Models\Categories;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -13,7 +14,31 @@ class ProductsController extends Controller
     {
         $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
         $products = Product::with('categories')->get();
-        return view('products.index', compact(['products', 'users']));
+        return view('products.index', compact(['users']));
+    }
+
+    public function search_query(Request $request)
+    {
+        if ($request->ajax()) {
+            $products = DB::table('products')->where('name', 'LIKE', `%$request->name%`)->get();
+            if ($products) {
+                foreach ($products as $key => $product) {
+                    $output = `
+                        <tr>
+                            <td>$product->id</td>
+                            <td><img src="$product->getFirstMediaUrl('avatar', 'thumb')" alt="" class="photo"> </td>
+                            <td>$product->name</td>
+                            <td>$product->barcode</td>
+                            <td>$product->price</td>
+                            <td>
+                                <a href="" class="link btn primary">View</a>
+                                <a href="" class="link btn danger">Delete</a>
+                            </td>
+                        </tr>
+                    `;
+                }
+            }
+        }
     }
 
     public function create()

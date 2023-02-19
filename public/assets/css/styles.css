@@ -249,11 +249,13 @@ body {
 }
 
 .products,
-.customers {
+.customers,
+.orders {
     position: relative;
     padding: var(--md);
     width: 100%;
     background: var(--white-primary);
+    border-radius: 8px;
 }
 
 .label .field .input-form {

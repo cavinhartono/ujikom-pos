@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @push('css')
-<link rel="stylesheet" href="{{ asset('assets/js/plugins/jquery.dataTables.min.css') }}">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @endpush
 
 @section('overview')
@@ -13,7 +13,7 @@
     <a href="/products/create" class="btn primary link">Tambah</a>
     <div class="field" style="width: 300px;">
       <div class="input">
-        <input type="text" class="input-form" placeholder="Pencarian">
+        <input type="text" class="input-form" id="search" placeholder="Pencarian">
       </div>
     </div>
   </div>
@@ -22,10 +22,10 @@
       <tr>
         <th>ID</th>
         <th>Image</th>
-        <th>Barcode</th>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Action</th>
+        <th style="text-align: start;">Barcode</th>
+        <th style="text-align: start;">Name</th>
+        <th style="text-align: end;">Price</th>
+        <th style="text-align: center;">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -68,11 +68,11 @@
         <td style="width: 120px; height: 120px">
           <img src="{{ $product->getFirstMediaUrl('avatar', 'thumb') }}" class="photo">
         </td>
-        <td>{{ $product->barcode }}</td>
-        <td>{{ $product->name }}</td>
-        <td>{{ $product->price }}</td>
-        <td>
-          <a href="#" class="link">
+        <td style="text-align: start;">{{ $product->barcode }}</td>
+        <td style="text-align: start;">{{ $product->name }}</td>
+        <td style="text-align: end;">{{ $product->price }} IDR</td>
+        <td style="text-align: center;">
+          <a href="#" class="link btn primary">
             <span class="icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="auto" fill="currentColor" height="auto" viewBox="0 0 512 512">
                 <title>Edit</title>
@@ -83,7 +83,7 @@
               </svg>
             </span>
           </a>
-          <a href="#" class="link">
+          <a href="#" class="link btn danger">
             <span class="icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="auto" fill="currentColor" height="auto" viewBox="0 0 512 512">
                 <title>Delete</title>
@@ -107,32 +107,5 @@
 @endsection
 
 @push('js')
-<!-- <script src="{{ asset('assets/js/plugins/jquery.js') }}"></script>
-<script src="{{ asset('assets/js/plugins/jquery.dataTables.min.js') }}"></script> -->
-<!-- <script>
-  $(document).ready(function() {
-    $('#table').DataTable({
-      processing: true,
-      serverSide: true,
-      ajax: '{{ url()->current() }}',
-      columns: [{
-          data: 'id',
-          name: 'id'
-        },
-        {
-          data: 'name',
-          name: 'name'
-        },
-        {
-          data: 'image',
-          name: 'image'
-        },
-        {
-          data: 'image',
-          name: 'image'
-        },
-      ]
-    });
-  });
-</script> -->
+
 @endpush
