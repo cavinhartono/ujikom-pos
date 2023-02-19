@@ -48,8 +48,12 @@ Route::middleware('IsLogin')->group(function () {
 
     Route::controller(UsersController::class)->group(function () {
         Route::get('/users', 'index');
+        Route::get('/users/create', 'create');
+        Route::post('/users/store', 'store');
         Route::put('/users/{id}', 'edit');
-        Route::post('/users/{id}/store', 'update');
+        Route::post('/users/{id}/update', 'update');
+        Route::delete('/users/delete', 'delete');
+        Route::post('/users/search', 'search');
     });
 
     Route::controller(TransactionController::class)->group(function () {

@@ -250,7 +250,8 @@ body {
 
 .products,
 .customers,
-.orders {
+.orders,
+.users {
     position: relative;
     padding: var(--md);
     width: 100%;
