@@ -33,7 +33,6 @@
 .nav .list:not(:first-child),
 .profile .list {
     margin: var(--sm) 0;
-    color: var(--black-secondary);
 }
 
 .profile.active {
