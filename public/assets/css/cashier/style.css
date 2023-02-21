@@ -17,6 +17,7 @@
     flex-direction: column;
     background: var(--white-primary);
     box-shadow: var(--boxShadow-primary);
+    border-radius: var(--md);
 }
 
 .profile {
