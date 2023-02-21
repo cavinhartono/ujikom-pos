@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@push('title')
+Laporan | Shopcube
+@endpush
+
 @section('overview')
 <div class="label">
   <h2 class="subtitle">Laporan Sekarang</h2>

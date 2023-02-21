@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@push('title')
+Pengguna | Shopcube
+@endpush
+
 @push('css')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <style>
@@ -38,7 +42,7 @@
         <td style="--width: 80px; text-align: start;">{{ $loop->iteration }}</td>
         <td style=" --width: 150px text-align: start; text-transform: capitalize;">
           @forelse($user->roles as $role)
-          {{$role->name}}
+          {{ $role->name }}
           @empty
           User
           @endforelse

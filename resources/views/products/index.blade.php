@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@push('title')
+Produk | Shopcube
+@endpush
+
 @push('css')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 @endpush

@@ -3,6 +3,10 @@
 @push('css')
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <style>
+  ::-webkit-scrollbar {
+    display: block;
+  }
+
   table {
     table-layout: fixed;
   }

@@ -1,8 +1,62 @@
 @import url("../master.css");
 
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: var(--md);
+    z-index: 5;
+}
+
+.navbar-brand {
+    width: inherit;
+    height: inherit;
+    padding: var(--md);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: var(--white-primary);
+    box-shadow: var(--boxShadow-primary);
+}
+
+.profile {
+    position: fixed;
+    transform: translate(80px, -50px);
+    background: var(--white-primary);
+    border-radius: 8px;
+    padding: var(--md);
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.nav .list:not(:first-child),
+.profile .list {
+    margin: var(--sm) 0;
+    color: var(--black-secondary);
+}
+
+.profile.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.nav .photo {
+    width: var(--lg);
+    height: var(--lg);
+}
+
+.nav .link,
+.profile .link {
+    display: flex;
+    align-items: center;
+    gap: var(--sm);
+    color: var(--black-secondary);
+}
+
 .icon {
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
 }
 
 .header {
@@ -59,10 +113,6 @@
 
 .menu.active span:nth-child(3) {
     transform: translateY(0) rotate(-45deg);
-}
-
-.nav .icon {
-    display: none;
 }
 
 .nav .list .link {
@@ -130,26 +180,4 @@
 
 .card:hover {
     box-shadow: none;
-}
-
-@media (max-width: 768px) {
-    .menu {
-        display: block;
-        visibility: visible;
-    }
-
-    .nav {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 400px;
-        height: 100vh;
-        background: var(--primary-color-700);
-        backdrop-filter: blur(90px);
-        flex-direction: column;
-    }
-
-    .nav .icon {
-        display: block;
-    }
 }

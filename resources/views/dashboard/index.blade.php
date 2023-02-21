@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @push('title')
-Dashboard | ShopCube
+Dashboard | Shopcube
 @endpush
 
 @section('overview')

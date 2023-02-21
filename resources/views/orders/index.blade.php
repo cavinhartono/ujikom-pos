@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@push('title')
+Transaksi | Shopcube
+@endpush
+
 @push('css')
 <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
 @endpush
