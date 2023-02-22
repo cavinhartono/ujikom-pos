@@ -23,13 +23,13 @@
           </span>
         </div>
         <ul class="nav">
-          <li class="list" onclick="document.querySelector('.profile').classList.toggle('active')" style="cursor: pointer;">
+          <li class="list flex" onclick="document.querySelector('.profile').classList.toggle('active')" style="cursor: pointer; flex-direction: column;">
             <img src="{{ Auth::user()->getFirstMediaUrl('avatar', 'thumb') }}" class="photo">
             <ul class="profile">
               <li class="list">
                 <div class="label">
                   <h2 class="subtitle">{{ Auth::user()->name }}</h2>
-                  <h2 class="subtitle">{{ Auth::user()->roles->first()->name }}</h2>
+                  <h2 class="subtitle" style="text-transform: capitalize">{{ Auth::user()->roles->first()->name }}</h2>
                 </div>
               </li>
               <li class="list">
