@@ -23,9 +23,15 @@
           </span>
         </div>
         <ul class="nav">
-          <li class="list" style="margin: var(--md) 0" onclick="document.querySelector('.profile').classList.toggle('active')">
+          <li class="list" onclick="document.querySelector('.profile').classList.toggle('active')" style="cursor: pointer;">
             <img src="{{ Auth::user()->getFirstMediaUrl('avatar', 'thumb') }}" class="photo">
             <ul class="profile">
+              <li class="list">
+                <div class="label">
+                  <h2 class="subtitle">{{ Auth::user()->name }}</h2>
+                  <h2 class="subtitle">{{ Auth::user()->roles->first()->name }}</h2>
+                </div>
+              </li>
               <li class="list">
                 <a href="/auth/settings" class="link">
                   <span class="icon center">
@@ -74,31 +80,16 @@
       </div>
     </nav>
     <div class="content full-content between gap">
-      <div class="content" style="width: 900px">
-        <!-- <header class="header between center" style="width: 900px;">
-          <div class="logo">
-            <h2 class="subtitle">Shop<b>cube</b></h2>
+      <div class="content" style="width: 900px;">
+        <header class="header between center" style="width: inherit;">
+          <div class="label">
+            <div class="logo">
+              <h2 class="subtitle">Shop<b>cube</b></h2>
+            </div>
+            <div class="subtitle">{{ \Carbon\Carbon::parse(now())->isoFormat('MMM YYYY, Do') }}</div>
           </div>
-          <menu class="menu" onclick="document.querySelector('.nav').classList.toggle('active')">
-            <span></span>
-            <span></span>
-            <span></span>
-          </menu>
-          <ul class="nav flex gap">
-            <li class="list {{ (request()->is('dashboard/cashier')) ? 'active' : '' }}">
-              <a href="/dashboard/cashier" class="link">
-                <span class="icon"></span>
-                <span class="subtitle">Dashboard</span>
-              </a>
-            </li>
-            <li class="list {{ (request()->is('orders')) ? 'active' : '' }}">
-              <a href="/orders" class="link">
-                <span class="icon"></span>
-                <span class="subtitle">Transaksi</span>
-              </a>
-            </li>
-          </ul>
-        </header> -->
+          @yield('header')
+        </header>
         @yield('overview')
       </div>
       @yield('dashboard')

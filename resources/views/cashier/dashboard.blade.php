@@ -44,8 +44,18 @@
 Cashier | Shopcube
 @endpush
 
+@section('header')
+<form class="form">
+  <div class="field flex gap">
+    <div class="input">
+      <input type="text" placeholder="Mencari produk..." class="input-form" id="search">
+    </div>
+  </div>
+</form>
+@endsection
+
 @section('overview')
-<form class="form" style="position: relative; margin: var(--lg) 0; padding: 0 var(--md)">
+<!-- <form class="form" style="position: relative; margin: var(--lg) 0; padding: 0 var(--md)">
   <div class="field flex gap">
     <div class="input">
       <input type="text" placeholder="Mencari produk..." class="input-form" id="search">
@@ -55,8 +65,8 @@ Cashier | Shopcube
       <button class="btn primary" id="find" style="padding: 12px 24px;">Cari</button>
     </div>
   </div>
-</form>
-<ul class="products flex" style="margin: var(--md) 0; gap: 8px; flex-wrap: wrap;">
+</form> -->
+<ul class="products flex" style="margin: 80px 0; margin-left: 75px; gap: 12px; flex-wrap: wrap;">
   @forelse($products as $product)
   <li class="list">
     <button type="button" class="btn card" id="item" style="cursor: pointer; border: none;" value="{{ $product->id }}">
