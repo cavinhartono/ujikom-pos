@@ -36,6 +36,14 @@
     margin: var(--sm) 0;
 }
 
+.list .link {
+    color: var(--black-secondary);
+}
+
+.list.active .link {
+    color: var(--primary-color);
+}
+
 .profile.active {
     visibility: visible;
     opacity: 1;
@@ -125,13 +133,8 @@
     transform: translateY(0) rotate(-45deg);
 }
 
-.nav .list .link {
-    color: var(--primary-color-700) !important;
+.list .link {
     transition: 0.3s;
-}
-
-.nav.active .list .link {
-    color: var(--primary-color);
 }
 
 .content {
