@@ -1,3 +1,5 @@
+@import url("./font.css");
+
 :root {
     --primary-color: hsl(208, 100%, 25%);
     --primary-color-700: rgba(0, 68, 128, 0.75);
