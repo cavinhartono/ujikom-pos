@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ asset('assets/css/struck.css') }}">
-  <title>Struck {{ $order->name }}</title>
+  <title>Struck {{ $orderItem->name }}</title>
 </head>
 
 <body onload="window.print()">
@@ -22,11 +22,11 @@
         <header class="full-content between">
           <div class="content">
             <h2 class="subtitle">{{ date('d-m-Y') }}</h2>
-            <h2 class="subtitle">{{ $order->order_index }}</h2>
+            <h2 class="subtitle">{{ $orderItem->order_index }}</h2>
           </div>
           <div class="content">
             <h2 class="subtitle">Dilayani oleh {{ Auth()->user()->name }}</h2>
-            <h2 class="subtitle">Pelanggan {{ $order->customer->name }}</h2>
+            <h2 class="subtitle">Pelanggan {{ $orderItem->customer->name }}</h2>
           </div>
         </header>
       </div>
@@ -35,7 +35,7 @@
       <div class="content">
         <table class="table">
           <tbody>
-            @foreach($order as $item)
+            @foreach($orderItem as $item)
             <tr>
               <td colspan="3">{{ $item->product->name }}</td>
             </tr>

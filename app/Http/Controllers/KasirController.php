@@ -57,7 +57,7 @@ class KasirController extends Controller
         });
 
         if ($isTransaction) {
-            return redirect('/struck', compact(['order' => $isTransaction]));
+            return view(`/struck/$isTransaction->id`);
         }
     }
 
