@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UsersController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Contracts\Role;
 
@@ -38,12 +39,15 @@ Route::middleware('IsLogin')->group(function () {
         Route::get('/struck/{id}', 'print_struck');
     });
 
-    Route::resource('carts', CartController::class);
-    Route::post('carts/scan', [CartController::class, 'scan']);
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 
-    Route::controller(ReportsController::class)->group(function () {
-        Route::get('/reports', 'index');
-        Route::get('/print', 'print');
+    Route::controller(ProductsController::class)->group(function () {
+        Route::get('/products', 'index');
+        Route::post('/products/store', 'store');
+        Route::get('/products/create', 'create');
+        Route::post('/products/search', 'search');
+        Route::put('/products/edit/{id}', 'edit');
+        Route::get('/products/delete/{id}', 'delete');
     });
 
     Route::controller(UsersController::class)->group(function () {
@@ -56,17 +60,15 @@ Route::middleware('IsLogin')->group(function () {
         Route::post('/users/search', 'search');
     });
 
-    Route::controller(TransactionController::class)->group(function () {
-        Route::get('/transactions', 'index');
+    Route::resource('carts', CartController::class);
+    Route::post('carts/scan', [CartController::class, 'scan']);
+
+    Route::controller(ReportsController::class)->group(function () {
+        Route::get('/reports', 'index');
+        Route::get('/print', 'print');
     });
 
-    Route::get('/dashboard', [DashboardController::class, 'index']);
-    Route::controller(ProductsController::class)->group(function () {
-        Route::get('/products', 'index');
-        Route::post('/products/store', 'store');
-        Route::get('/products/create', 'create');
-        Route::post('/products/search', 'search');
-        Route::put('/products/edit/{id}', 'edit');
-        Route::get('/products/delete/{id}', 'delete');
+    Route::controller(TransactionController::class)->group(function () {
+        Route::get('/transactions', 'index');
     });
 });

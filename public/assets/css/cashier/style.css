@@ -5,7 +5,7 @@
     top: 0;
     left: 0;
     padding: var(--md);
-    z-index: 5;
+    z-index: 20;
 }
 
 .navbar-brand {
@@ -22,8 +22,11 @@
 
 .profile {
     position: fixed;
-    transform: translate(80px, -50px);
+    top: 0;
+    left: 0;
+    transform: translate(124px, 50px);
     background: var(--white-primary);
+    box-shadow: var(--boxShadow-primary);
     border-radius: 8px;
     padding: var(--md);
     transition: 0.3s;

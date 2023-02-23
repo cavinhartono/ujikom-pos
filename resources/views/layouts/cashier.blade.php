@@ -23,8 +23,8 @@
           </span>
         </div>
         <ul class="nav">
-          <li class="list flex" onclick="document.querySelector('.profile').classList.toggle('active')" style="cursor: pointer; flex-direction: column;">
-            <img src="{{ Auth::user()->getFirstMediaUrl('avatar', 'thumb') }}" class="photo">
+          <li class="list flex" onclick="document.querySelector('.profile').classList.toggle('active')" style="position: relative; cursor: pointer;">
+            <img src="{{ Auth::user()->getFirstMediaUrl('avatar', 'thumb') }}" class="photo" style="border-radius: 8px;">
             <ul class="profile">
               <li class="list">
                 <div class="label">
