@@ -69,5 +69,6 @@ Route::middleware('IsLogin')->group(function () {
 
     Route::controller(TransactionController::class)->group(function () {
         Route::get('/transactions', 'index');
+        Route::get('/transaction/{id}/view', 'view');
     });
 });

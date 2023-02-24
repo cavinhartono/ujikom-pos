@@ -10,7 +10,7 @@ Edit User | {{ $user->name }}
     <h2 class="title">{{ $user->name }}</h2>
     <h2 class="subtitle">Mengedit seorang pengguna</h2>
   </div>
-  <form action="/users/store" method="POST" class="form full-content" enctype="multipart/form-data">
+  <form action="/users/{{ $user->id }}/update" method="POST" class="form full-content" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="img">
