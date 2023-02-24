@@ -49,8 +49,8 @@ Pengguna | Shopcube
         </td>
         <td style=" --width: 300px text-align: start; text-transform: capitalize;">{{ $user->name }}</td>
         <td style=" --width: calc(100% - (300px + 150px)); text-align: center;">
-          <a href="/auth/edit/{{ $user->id }}" class="link btn primary">Edit</a>
-          <a href="/auth/delete/{{ $user->id }}" class="link btn danger">Delete</a>
+          <a href="/users/{{ $user->id }}" class="link btn primary">Edit</a>
+          <a href="/users/delete/{{ $user->id }}" class="link btn danger">Delete</a>
         </td>
       </tr>
       @endforeach
