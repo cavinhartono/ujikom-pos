@@ -34,7 +34,7 @@ class UsersController extends Controller
 
         $user = User::find($id);
         $user->syncRoles($request->role);
-        $user->update([$request->all()]);
+        $user->update([$data]);
 
         if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
             $user->clearMediaCollection('avatar');
