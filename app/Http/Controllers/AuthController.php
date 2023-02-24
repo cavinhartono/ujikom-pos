@@ -47,6 +47,7 @@ class AuthController extends Controller
         ];
 
         if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
+            $user->clearMediaColletion('avatar');
             $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
         }
 

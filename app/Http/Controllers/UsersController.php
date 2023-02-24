@@ -35,6 +35,12 @@ class UsersController extends Controller
         $user = User::find($id);
         $user->syncRoles($request->role);
         $user->update([$request->all()]);
+
+        if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
+            $user->clearMediaCollection('avatar');
+            $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
+        }
+
         return redirect('/users')->with('success', `$request->name telah diedit!`);
     }
 
@@ -47,6 +53,7 @@ class UsersController extends Controller
     public function store(Request $request)
     {
         $user = User::create($request->all());
+
         if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
             $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
         }
