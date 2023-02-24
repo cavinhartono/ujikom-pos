@@ -41,6 +41,7 @@ Route::middleware('IsLogin')->group(function () {
 
     Route::controller(ProductsController::class)->group(function () {
         Route::get('/products', 'index');
+        Route::get('/products/print', 'cetak');
         Route::post('/products/store', 'store');
         Route::get('/products/create', 'create');
         Route::post('/products/search', 'search');

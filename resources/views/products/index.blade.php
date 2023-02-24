@@ -14,7 +14,10 @@ Produk | Shopcube
 </div>
 <div class="products">
   <div class="label full-content between" style="align-items: center;">
-    <a href="/products/create" class="btn primary link">Tambah</a>
+    <div class="label flex gap">
+      <a href="/products/create" class="btn primary link">Tambah</a>
+      <a href="/products/print" class="btn secondary link">Cetak</a>
+    </div>
     <div class="field" style="width: 300px;">
       <div class="input">
         <input type="text" class="input-form" id="search" placeholder="Pencarian">

@@ -63,4 +63,10 @@ class ProductsController extends Controller
 
         return json_encode($products);
     }
+
+    public function cetak()
+    {
+        $products = Product::all();
+        return view('products.print', compact(['products']));
+    }
 }
