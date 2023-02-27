@@ -6,14 +6,19 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
     public function index()
     {
         $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
-        $orders = Order::with('customer')->get();
-        return view('orders.index', compact(['users', 'orders']));
+        $orders = Order::with('order_item', 'customer')->get();
+
+        if (Auth::user()->roles->first()->name == 'admin') {
+            return view('orders.index', compact(['users', 'orders']));
+        }
+        return view('cashier.transaction', compact(['orders']));
     }
 
     public function view($id)

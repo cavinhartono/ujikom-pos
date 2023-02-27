@@ -9,7 +9,7 @@
   <title>Struck {{ $orderItem->name }}</title>
 </head>
 
-<body>
+<body onload="window.print()">
   <div class="content">
     <header class="header">
       <button class="btn primary" onclick="window.print()">
@@ -19,12 +19,12 @@
       <div class="label">
         <h2 class="title">Shop<b>cube</b></h2>
         <h2 class="subtitle">Jalan Baranangsiang</h2>
-        <header class="full-content between">
+        <header class="full-content between" style="margin: var(--md) 0;">
           <div class="content">
             <h2 class="subtitle">{{ date('d-m-Y') }}</h2>
             <h2 class="subtitle">{{ $orderItem->order_index }}</h2>
           </div>
-          <div class="content">
+          <div class="content" style="text-align: end;">
             <h2 class="subtitle">Dilayani oleh {{ Auth()->user()->name }}</h2>
             <h2 class="subtitle">Pelanggan {{ $orderItem->customer->name }}</h2>
           </div>
@@ -38,15 +38,19 @@
             @foreach($orderItem->order_item as $item)
             <tr>
               <td colspan="3">{{ $item->product->name }}</td>
-            </tr>
-            <tr>
-              <td>
+              <td style="text-align: end;">
                 {{ $item->price }} X {{ $item->qty }}
               </td>
             </tr>
             @endforeach
           </tbody>
         </table>
+        <div class="full-content between" style="margin: var(--lg) 0;">
+          <div class="barcode">
+            {!! DNS1D::getBarcodeSVG(($orderItem->id . $orderItem->customer->id), 'PHARMA') !!}
+          </div>
+          <h2 class="subtitle">Terimakasih!</h2>
+        </div>
       </div>
     </div>
   </div>
