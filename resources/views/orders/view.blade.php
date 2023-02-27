@@ -46,5 +46,6 @@
       </tr>
     </tfoot>
   </table>
+  <a href="/struck/{{ $orderItem->id }}" class="link btn primary" onclick="window.open('width=1000,height=500')">Cetak</a>
 </div>
 @endsection

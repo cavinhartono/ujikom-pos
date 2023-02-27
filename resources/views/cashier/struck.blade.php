@@ -9,7 +9,7 @@
   <title>Struck {{ $orderItem->name }}</title>
 </head>
 
-<body onload="window.print()">
+<body>
   <div class="content">
     <header class="header">
       <button class="btn primary" onclick="window.print()">
@@ -35,13 +35,13 @@
       <div class="content">
         <table class="table">
           <tbody>
-            @foreach($orderItem as $item)
+            @foreach($orderItem->order_item as $item)
             <tr>
               <td colspan="3">{{ $item->product->name }}</td>
             </tr>
             <tr>
               <td>
-                {{ $item->product->price }} X {{ $item->qty }}
+                {{ $item->price }} X {{ $item->qty }}
               </td>
             </tr>
             @endforeach
@@ -51,5 +51,17 @@
     </div>
   </div>
 </body>
+
+<script>
+  let body = document.body;
+  let html = document.documentElement;
+  let height = Math.max(
+    body.scrollHeight, body.offsetHeight,
+    html.clientHeight, html.scrollHeight, html.offsetHeight
+  );
+
+  document.cookie = "innerHeight=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  document.cookie = "innerHeight=" + ((height + 50) * 0.264583);
+</script>
 
 </html>

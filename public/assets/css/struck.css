@@ -1,0 +1,21 @@
+@import url("./master.css");
+
+body {
+    padding: var(--lg);
+}
+
+.content {
+    position: relative;
+}
+
+.btn.primary {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+@media print {
+    .btn.primary {
+        display: none;
+    }
+}

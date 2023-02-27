@@ -56,14 +56,12 @@ class KasirController extends Controller
             return $isOrder;
         });
 
-        if ($isTransaction) {
-            return view(`/struck/$isTransaction->id`);
-        }
+        return redirect('/struck/' . $isTransaction->id);
     }
 
     public function print_struck($id)
     {
-        $orderItem = OrderItem::with('order', 'product')->findOrFail($id);
-        return view('cashier.stuck', compact(['order' => $orderItem]));
+        $orderItem = Order::with('order_item', 'customer')->findOrFail($id);
+        return view('cashier.struck', compact(['orderItem']));
     }
 }
