@@ -27,10 +27,10 @@
         @foreach($orders as $order)
         <tr>
           <td>{{ $loop->iteration }}</td>
-          <td>{{ \Carbon\Carbon::parse($order->order_item->created_at)->isoFormat('Do MMM, Hh Mm') }}</td>
+          <td>{{ \Carbon\Carbon::parse($order->created_at)->isoFormat('Do MMM, Hh Mm') }}</td>
           <td>{{ $order->customer->name }}</td>
-          <td>{{ $order->order_item->accept }}</td>
-          <td>{{ $order->order_item->price }}</td>
+          <td>{{ $order->accept }}</td>
+          <td>{{ $order->price }}</td>
           <td>
             <a href="/transaction/{{ $order->id }}/view" class="link btn primary">
               <span class="icon">
