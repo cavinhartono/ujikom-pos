@@ -4,19 +4,25 @@
 <form class="form">
   <div class="field flex gap">
     <div class="input">
-      <input type="text" placeholder="Mencari produk..." class="input-form" id="search">
+      <input type="text" placeholder="Mencari produk..." class="input-form">
     </div>
   </div>
 </form>
 @endsection
 
 @section('overview')
-<div class="transaction">
+<div class="transaction" style="margin: 40px 60px; width: 100%">
   <div class="content">
+    <div class="label">
+      <h2 class="subtitle">
+        Transaksi
+      </h2>
+    </div>
     <table class="table">
       <thead>
         <tr>
           <th>ID</th>
+          <th>-</th>
           <th>Nama</th>
           <th>Total</th>
           <th>Uang Tunai</th>
@@ -27,7 +33,7 @@
         @foreach($orders as $order)
         <tr>
           <td>{{ $loop->iteration }}</td>
-          <td>{{ \Carbon\Carbon::parse($order->created_at)->isoFormat('Do MMM, Hh Mm') }}</td>
+          <td>{{ \Carbon\Carbon::parse($order->created_at)->isoFormat('Do MMM, hh mm') }}</td>
           <td>{{ $order->customer->name }}</td>
           <td>{{ $order->accept }}</td>
           <td>{{ $order->price }}</td>

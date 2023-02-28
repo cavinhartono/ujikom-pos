@@ -57,8 +57,8 @@ class ProductsController extends Controller
     public function search(Request $request)
     {
         $products = Product::where('name', 'LIKE', '%' . $request->search . '%')
-            ->orWhere('price', 'LIKE', '%' . $request->search . '%')
-            ->orWhere('barcode', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('price', '=', $request->search)
+            ->orWhere('barcode', '=', $request->search)
             ->get();
 
         return json_encode($products);
