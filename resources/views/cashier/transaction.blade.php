@@ -1,5 +1,11 @@
 @extends('layouts.cashier')
 
+
+
+@push('title')
+Transaksi | Shopcube
+@endpush
+
 @section('header')
 <form class="form">
   <div class="field flex gap">
@@ -11,13 +17,8 @@
 @endsection
 
 @section('overview')
-<div class="transaction" style="margin: 40px 60px; width: 100%">
+<div class="transaction" style="margin: 0 60px; margin-top: 60px; width: 100%">
   <div class="content">
-    <div class="label">
-      <h2 class="subtitle">
-        Transaksi
-      </h2>
-    </div>
     <table class="table">
       <thead>
         <tr>
@@ -50,4 +51,29 @@
     </table>
   </div>
 </div>
+@endsection
+
+@section('dashboard')
+<ul class="revenue">
+  <li class="list">
+    <h2 class="subtitle">
+      Total
+    </h2>
+    <h2 class="subtitle value">
+      {{ $orders->count() }}
+    </h2>
+  </li>
+  <li class="list">
+    <h2 class="subtitle">
+      Saat Ini
+    </h2>
+    <h2 class="subtitle value">
+
+    </h2>
+  </li>
+  <li class="list">
+    <h2 class="subtitle">Bulan Ini</h2>
+    <h2 class="subtitle value"></h2>
+  </li>
+</ul>
 @endsection

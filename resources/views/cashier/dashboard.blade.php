@@ -93,10 +93,12 @@ Cashier | Shopcube
     @csrf
     <div class="field flex gap">
       <div class="input">
-        <input type="text" placeholder="Nama Customer" name="name" class="input-form">
+        <label for="name">Nama</label>
+        <input type="text" placeholder="John Doe" name="name" id="name" class="input-form">
       </div>
       <div class="input">
-        <input type="text" placeholder="Nomor Telepon" name="phone" class="input-form">
+        <label for="phone">Nomor Telepon</label>
+        <input type="text" placeholder="Minimal 8 digit" name="phone" id="phone" class="input-form">
       </div>
     </div>
     <table class="table" style="margin-bottom: var(--md);">

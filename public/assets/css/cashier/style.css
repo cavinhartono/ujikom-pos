@@ -196,3 +196,26 @@
 .card:hover {
     box-shadow: none;
 }
+
+.revenue {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: var(--md);
+}
+
+.revenue .list {
+    position: relative;
+    width: 360px;
+    height: 200px;
+    padding: var(--lg);
+    border-radius: 4px;
+    margin: var(--sm) 0;
+    background: var(--black-secondary);
+}
+
+.revenue .list .subtitle {
+    font-size: var(--md);
+    font-weight: 700;
+    color: var(--white-fourth);
+}

@@ -12,11 +12,11 @@ Dashboard | Shopcube
   <ul class="card">
     <li class="list" style="background: var(--fifth-color)">
       <h2 class="subtitle">Total Sales</h2>
-      <h2 class="subtitle value">IDR. 90.000.000</h2>
+      <h2 class="subtitle value">IDR. {{ $orders->sum('price') }}</h2>
     </li>
     <li class="list" style="background: var(--third-color)">
       <h2 class="subtitle">Orders</h2>
-      <h2 class="subtitle value">600 Orang</h2>
+      <h2 class="subtitle value"> {{ $orders->count() }} </h2>
     </li>
     <li class="list" style="background: var(--fourth-color)">
       <h2 class="subtitle">Customers</h2>
