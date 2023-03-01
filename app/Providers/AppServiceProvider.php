@@ -25,7 +25,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::directive('money', function ($money) {
-            return 'IDR. <?php echo number_format($money, 0, "")?>';
+            $format = number_format($money, "0");
+            return "IDR. $format";
         });
 
         Blade::directive('persen', function ($a, $b) {
