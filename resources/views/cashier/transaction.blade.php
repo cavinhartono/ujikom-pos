@@ -34,7 +34,7 @@ Transaksi | Shopcube
         @foreach($orders as $order)
         <tr>
           <td>{{ $loop->iteration }}</td>
-          <td>{{ \Carbon\Carbon::parse($order->created_at)->isoFormat('Do MMM, hh mm') }}</td>
+          <td>{{ \Carbon\Carbon::parse($order->created_at)->isoFormat('D MMM, H M') }}</td>
           <td>{{ $order->customer->name }}</td>
           <td>{{ $order->accept }}</td>
           <td>{{ $order->price }}</td>
@@ -68,13 +68,13 @@ Transaksi | Shopcube
       Saat Ini
     </h2>
     <h2 class="subtitle value">
-      {{ $current }}
+      {{ $orders->where(DB::raw("DAY(created_at) = DAY(NOW())"))->count() }}
     </h2>
   </li>
   <li class="list">
     <h2 class="subtitle">Bulan Ini</h2>
     <h2 class="subtitle value">
-      {{ $monthNow }}
+      {{ $orders->where(DB::raw('MONTH(created_at) = MONTH(NOW())'))->count() }}
     </h2>
   </li>
 </ul>

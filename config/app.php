@@ -69,7 +69,9 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Jakarta',
+    'locate' => 'id',
+    'faker_locate' => 'id_ID',
 
     /*
     |--------------------------------------------------------------------------

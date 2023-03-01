@@ -86,7 +86,7 @@
             <div class="logo">
               <h2 class="subtitle">Shop<b>cube</b></h2>
             </div>
-            <div class="subtitle">{{ \Carbon\Carbon::parse(now())->isoFormat('MMM YYYY, Do') }}</div>
+            <div class="subtitle">{{ \Carbon\Carbon::now()->isoFormat('dddd, D MMMM YYYY') }}</div>
           </div>
           @yield('header')
         </header>
