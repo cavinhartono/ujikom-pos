@@ -68,12 +68,14 @@ Transaksi | Shopcube
       Saat Ini
     </h2>
     <h2 class="subtitle value">
-
+      {{ $current }}
     </h2>
   </li>
   <li class="list">
     <h2 class="subtitle">Bulan Ini</h2>
-    <h2 class="subtitle value"></h2>
+    <h2 class="subtitle value">
+      {{ $monthNow }}
+    </h2>
   </li>
 </ul>
 @endsection
