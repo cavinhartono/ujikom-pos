@@ -56,7 +56,7 @@ class KasirController extends Controller
             return $isOrder;
         });
 
-        return redirect('/struck/' . $isTransaction->id);
+        return redirect()->route('struck', $isTransaction->id);
     }
 
     public function print_struck($id)

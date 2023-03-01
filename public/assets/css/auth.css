@@ -1,7 +1,21 @@
-@import url("/assets/css/master.css");
+@import url("./master.css");
 
 input {
     margin: 0;
+}
+
+label {
+    font-size: 8px !important;
+}
+
+.flex.gap {
+    display: flex;
+    gap: 8px;
+}
+
+.input input,
+.input .passwordBx {
+    margin: 12px 0;
 }
 
 .title {

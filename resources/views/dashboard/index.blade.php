@@ -62,7 +62,9 @@ Dashboard | Shopcube
           <td>{{ Carbon\Carbon::parse($customer->created_at)->diffForHumans() }}</td>
         </tr>
         @empty
-
+        <tr>
+          <td colspan="3">Tidak ada</td>
+        </tr>
         @endforelse
       </tbody>
     </table>

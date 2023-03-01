@@ -26,10 +26,18 @@
         <form action="/auth/login" method="POST">
           @csrf
           <h1 class="title" style="margin: (--md) 0;">Shop<b>cube</b></h1>
-          <input type="text" name="email" placeholder="Email" />
-          <div class="passwordBx">
-            <input type="password" name="password" id="showPassword" placeholder="Password" />
-            <span class="lihatPassword"><span id="eye"></span></span>
+          <div class="field">
+            <div class="input">
+              <label for="email">Email</label>
+              <input type="text" id="email" name="email" placeholder="johndoe@example.com" />
+            </div>
+            <div class="input">
+              <label for="password">Password</label>
+              <div class="passwordBx">
+                <input type="password" name="password" id="password" placeholder="Minimal 8 digit" />
+                <span class="lihatPassword"><span id="eye"></span></span>
+              </div>
+            </div>
           </div>
           <input type="submit" value="Masuk" />
         </form>
@@ -38,15 +46,31 @@
         <form action="/auth/register" method="POST">
           @csrf
           <h1 class="title">Buat Akun</h1>
-          <input type="text" name="email" placeholder="Email" />
-          <input type="text" name="name" placeholder="Username" />
-          <div class="passwordBx">
-            <input type="password" name="password" id="showPassword" placeholder="Password" />
-            <span class="lihatPassword"><span id="eye"></span></span>
+          <div class="field">
+            <div class="input">
+              <label for="email2">Email</label>
+              <input type="text" id="email2" name="email" placeholder="Email" />
+            </div>
+            <div class="input">
+              <label for="username">Username</label>
+              <input type="text" name="name" id="username" placeholder="John Doe" />
+            </div>
           </div>
-          <div class="passwordBx">
-            <input type="password" name="password" id="showPassword" placeholder="Confirm Password" />
-            <span class="lihatPassword"><span id="eye"></span></span>
+          <div class="field flex gap">
+            <div class="input">
+              <label for="password2">Password</label>
+              <div class="passwordBx">
+                <input type="password" name="password" id="password2" placeholder="Minimal 8 digit" />
+                <span class="lihatPassword"><span id="eye"></span></span>
+              </div>
+            </div>
+            <div class="input">
+              <label for="confirmPassword">Konfirmasi Password</label>
+              <div class="passwordBx">
+                <input type="password" name="password" id="confirmPassword" placeholder="Minimal 8 digit" />
+                <span class="lihatPassword"><span id="eye"></span></span>
+              </div>
+            </div>
           </div>
           <input type="submit" value="Daftar" />
         </form>
@@ -55,7 +79,7 @@
   </section>
   <script>
     var eye = document.querySelectorAll("#eye");
-    var password = document.querySelectorAll("#showPassword");
+    var password = document.querySelectorAll("#password");
 
     eye.forEach((element) => {
       element.addEventListener("click", () => {
