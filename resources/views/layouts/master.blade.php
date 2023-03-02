@@ -157,6 +157,36 @@
           @endforeach
         </ul>
 
+        @if(Session::get('primary'))
+        <div class="alert primary between">
+          <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
+              <path d="M48,48V464H464V48ZM218,360.38,137.4,270.81l23.79-21.41,56,62.22L350,153.46,374.54,174Z" />
+            </svg>
+          </span>
+          <h2 class="subtitle">{{ Session::get('primary') }}</h2>
+        </div>
+        @endif
+
+        @if(Session::get('success'))
+        <div class="alert success between">
+          <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
+              <path d="M48,48V464H464V48ZM218,360.38,137.4,270.81l23.79-21.41,56,62.22L350,153.46,374.54,174Z" />
+            </svg>
+          </span>
+          <h2 class="subtitle">{{ Session::get('success') }}</h2>
+        </div>
+        @endif
+
+
+        @if(Session::get('failed'))
+        <div class="alert flex between">
+          <span class="icon"></span>
+          <h2 class="subtitle">{{ Session::get('failed') }}</h2>
+        </div>
+        @endif
+
       </div>
     </nav>
     <div class="content">
