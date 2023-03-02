@@ -75,7 +75,7 @@ Cashier | Shopcube
       </div>
       <div class="label center" style="flex-direction: column;">
         <h2 class="title">{{ $product->name }}</h2>
-        <h2 class="subtitle">{{ $product->price }}</h2>
+        <h2 class="subtitle">{{ $product->price }} - Stok: {{ $product->qty }}</h2>
       </div>
     </button>
   </li>

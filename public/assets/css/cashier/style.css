@@ -1,5 +1,9 @@
 @import url("../master.css");
 
+body {
+    background: var(--white-secondary);
+}
+
 .navbar {
     position: fixed;
     top: 0;
@@ -151,6 +155,7 @@
     border-radius: 8px;
     transition: 0.3s;
     overflow: hidden;
+    background: var(--white-primary);
     box-shadow: var(--boxShadow-primary);
 }
 
@@ -211,7 +216,6 @@
     padding: var(--lg);
     border-radius: 4px;
     margin: var(--sm) 0;
-    background: var(--black-secondary);
 }
 
 .revenue .list .subtitle {

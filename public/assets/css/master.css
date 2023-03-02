@@ -110,6 +110,12 @@ textarea {
     color: var(--white-primary);
 }
 
+.btn.secondary {
+    color: var(--primary-color-700);
+    background: var(--white-primary);
+    box-shadow: var(--boxShadow-primary);
+}
+
 .danger {
     background: hsl(344, 99%, 72%);
     color: var(--white-primary);
