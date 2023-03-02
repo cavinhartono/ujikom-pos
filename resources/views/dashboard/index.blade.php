@@ -12,8 +12,7 @@ Dashboard | Shopcube
   <ul class="card">
     <li class="list" style="background: var(--fifth-color)">
       <h2 class="subtitle">Total Sales</h2>
-      @php $money = $orders->sum('price') @endphp
-      <h2 class="subtitle value">@money($money)</h2>
+      <h2 class="subtitle value"><?php echo "IDR. " . number_format($orders->sum('price'), "0", '.') ?></h2>
     </li>
     <li class="list" style="background: var(--third-color)">
       <h2 class="subtitle">Orders</h2>

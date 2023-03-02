@@ -67,7 +67,7 @@ Transaksi | Shopcube
         @foreach($orders as $order)
         <tr>
           <td>{{ $loop->iteration }}</td>
-          <td>{{ \Carbon\Carbon::parse($order->created_at)->isoFormat('D MMM, H M') }}</td>
+          <td>{{ \Carbon\Carbon::parse($order->created_at)->isoFormat('D MMM, hh mm') }}</td>
           <td>{{ $order->customer->name }}</td>
           <td>{{ $order->accept }}</td>
           <td>{{ $order->price }}</td>
