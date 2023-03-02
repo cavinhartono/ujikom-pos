@@ -105,13 +105,13 @@ Transaksi | Shopcube
       Saat Ini
     </h2>
     <h2 class="subtitle value">
-      {{ $orders->where(DB::raw("DAY(created_at) = DAY(NOW())"))->count() }}
+      {{ App\Models\Order::whereDay('created_at', '=', Carbon\Carbon::now())->count() }}
     </h2>
   </li>
   <li class="list" style="background: var(--fourth-color)">
     <h2 class="subtitle">Bulan Ini</h2>
     <h2 class="subtitle value">
-      {{ $orders->where(DB::raw('MONTH(created_at) = MONTH(NOW())'))->count() }}
+      {{ App\Models\Order::whereMonth('created_at', '=', Carbon\Carbon::now())->count() }}
     </h2>
   </li>
 </ul>

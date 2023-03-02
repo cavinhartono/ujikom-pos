@@ -62,6 +62,7 @@ svg {
 .photo {
     width: initial;
     height: inherit;
+    object-fit: cover;
 }
 
 button {

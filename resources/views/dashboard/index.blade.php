@@ -50,11 +50,6 @@ Dashboard | Shopcube
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>C0000</td>
-          <td>Marselinus Cavin Hartono</td>
-          <td>2 jam yang lalu</td>
-        </tr>
         @forelse($customerLast as $customer)
         <tr>
           <td>{{ $customer->customer_index }}</td>
