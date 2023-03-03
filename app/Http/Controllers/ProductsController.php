@@ -44,7 +44,13 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
-        $product->update([$request->all()]);
+        $product->update($request->all());
+
+        if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
+            $product->clearMediaCollection('avatar');
+            $product->addMediaFromRequest('avatar')->toMediaCollection('avatar');
+        }
+
         return redirect('/products')->with('success', `$request->name telah diedit`);
     }
 

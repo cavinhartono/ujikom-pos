@@ -76,7 +76,7 @@ textarea {
     margin: var(--sm) 0;
     resize: none;
     outline: none;
-    border: none;
+    border: 1px solid #ddd;
     width: 100%;
     padding: var(--sm);
     border-radius: 4px;
@@ -168,7 +168,7 @@ textarea {
 
 .input-form {
     background: var(--white-primary);
-    border: 1px solid var(--grey-primary);
+    border: 1px solid #ddd;
     transition: 0.3s;
 }
 
@@ -225,6 +225,7 @@ td {
 }
 
 .field label {
+    font-size: 8px;
     font-weight: 600;
 }
 

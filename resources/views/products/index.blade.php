@@ -72,8 +72,11 @@ Produk | Shopcube
       @forelse($products as $product)
       <tr>
         <td>{{ $loop->iteration }}</td>
-        <td style="width: 120px; height: 120px">
+        <td style="width: 100px; height: 80px;">
           <img src="{{ $product->getFirstMediaUrl('avatar', 'thumb') }}" class="photo">
+          <div class="qty">
+            <h2 class="subtitle"> Stok: {{ $product->qty }} </h2>
+          </div>
         </td>
         <td style="text-align: start;">{{ $product->barcode }}</td>
         <td style="text-align: start;">{{ $product->name }}</td>

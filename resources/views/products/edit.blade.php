@@ -6,7 +6,7 @@
     <h2 class="title">{{ $product->name }}</h2>
     <h2 class="subtitle">Mengedit suatu produk</h2>
   </div>
-  <form action="/product/store" method="POST" class="form">
+  <form action="/products/edit/{{ $product->id }}/store" method="POST" class="form" style="margin: var(--md) 0" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="img">
@@ -36,12 +36,6 @@
       <div class="input">
         <label for="barcode">Barcode</label>
         <input type="text" class="input-form" value="{{ $product->barcode }}" name="barcode" id="barcode" />
-      </div>
-    </div>
-    <div class="field">
-      <div class="input">
-        <label for="desc">Deskripsi</label>
-        <textarea class="input-form" name="desc" id="desc">{{ $product->desc }}</textarea>
       </div>
     </div>
     <div class="field">
