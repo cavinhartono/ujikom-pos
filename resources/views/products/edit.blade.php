@@ -10,8 +10,9 @@
     @csrf
     @method('PUT')
     <div class="img">
-      <img src="" class="photo" />
+      <img src="{{ $product->getFirstMediaUrl('avatar', 'thumb') }}" class="photo">
     </div>
+
     <div class="field flex gap">
       <div class="input">
         <label for="name">Nama</label>
@@ -22,12 +23,20 @@
         <input class="input-form" type="number" name="price" id="price" placeholder="IDR. XXX" value="{{ $product->price }}" />
       </div>
     </div>
-    <div class="field">
-      <select class="input-form" name="category_id" id="category">
-        <option value="">Pilih</option>
-        <option value="">Minuman</option>
-        <option value="">Makanan</option>
-      </select>
+    <div class="field flex gap">
+      <div class="input">
+        <label for="category">Kategori</label>
+        <select class="input-form" name="category_id" id="category">
+          <option>Pilih</option>
+          @foreach($categories as $category)
+          <option value="{{ $category->id }}" {{ $product->category_id == $category->id  ? 'selected' : '' }} style="text-transform: capitalize;"> {{ $category->name }} </option>
+          @endforeach
+        </select>
+      </div>
+      <div class="input">
+        <label for="barcode">Barcode</label>
+        <input type="text" class="input-form" value="{{ $product->barcode }}" name="barcode" id="barcode" />
+      </div>
     </div>
     <div class="field">
       <div class="input">
@@ -35,6 +44,12 @@
         <textarea class="input-form" name="desc" id="desc">{{ $product->desc }}</textarea>
       </div>
     </div>
+    <div class="field">
+      <div class="input">
+        <input type="file" class="input-form" name="avatar" />
+      </div>
+    </div>
+
     <div class="field">
       <button class="btn primary">Kirim</button>
     </div>

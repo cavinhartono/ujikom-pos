@@ -45,8 +45,9 @@ Route::middleware('IsLogin')->group(function () {
         Route::post('/products/store', 'store');
         Route::get('/products/create', 'create');
         Route::post('/products/search', 'search');
-        Route::put('/products/edit/{id}', 'edit');
-        Route::get('/products/delete/{id}', 'delete');
+        Route::get('/products/edit/{id}', 'edit');
+        Route::put('/products/edit/{id}/store', 'update');
+        Route::delete('/products/delete/{id}', 'delete');
     });
 
     Route::controller(UsersController::class)->group(function () {

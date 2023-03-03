@@ -79,7 +79,7 @@ Produk | Shopcube
         <td style="text-align: start;">{{ $product->name }}</td>
         <td style="text-align: end;">{{ $product->price }} IDR</td>
         <td style="text-align: center;">
-          <a href="#" class="link btn primary">
+          <a href="/products/edit/{{ $product->id }}" class="link btn primary">
             <span class="icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="auto" fill="currentColor" height="auto" viewBox="0 0 512 512">
                 <title>Edit</title>
@@ -90,7 +90,7 @@ Produk | Shopcube
               </svg>
             </span>
           </a>
-          <a href="#" class="link btn danger">
+          <a href="/products/delete/{{ $product->id }}" class="link btn danger">
             <span class="icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="auto" fill="currentColor" height="auto" viewBox="0 0 512 512">
                 <title>Delete</title>

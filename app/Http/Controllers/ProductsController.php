@@ -26,9 +26,10 @@ class ProductsController extends Controller
 
     public function edit($id)
     {
+        $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
         $categories = Categories::all();
         $product = Product::with('categories')->find($id);
-        return view('products.index', compact(['categories', 'product']));
+        return view('products.edit', compact(['categories', 'product', 'users']));
     }
 
     public function store(Request $request)
