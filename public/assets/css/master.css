@@ -252,7 +252,7 @@ td {
 }
 
 .alert.hide {
-    animation: hide 1s forwards;
+    animation: hide 1s ease forwards;
     opacity: 0;
 }
 

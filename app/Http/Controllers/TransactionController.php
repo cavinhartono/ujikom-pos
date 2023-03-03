@@ -23,7 +23,8 @@ class TransactionController extends Controller
 
     public function view($id)
     {
-        $orderItem = OrderItem::with('order', 'product')->find($id);
-        return view('orders.view', compact(['orderItem']));
+        $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
+        $orderItem = Order::with('order_item', 'customer')->find($id);
+        return view('orders.view', compact(['orderItem', 'users']));
     }
 }

@@ -44,6 +44,12 @@
             </tr>
             @endforeach
           </tbody>
+          <tfoot>
+            <tr>
+              <th style="text-align: end" colspan="3">Total:</th>
+              <th style="text-align: end">{{ $orderItem->price }}</th>
+            </tr>
+          </tfoot>
         </table>
         <div class="full-content between" style="margin: var(--lg) 0;">
           <div class="barcode">
