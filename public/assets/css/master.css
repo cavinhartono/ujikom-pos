@@ -252,7 +252,7 @@ td {
 }
 
 .alert.hide {
-    animation: slide_hide 1s ease forwards;
+    animation: hide 1s forwards;
     opacity: 0;
 }
 
@@ -316,7 +316,7 @@ td {
     }
 }
 
-@keyframes slide_hide {
+@keyframes hide {
     0% {
         transform: translateX(-10px);
     }

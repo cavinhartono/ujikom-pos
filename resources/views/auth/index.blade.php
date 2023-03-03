@@ -10,6 +10,12 @@
 </head>
 
 <body>
+  @if(Session::get('failed'))
+  <div class="alert danger between">
+    <span class="icon"></span>
+    <h2 class="subtitle">{{ Session::get('failed') }}</h2>
+  </div>
+  @endif
   <section class="login">
     <div class="blurBx">
       <div class="box SignIn">
@@ -29,12 +35,12 @@
           <div class="field">
             <div class="input">
               <label for="email">Email</label>
-              <input type="text" id="email" name="email" placeholder="johndoe@example.com" />
+              <input type="text" id="email" name="email" placeholder="johndoe@example.com" value="{{ Session::get('email') }}" />
             </div>
             <div class="input">
               <label for="password">Password</label>
               <div class="passwordBx">
-                <input type="password" name="password" id="password" placeholder="Minimal 8 digit" />
+                <input type="password" name="password" id="password" placeholder="Minimal 8 digit" value="{{ Session::get('password') }}" />
                 <span class="lihatPassword"><span id="eye"></span></span>
               </div>
             </div>
@@ -49,11 +55,11 @@
           <div class="field">
             <div class="input">
               <label for="email2">Email</label>
-              <input type="text" id="email2" name="email" placeholder="Email" />
+              <input type="text" id="email2" name="email" placeholder="johndoe@example.com" value="{{ Session::get('email') }}" />
             </div>
             <div class="input">
               <label for="username">Username</label>
-              <input type="text" name="name" id="username" placeholder="John Doe" />
+              <input type="text" name="name" id="username" placeholder="John Doe" value="{{ Session::get('username') }}" />
             </div>
           </div>
           <div class="field flex gap">
@@ -104,6 +110,10 @@
         login.classList.toggle('aktif');
       }
     });
+
+    setTimeout(() => {
+      document.querySelector(".alert").classList.add("hide");
+    }, 5000);
   </script>
 </body>
 

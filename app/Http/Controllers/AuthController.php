@@ -81,7 +81,7 @@ class AuthController extends Controller
             }
             return redirect('/')->with('success', "Selamat kembali, $name.");
         } else {
-            return redirect('/auth')->withErrors('Email dan Password harus disesuaikan');
+            return redirect('/auth')->with('failed', 'Email dan Password harus disesuaikan');
         }
     }
 
@@ -120,7 +120,7 @@ class AuthController extends Controller
             $name = explode(' ', trim(Auth::user()->name))[0];
             return view('guest.index')->with('success', "Selamat datang, $name.");
         } else {
-            return redirect('/auth')->withErrors('Email dan Password harus disesuaikan');
+            return redirect('/auth')->with('failed', 'Email dan Password harus disesuaikan');
         }
     }
 
