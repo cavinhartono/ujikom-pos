@@ -50,16 +50,13 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach($orders as $order)
                     <tr>
-                        <td>1</td>
-                        <td>10 Februari 2023</td>
-                        <td style="text-align: right">250.000 IDR</td>
+                        <td> {{ $loop->iteration }} </td>
+                        <td> {{ \Carbon\Carbon::parse($order->created_at)->isoFormat('DD MMMM YYYY') }} </td>
+                        <td style="text-align: right"> {{ $order->sum('price')->whereDay('created_at', '=', 'created_at')->get() }}</td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>11 Februari 2023</td>
-                        <td style="text-align: right">500.000 IDR</td>
-                    </tr>
+                    @endforeach
                 </tbody>
                 <tfoot>
                     <tr>

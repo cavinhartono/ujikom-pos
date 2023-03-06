@@ -9,6 +9,11 @@ use Spatie\Permission\Models\Role;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:user')->only('view');
+    }
+
     public function index()
     {
         $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);

@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:transaksi')->only('view');
+    }
+
     public function index()
     {
         $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);

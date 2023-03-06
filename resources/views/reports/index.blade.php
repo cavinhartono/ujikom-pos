@@ -13,41 +13,25 @@ Laporan | Shopcube
     <a href="/print" class="link btn primary">Print</a>
   </div>
   <ul class="report">
-    <li class="list full-content between">
-      <div class="label">
-        <h2 class="subtitle">Orang yang Mengunjungi</h2>
-        <h2 class="title">60</h2>
-      </div>
-      <div class="label">
-        <h2 class="subtitle">Keuntungan</h2>
-        <h2 class="title">IDR. 30.000.000</h2>
-      </div>
-    </li>
-    <li class="list full-content between">
-      <div class="label full-content between">
-        <h2 class="subtitle">Keuntungan</h2>
-        <h2 class="subtitle">IDR. 30.000.000</h2>
-      </div>
+    <li class="list">
       <table class="table">
         <thead>
-          <tr class="full-content between">
-            <th>Tender Type</th>
-            <th>Total</th>
+          <tr>
+            <th style="text-align: start;">-</th>
+            <th style="text-align: start;">Tanggal</th>
+            <th style="text-align: end;">Total</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="full-content between">
-            <td>Cash</td>
-            <td>IDR. 12.000.000</td>
+          @foreach($orders as $order)
+          <tr>
+            <td> {{ $loop->iteration }} </td>
+            <td> {{ \Carbon\Carbon::parse($order->created_at)->isoFormat('DD MMMM YYYY') }} </td>
+            <td style="text-align: right"> {{ $order->price }}</td>
           </tr>
+          @endforeach
         </tbody>
       </table>
-    </li>
-    <li class="list full-content between">
-      <div class="label full-content between">
-        <h2 class="subtitle">Pengeluaran</h2>
-        <h2 class="subtitle">IDR. 12.000.000</h2>
-      </div>
     </li>
   </ul>
 </div>

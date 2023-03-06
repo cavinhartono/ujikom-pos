@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:user')->only('view');
+    }
+
     public function index()
     {
         return view('auth.index');
