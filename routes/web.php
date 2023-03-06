@@ -32,7 +32,7 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::middleware('IsLogin')->group(function () {
     Route::controller(KasirController::class)->group(function () {
-        Route::get('/', 'index');
+        Route::get('/', 'index')->middleware('can:kasir-mode');
         Route::post('/transaction/store', 'store');
         Route::get('/struck/{id}', 'print_struck')->name('struck');
     });
@@ -40,7 +40,7 @@ Route::middleware('IsLogin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::controller(ProductsController::class)->group(function () {
-        Route::get('/products', 'index');
+        Route::get('/products', 'index')->middleware('can:produk');
         Route::get('/products/print', 'cetak');
         Route::post('/products/store', 'store');
         Route::get('/products/create', 'create');

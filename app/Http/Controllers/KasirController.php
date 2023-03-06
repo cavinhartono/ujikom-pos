@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\DB;
 
 class KasirController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:kasir-mode')->only('view');
+    }
+
     public function index()
     {
         $products = Product::all();

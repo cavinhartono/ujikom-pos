@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(
+            'can:produk'
+        )->only('view');
+    }
+
     public function index()
     {
         $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
