@@ -17,7 +17,7 @@ Laporan | Shopcube
     </li>
     <li class="list" style="background: var(--third-color)">
       <h2 class="subtitle">Minggu Ini</h2>
-      <h2 class="subtitle value"> {{ App\Models\Order::whereWeek('created_at', '=', Carbon\Carbon::now())->count() }} </h2>
+      <h2 class="subtitle value"> {{ App\Models\Order::whereBetween('created_at', [Carbon\Carbon::now()->startOfWeek(), Carbon\Carbon::now()->endOfWeek()])->count() }} </h2>
     </li>
     <li class="list" style="background: var(--fourth-color)">
       <h2 class="subtitle">Hari Ini</h2>
@@ -77,7 +77,7 @@ Laporan | Shopcube
       <li class="list">
         <span class="icon"></span>
         <div class="label">
-          <h2 class="title"> {{ (beforeMonth / monthNow) * 100 }}% </h2>
+          <h2 class="title"> {{ ($beforeMonth / $monthNow) * 100 }}% </h2>
           <h2 class="subtitle"> Persentase </h2>
         </div>
       </li>

@@ -19,9 +19,9 @@ class ReportsController extends Controller
     public function index()
     {
         $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
-        $orders = Order::with('order_item', 'customer')->orderBy('created_at', 'DESC')->get();
-        $monthNow = Order::sum('price')->whereMonth('created_at', '=', Carbon::now());
-        $beforeMonth = Order::sum('price')->whereMonth('created_at', '=', (Carbon::now() - 1));
+        $orders = Order::with('order_item', 'customer')->orderBy('created_at', 'DESC')->paginate(5);
+        $monthNow = Order::whereMonth('created_at', '=', Carbon::now())->sum('price');
+        $beforeMonth = Order::whereMonth('created_at', '=', 'NOW() - 1')->sum('price');
         return view('reports.index', compact(['users', 'orders', 'monthNow', 'beforeMonth']));
     }
 
