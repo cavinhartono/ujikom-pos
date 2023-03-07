@@ -66,6 +66,7 @@ Route::middleware('IsLogin')->group(function () {
     Route::controller(ReportsController::class)->group(function () {
         Route::get('/reports', 'index');
         Route::get('/print', 'print');
+        Route::get('/export-pdf', 'export_pdf');
     });
 
     Route::controller(TransactionController::class)->group(function () {

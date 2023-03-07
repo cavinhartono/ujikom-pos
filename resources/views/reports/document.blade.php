@@ -61,7 +61,7 @@
                 <tfoot>
                     <tr>
                         <th colspan="2" style="text-align: right">Total</th>
-                        <th style="text-align: right">750.000 IDR</th>
+                        <th style="text-align: right">{{ $orders->sum('price') }}</th>
                     </tr>
                 </tfoot>
             </table>

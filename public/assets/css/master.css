@@ -270,8 +270,10 @@ td {
     background: hsl(208, 100%, 25%);
 }
 
+.success,
 .alert.success {
     background: hsl(171, 93%, 32%);
+    color: var(--white-primary);
 }
 
 .alert.danger {
