@@ -18,7 +18,7 @@ class TransactionController extends Controller
     public function index()
     {
         $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
-        $orders = Order::with('order_item', 'customer')->orderBy('created_at', 'DESC')->get();
+        $orders = Order::with('order_item', 'customer')->orderBy('created_at', 'DESC')->paginate(5);
 
         if (Auth::user()->roles->first()->name == 'admin') {
             return view('orders.index', compact(['users', 'orders']));

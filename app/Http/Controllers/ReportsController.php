@@ -19,7 +19,10 @@ class ReportsController extends Controller
     public function index()
     {
         $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
-        return view('reports.index', compact(['users']));
+        $orders = Order::with('order_item', 'customer')->orderBy('created_at', 'DESC')->get();
+        $monthNow = Order::sum('price')->whereMonth('created_at', '=', Carbon::now());
+        $beforeMonth = Order::sum('price')->whereMonth('created_at', '=', (Carbon::now() - 1));
+        return view('reports.index', compact(['users', 'orders', 'monthNow', 'beforeMonth']));
     }
 
     public function export_pdf()
