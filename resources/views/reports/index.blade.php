@@ -24,13 +24,7 @@ Laporan | Shopcube
         </tr>
       </thead>
       <tbody>
-        @foreach($orders as $order)
-        <tr>
-          <td> {{ $loop->iteration }} </td>
-          <td> {{ \Carbon\Carbon::parse($order->created_at)->isoFormat('DD MMMM YYYY') }} </td>
-          <td style="text-align: right"> <?php echo number_format($order->price, "0", ' ', '.') . " IDR" ?> </td>
-        </tr>
-        @endforeach
+
       </tbody>
       <tfoot>
         <tr>

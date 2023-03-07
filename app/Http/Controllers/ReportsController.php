@@ -19,8 +19,7 @@ class ReportsController extends Controller
     public function index()
     {
         $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
-        $orders = Order::with('order_item', 'customer')->orderBy('created_at', 'DESC')->get();
-        return view('reports.index', compact(['orders', 'users']));
+        return view('reports.index', compact(['users']));
     }
 
     public function export_pdf()
