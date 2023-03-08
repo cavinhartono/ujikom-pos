@@ -28,7 +28,7 @@ Transaksi | Shopcube
         <th style="text-align: start; --width: 200px">Tanggal</th>
         <th style="text-align: start; --width: 150px">Nama</th>
         <th style="text-align: end; --width: 150px">Total</th>
-        <th style="text-align: center; --width: calc(100% - (50px + 200px + 150px + 150px))">Action</th>
+        <th style="text-align: center; --width: calc(100% - (50px + 200px + 150px + 150px))">Aksi</th>
       </tr>
     </thead>
     <tbody>

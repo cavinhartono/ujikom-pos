@@ -247,12 +247,14 @@ td {
     padding: var(--sm) 0;
     border-radius: 8px;
     overflow: hidden;
+    transform: 0.5s;
     animation: slide 1s ease forwards;
     opacity: 1;
 }
 
 .alert.hide {
     animation: hide 1s ease forwards;
+    transition-delay: 1s;
     opacity: 0;
 }
 

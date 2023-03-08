@@ -70,14 +70,14 @@ Laporan | Shopcube
       <li class="list">
         <span class="icon"></span>
         <div class="label">
-          <h2 class="title"> IDR. {{ App\Models\Order::sum('price') }} </h2>
+          <h2 class="title"> IDR. <?php echo number_format($monthNow, '0', ",", "."); ?> </h2>
           <h2 class="subtitle">Total Penghasilan</h2>
         </div>
       </li>
-      <li class="list">
+      <li class="list {{ $monthNow <= $beforeMonth ? 'danger' : 'success' }}">
         <span class="icon"></span>
         <div class="label">
-          <h2 class="title"> {{ ($beforeMonth / $monthNow) * 100 }}% </h2>
+          <h2 class="title"> {{ $monthNow <= $beforeMonth ? "-" . number_format((($monthNow / $beforeMonth) * 100), 1) : number_format((($beforeMonth / $monthNow) * 100), 1) }}% </h2>
           <h2 class="subtitle"> Persentase </h2>
         </div>
       </li>

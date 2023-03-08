@@ -28,11 +28,11 @@ Produk | Shopcube
     <thead>
       <tr>
         <th>ID</th>
-        <th>Image</th>
+        <th>-</th>
         <th style="text-align: start;">Barcode</th>
-        <th style="text-align: start;">Name</th>
-        <th style="text-align: end;">Price</th>
-        <th style="text-align: center;">Action</th>
+        <th style="text-align: start;">Nama</th>
+        <th style="text-align: end;">Harga</th>
+        <th style="text-align: center;">Aksi</th>
       </tr>
     </thead>
     <tbody>
@@ -74,7 +74,7 @@ Produk | Shopcube
         <td>{{ $loop->iteration }}</td>
         <td style="width: 100px; height: 80px;">
           <img src="{{ $product->getFirstMediaUrl('avatar', 'thumb') }}" class="photo">
-          <div class="qty">
+          <div class="qty" style="z-index: 10;">
             <h2 class="subtitle"> Stok: {{ $product->qty }} </h2>
           </div>
         </td>
