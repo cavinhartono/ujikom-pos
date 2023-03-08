@@ -75,7 +75,19 @@ Laporan | Shopcube
         </div>
       </li>
       <li class="list {{ $monthNow <= $beforeMonth ? 'danger' : 'success' }}">
-        <span class="icon"></span>
+        <span class="icon">
+          @if ($monthNow <= $beforeMonth) <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
+            <polyline points="352 368 464 368 464 256" style="fill:none;stroke:#000;stroke-linecap:square;stroke-miterlimit:10;stroke-width:32px" />
+            <polyline points="48 144 192 288 288 192 448 352" style="fill:none;stroke:#000;stroke-linecap:square;stroke-miterlimit:10;stroke-width:32px" />
+            </svg>
+            @else
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
+              <title>ionicons-v5-c</title>
+              <polyline points="352 144 464 144 464 256" style="fill:none;stroke:#000;stroke-linecap:square;stroke-miterlimit:10;stroke-width:32px" />
+              <polyline points="48 368 192 224 288 320 448 160" style="fill:none;stroke:#000;stroke-linecap:square;stroke-miterlimit:10;stroke-width:32px" />
+            </svg>
+            @endif
+        </span>
         <div class="label">
           <h2 class="title"> {{ $monthNow <= $beforeMonth ? "-" . number_format((($monthNow / $beforeMonth) * 100), 1) : number_format((($beforeMonth / $monthNow) * 100), 1) }}% </h2>
           <h2 class="subtitle"> Persentase </h2>
