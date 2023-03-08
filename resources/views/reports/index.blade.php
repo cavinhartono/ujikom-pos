@@ -12,6 +12,7 @@ Laporan | Shopcube
 <div class="label">
   <h2 class="title">Laporan</h2>
   <h2 class="subtitle">{{ App\Models\Order::count() }}</h2>
+  {{ dd($topSellings) }}
 </div>
 <div class="full-content gap">
   <ul class="card">
@@ -117,6 +118,10 @@ Laporan | Shopcube
 @push('js')
 <script src="{{ asset('assets/js/plugins/apexchart.min.js') }}"></script>
 <script>
+  var foods = <?php echo json_encode($foods) ?>;
+  var drinks = <?php echo json_encode($drinks) ?>;
+  var others = <?php echo json_encode($others) ?>;
+
   var AreaOptions = {
     series: [{
         name: "series1",
