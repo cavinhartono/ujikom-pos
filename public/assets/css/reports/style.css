@@ -1,0 +1,16 @@
+@import url("../master.css");
+
+.revenue .list {
+    padding: var(--md);
+    width: calc(100% - 50%);
+    border-radius: 4px;
+}
+
+.revenue .list .icon {
+    width: var(--lg);
+    height: var(--lg);
+}
+
+.revenue .list .label {
+    margin: var(--sm) 0;
+}
