@@ -24,9 +24,8 @@ class ReportsController extends Controller
         $orders = Order::with('order_item', 'customer')->orderBy('created_at', 'DESC')->paginate(5);
         $topSellings = DB::table('products')
             ->select([
-                'id',
-                'name',
-                DB::raw('SUM(order_items.qty) as total_sales'),
+                'products.name',
+                DB::raw('SUM(order_items.qty) AS total_sales'),
                 DB::raw('SUM(products.price * order_items.qty) AS total_price'),
             ])
             ->join('order_items', 'order_items.product_id', '=', 'products.id')
