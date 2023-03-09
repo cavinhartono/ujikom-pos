@@ -33,9 +33,25 @@ class ReportsController extends Controller
             ->groupBy('products.id')
             ->orderByDesc('total_sales')
             ->get();
+        $label = DB::table('products')
+            ->select('products.name')
+            ->join('order_items', 'order_items.product_id', '=', 'products.id')
+            ->join('orders', 'order_items.order_id', '=', 'orders.id')
+            ->groupBy('products.id')
+            ->orderByDesc('name')
+            ->get();
+        $series = DB::table('products')
+            ->select([
+                DB::raw('SUM(products.price * order_items.qty) AS total_price'),
+            ])
+            ->join('order_items', 'order_items.product_id', '=', 'products.id')
+            ->join('orders', 'order_items.order_id', '=', 'orders.id')
+            ->groupBy('products.id')
+            ->orderByDesc('total_price')
+            ->get();
         $monthNow = Order::whereMonth('created_at', '=', Carbon::now())->sum('price');
         $beforeMonth = Order::whereMonth('created_at', '=', Carbon::now()->startOfMonth()->subMonth(1))->sum('price');
-        return view('reports.index', compact(['users', 'orders', 'monthNow', 'beforeMonth', 'topSellings']));
+        return view('reports.index', compact(['users', 'orders', 'monthNow', 'beforeMonth', 'topSellings', 'label', 'series']));
     }
 
     public function export_pdf()
