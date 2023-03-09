@@ -22,11 +22,18 @@ class ReportsController extends Controller
     {
         $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
         $orders = Order::with('order_item', 'customer')->orderBy('created_at', 'DESC')->paginate(5);
-        $topSellings = DB::table('order_items')
-            ->select('products.name', 'products.price', DB::raw('SUM(order_items.qty) AS total'))
-            ->join('products', 'order_items.product_id', '=', 'products.id')
-            ->whereMonth('created_at', '=', Carbon::now())
-            ->limit(3);
+        $topSellings = DB::table('products')
+            ->select([
+                'id',
+                'name',
+                DB::raw('SUM(order_items.qty) as total_sales'),
+                DB::raw('SUM(products.price * order_items.qty) AS total_price'),
+            ])
+            ->join('order_items', 'order_items.product_id', '=', 'products.id')
+            ->join('orders', 'order_items.order_id', '=', 'orders.id')
+            ->groupBy('products.id')
+            ->orderByDesc('total_sales')
+            ->get();
         $monthNow = Order::whereMonth('created_at', '=', Carbon::now())->sum('price');
         $beforeMonth = Order::whereMonth('created_at', '=', Carbon::now()->startOfMonth()->subMonth(1))->sum('price');
         return view('reports.index', compact(['users', 'orders', 'monthNow', 'beforeMonth', 'topSellings']));

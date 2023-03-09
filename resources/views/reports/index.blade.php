@@ -12,7 +12,7 @@ Laporan | Shopcube
 <div class="label">
   <h2 class="title">Laporan</h2>
   <h2 class="subtitle">{{ App\Models\Order::count() }}</h2>
-  {{ dd($topSellings) }}
+  <h2 class="subtitle"> {{ dd($topSellings) }} </h2>
 </div>
 <div class="full-content gap">
   <ul class="card">
