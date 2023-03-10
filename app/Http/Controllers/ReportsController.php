@@ -22,6 +22,17 @@ class ReportsController extends Controller
     {
         $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
         $orders = Order::with('order_item', 'customer')->orderBy('created_at', 'DESC')->paginate(5);
+        $totalRevenue = OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -1 DAY)'))
+            ->select([DB::raw('"Today" as date'), DB::raw('sum(price) as total')])
+            ->union(
+                OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -7 DAY)'))
+                    ->select([DB::raw('"Last 7 days"'), DB::raw('sum(price) as total')])
+            )
+            ->union(
+                OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -30 DAY)'))
+                    ->select([DB::raw('"Last 30 days"'), DB::raw('sum(price) as total')])
+            )
+            ->get();
         $topSellings = DB::table('products')
             ->select([
                 'products.name',
@@ -33,25 +44,9 @@ class ReportsController extends Controller
             ->groupBy('products.id')
             ->orderByDesc('total_sales')
             ->get();
-        $label = DB::table('products')
-            ->select('products.name')
-            ->join('order_items', 'order_items.product_id', '=', 'products.id')
-            ->join('orders', 'order_items.order_id', '=', 'orders.id')
-            ->groupBy('products.id')
-            ->orderByDesc('name')
-            ->get();
-        $series = DB::table('products')
-            ->select([
-                DB::raw('SUM(products.price * order_items.qty) AS total_price'),
-            ])
-            ->join('order_items', 'order_items.product_id', '=', 'products.id')
-            ->join('orders', 'order_items.order_id', '=', 'orders.id')
-            ->groupBy('products.id')
-            ->orderByDesc('total_price')
-            ->get();
         $monthNow = Order::whereMonth('created_at', '=', Carbon::now())->sum('price');
         $beforeMonth = Order::whereMonth('created_at', '=', Carbon::now()->startOfMonth()->subMonth(1))->sum('price');
-        return view('reports.index', compact(['users', 'orders', 'monthNow', 'beforeMonth', 'topSellings', 'label', 'series']));
+        return view('reports.index', compact(['users', 'orders', 'monthNow', 'beforeMonth', 'topSellings', 'totalRevenue']));
     }
 
     public function export_pdf()

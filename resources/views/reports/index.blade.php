@@ -117,17 +117,16 @@ Laporan | Shopcube
 @push('js')
 <script src="{{ asset('assets/js/plugins/apexchart.min.js') }}"></script>
 <script>
-  var series = <?php echo json_encode($series) ?>;
-  var label = <?php echo json_encode($label) ?>;
+  var monthNow = <?php echo json_encode($totalRevenue) ?>;
 
   var AreaOptions = {
     series: [{
-        name: "series1",
-        data: [31, 40, 28, 51, 42, 109, 100],
+        name: "Bulan lalu",
+        data: beforeMonth,
       },
       {
-        name: "series2",
-        data: [11, 32, 45, 32, 34, 52, 41],
+        name: "Saat ini",
+        data: monthNow,
       },
     ],
     chart: {
