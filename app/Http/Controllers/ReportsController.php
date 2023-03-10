@@ -43,7 +43,7 @@ class ReportsController extends Controller
             ->join('orders', 'order_items.order_id', '=', 'orders.id')
             ->groupBy('products.id')
             ->orderByDesc('total_sales')
-            ->get();
+            ->paginate(3);
         $monthNow = Order::whereMonth('created_at', '=', Carbon::now())->sum('price');
         $beforeMonth = Order::whereMonth('created_at', '=', Carbon::now()->startOfMonth()->subMonth(1))->sum('price');
         return view('reports.index', compact(['users', 'orders', 'monthNow', 'beforeMonth', 'topSellings', 'totalRevenue']));

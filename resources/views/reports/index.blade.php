@@ -36,7 +36,7 @@ Laporan | Shopcube
       </div>
     </li>
     <li class="list" style="--width: 350px">
-      <h2 class="subtitle">Kategori</h2>
+      <h2 class="subtitle">Penjualan Terbanyak</h2>
       <div class="content">
         <div id="category"></div>
       </div>
@@ -112,12 +112,135 @@ Laporan | Shopcube
     </ul>
   </div>
 </div>
+<?php
+$label = array();
+$series = array();
+
+foreach ($topSellings as $item) {
+  array_push($label, $item->name);
+  array_push($series, $item->total_price);
+}
+?>
 @endsection
 
 @push('js')
 <script src="{{ asset('assets/js/plugins/apexchart.min.js') }}"></script>
 <script>
   var monthNow = <?php echo json_encode($totalRevenue) ?>;
+  var topSellings = <?php echo json_encode($series) ?>;
+  var seriesSellings = [];
+  var labelSellings = <?php echo json_encode($label) ?>;
+
+  Object.values(topSellings).forEach((element) => {
+    seriesSellings.push(parseInt(element));
+  });
+
+  var PieOptions = {
+    chart: {
+      type: "donut",
+      width: 400,
+    },
+    colors: ["#2196f3", "#e2a03f", "#8738a7"],
+    dataLabels: {
+      enabled: false,
+    },
+    legend: {
+      position: "bottom",
+      horizontalAlign: "center",
+      fontSize: "16px",
+      markers: {
+        width: 10,
+        height: 10,
+      },
+      itemMargin: {
+        horizontal: 0,
+        vertical: 8,
+      },
+    },
+    plotOptions: {
+      pie: {
+        donut: {
+          size: "50%",
+          background: "transparent",
+          labels: {
+            show: true,
+            name: {
+              show: true,
+              fontSize: "18px",
+              fontFamily: "Sharp Sans, sans-serif",
+              color: undefined,
+              offsetY: -10,
+            },
+            value: {
+              show: true,
+              fontSize: "24px",
+              fontFamily: "Quicksand, sans-serif",
+              color: "20",
+              offsetY: 16,
+              formatter: function(val) {
+                return val;
+              },
+            },
+            total: {
+              show: true,
+              showAlways: true,
+              label: "Total",
+              color: "#888ea8",
+              formatter: function(w) {
+                return w.globals.seriesTotals.reduce(
+                  function(a, b) {
+                    return Math.max(a, b);
+                  },
+                  0
+                );
+              },
+            },
+          },
+        },
+      },
+    },
+    stroke: {
+      show: true,
+      width: 16,
+    },
+    series: seriesSellings,
+    labels: labelSellings,
+    responsive: [{
+      breakpoint: 1599,
+      options: {
+        chart: {
+          width: "500px",
+          height: "400px",
+        },
+        legend: {
+          position: "bottom",
+        },
+      },
+      breakpoint: 1439,
+      options: {
+        chart: {
+          width: "300px",
+          height: "390px",
+        },
+        legend: {
+          position: "bottom",
+        },
+        plotOptions: {
+          pie: {
+            donut: {
+              size: "65%",
+            },
+          },
+        },
+      },
+    }, ],
+  };
+
+  var Pie = new ApexCharts(
+    document.querySelector("#category"),
+    PieOptions
+  );
+  Pie.render();
 
   var AreaOptions = {
     series: [{
@@ -163,112 +286,5 @@ Laporan | Shopcube
     AreaOptions
   );
   Area.render();
-
-  var PieOptions = {
-    chart: {
-      type: "donut",
-      width: 400,
-    },
-    colors: ["#2196f3", "#e2a03f", "#8738a7"],
-    dataLabels: {
-      enabled: false,
-    },
-    legend: {
-      position: "bottom",
-      horizontalAlign: "center",
-      fontSize: "16px",
-      markers: {
-        width: 10,
-        height: 10,
-      },
-      itemMargin: {
-        horizontal: 0,
-        vertical: 8,
-      },
-    },
-    plotOptions: {
-      pie: {
-        donut: {
-          size: "65%",
-          background: "transparent",
-          labels: {
-            show: true,
-            name: {
-              show: true,
-              fontSize: "29px",
-              fontFamily: "Sharp Sans, sans-serif",
-              color: undefined,
-              offsetY: -10,
-            },
-            value: {
-              show: true,
-              fontSize: "26px",
-              fontFamily: "Quicksand, sans-serif",
-              color: "20",
-              offsetY: 16,
-              formatter: function(val) {
-                return val;
-              },
-            },
-            total: {
-              show: true,
-              showAlways: true,
-              label: "Total",
-              color: "#888ea8",
-              formatter: function(w) {
-                return w.globals.seriesTotals.reduce(
-                  function(a, b) {
-                    return a + b;
-                  },
-                  0
-                );
-              },
-            },
-          },
-        },
-      },
-    },
-    stroke: {
-      show: true,
-      width: 25,
-    },
-    series: series,
-    labels: label,
-    responsive: [{
-      breakpoint: 1599,
-      options: {
-        chart: {
-          width: "500px",
-          height: "400px",
-        },
-        legend: {
-          position: "bottom",
-        },
-      },
-      breakpoint: 1439,
-      options: {
-        chart: {
-          width: "300px",
-          height: "390px",
-        },
-        legend: {
-          position: "bottom",
-        },
-        plotOptions: {
-          pie: {
-            donut: {
-              size: "65%",
-            },
-          },
-        },
-      },
-    }, ],
-  };
-
-  var Pie = new ApexCharts(
-    document.querySelector("#category"),
-    PieOptions
-  );
-  Pie.render();
 </script>
 @endpush
