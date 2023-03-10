@@ -17,11 +17,6 @@ body {
     z-index: 2;
 }
 
-.img:hover ~ .qty {
-    visibility: visible;
-    opacity: 1;
-}
-
 .container {
     display: flex;
     justify-content: flex-end;
@@ -281,4 +276,30 @@ body {
 
 .label .field .input-form {
     margin: 0;
+}
+
+.products .img {
+    position: relative;
+    width: 100px;
+    height: 80px;
+}
+
+.products .img .qty {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(34, 34, 34, 0.75);
+    border-radius: 8px;
+    color: var(--white-primary);
+    transition: 0.3s;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 10;
+}
+
+.products .img:hover .qty {
+    visibility: visible;
+    opacity: 1;
 }

@@ -28,7 +28,7 @@ Produk | Shopcube
     <thead>
       <tr>
         <th>ID</th>
-        <th>-</th>
+        <th></th>
         <th style="text-align: start;">Barcode</th>
         <th style="text-align: start;">Nama</th>
         <th style="text-align: end;">Harga</th>
@@ -72,10 +72,12 @@ Produk | Shopcube
       @forelse($products as $product)
       <tr>
         <td>{{ $loop->iteration }}</td>
-        <td style="width: 100px; height: 80px;">
-          <img src="{{ $product->getFirstMediaUrl('avatar', 'thumb') }}" class="photo">
-          <div class="qty" style="z-index: 10;">
-            <h2 class="subtitle"> Stok: {{ $product->qty }} </h2>
+        <td>
+          <div class="img center">
+            <img src="{{ $product->getFirstMediaUrl('avatar', 'thumb') }}" class="photo">
+            <div class="qty center">
+              <h2 class="subtitle"> Stok: {{ $product->qty }} </h2>
+            </div>
           </div>
         </td>
         <td style="text-align: start;">{{ $product->barcode }}</td>

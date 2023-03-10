@@ -33,6 +33,18 @@
                   <h2 class="subtitle" style="text-transform: capitalize">{{ Auth::user()->roles->first()->name }}</h2>
                 </div>
               </li>
+              @if(Auth::user()->roles->first()->name == 'admin')
+              <li class="list">
+                <a href="/dashboard" class="link">
+                  <span class="icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="auto" fill="currentColor" height="auto" viewBox="0 0 512 512">
+                      <polygon points="416 174.74 416 48 336 48 336 106.45 256 32 0 272 64 272 64 480 208 480 208 320 304 320 304 480 448 480 448 272 512 272 416 174.74" />
+                    </svg>
+                  </span>
+                  <span class="subtitle">Dashboard</span>
+                </a>
+              </li>
+              @endif
               <li class="list">
                 <a href="/auth/settings" class="link">
                   <span class="icon center">

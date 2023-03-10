@@ -36,7 +36,7 @@ Laporan | Shopcube
       </div>
     </li>
     <li class="list" style="--width: 350px">
-      <h2 class="subtitle">Penjualan Terbanyak</h2>
+      <h2 class="subtitle">Penjualan Laris</h2>
       <div class="content">
         <div id="category"></div>
       </div>
