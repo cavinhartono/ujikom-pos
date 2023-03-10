@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\KasirController;
 use App\Http\Controllers\ProductsController;
@@ -48,6 +49,14 @@ Route::middleware('IsLogin')->group(function () {
         Route::get('/products/edit/{id}', 'edit');
         Route::put('/products/edit/{id}/store', 'update');
         Route::delete('/products/delete/{id}', 'delete');
+    });
+
+    Route::controller(CategoriesController::class)->group(function () {
+        Route::get('/categories/create', 'create');
+        Route::post('/categories/store', 'store');
+        Route::get('/categories/edit/{id}', 'edit');
+        Route::put('/categories/edit/{id}/update', 'update');
+        Route::delete('/categories/delete/{id}', 'delete');
     });
 
     Route::controller(UsersController::class)->group(function () {

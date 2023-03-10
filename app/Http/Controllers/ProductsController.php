@@ -21,7 +21,8 @@ class ProductsController extends Controller
     {
         $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
         $products = Product::with('categories')->get();
-        return view('products.index', compact(['users', 'products']));
+        $categories = Categories::orderBy('created_at', 'DESC')->get();
+        return view('products.index', compact(['users', 'products', 'categories']));
     }
 
     public function create()

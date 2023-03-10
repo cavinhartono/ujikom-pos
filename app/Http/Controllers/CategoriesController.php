@@ -8,12 +8,6 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
-    public function index()
-    {
-        $categories = Categories::all();
-        return view('products.index', compact(['categories']));
-    }
-
     public function create()
     {
         $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
