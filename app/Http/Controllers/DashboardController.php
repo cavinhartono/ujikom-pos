@@ -7,6 +7,7 @@ use App\Models\Customer;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -19,6 +20,9 @@ class DashboardController extends Controller
         $others = Categories::where('name', 'NOT LIKE', "makanan")->where('name', 'NOT LIKE', "minunan")->count();
         $customers = Customer::all();
         $customerLast = Customer::orderBy('created_at', 'DESC')->paginate(5);
-        return view('dashboard.index', compact(['users', 'customers', 'customerLast', 'foods', 'drinks', 'others', 'orders']));
+
+        if (Auth::user()->roles->first()->name == 'admin') {
+            return view('dashboard.index', compact(['users', 'customers', 'customerLast', 'foods', 'drinks', 'others', 'orders']));
+        } else if (Auth::user()->roles->first()->name == 'user') return view('dashboard.guest');
     }
 }

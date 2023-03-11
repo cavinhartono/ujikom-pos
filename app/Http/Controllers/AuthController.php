@@ -81,7 +81,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($get)) {
             $name = explode(' ', trim(Auth::user()->name))[0];
-            if (Auth::user()->roles->first()->name == 'admin') {
+            if (Auth::user()->roles->first()->name == 'admin' || Auth::user()->roles->first()->name == 'user') {
                 return redirect('/dashboard')->with('success', "Selamat kembali, $name.");
             }
             return redirect('/')->with('success', "Selamat kembali, $name.");
@@ -123,7 +123,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($get)) {
             $name = explode(' ', trim(Auth::user()->name))[0];
-            return view('guest.index')->with('success', "Selamat datang, $name.");
+            return redirect('/dashboard')->with('success', "Selamat datang, $name.");
         } else {
             return redirect('/auth')->with('failed', 'Email dan Password harus disesuaikan');
         }

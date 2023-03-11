@@ -68,6 +68,7 @@
               </li>
             </ul>
           </li>
+          @can('kasir-mode')
           <li class="list {{ (request()->is('/')) ? 'active' : '' }}">
             <a href="/" class="link center">
               <span class="icon">
@@ -78,6 +79,8 @@
               </span>
             </a>
           </li>
+          @endcan
+          @can('transaksi')
           <li class="list {{ (request()->is('transactions')) ? 'active' : '' }}">
             <a href="/transactions" class="link center">
               <span class="icon">
@@ -89,6 +92,7 @@
               </span>
             </a>
           </li>
+          @endcan
         </ul>
       </div>
     </nav>

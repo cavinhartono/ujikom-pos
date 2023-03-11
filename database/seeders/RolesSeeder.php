@@ -62,7 +62,7 @@ class RolesSeeder extends Seeder
 
       $admin = Role::create(['name' => 'admin']);
       $kasir = Role::create(['name' => 'kasir']);
-      $kasir = Role::create(['name' => 'user']);
+      $user = Role::create(['name' => 'user']);
 
       $admin->givePermissionTo(['transaksi', 'laporan', 'aktivitas', 'produk', 'kasir-mode', 'user']);
       $kasir->givePermissionTo(['kasir-mode']);

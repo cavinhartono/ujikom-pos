@@ -60,7 +60,7 @@ Pengguna | Shopcube
               </svg>
             </span>
           </a>
-          <a href="/users/delete/{{ $user->id }}" class="link btn danger">
+          <a href="/users/{{ $user->id }}/delete" class="link btn danger">
             <span class="icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="auto" fill="currentColor" height="auto" viewBox="0 0 512 512">
                 <title>Delete</title>

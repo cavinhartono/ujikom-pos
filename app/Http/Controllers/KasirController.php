@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class KasirController extends Controller
@@ -20,6 +21,8 @@ class KasirController extends Controller
     public function index()
     {
         $products = Product::all();
+
+        if (Auth::user()->roles->first()->name == 'user') return "Maaf tidak dapat diakses";
         return view('cashier.dashboard', compact(['products']));
     }
 
