@@ -20,17 +20,30 @@ class ReportsController extends Controller
 
     public function index()
     {
+        $n = 3;
         $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
         $orders = Order::with('order_item', 'customer')->orderBy('created_at', 'DESC')->paginate(5);
-        $totalRevenue = OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -1 DAY)'))
-            ->select([DB::raw('"Today" as date'), DB::raw('sum(price) as total')])
+        // $totalRevenue = Order::where('created_at', Carbon::now()->subMonth($n))->sum('price')->union();
+        // $totalRevenue = OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -1 DAY)'))
+        //     ->select([DB::raw('"Today" as date'), DB::raw('sum(price) as total')])
+        //     ->union(
+        //         OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -7 DAY)'))
+        //             ->select([DB::raw('"Last 7 days"'), DB::raw('sum(price) as total')])
+        //     )
+        //     ->union(
+        //         OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -30 DAY)'))
+        //             ->select([DB::raw('"Last 30 days"'), DB::raw('sum(price) as total')])
+        //     )
+        //     ->get();
+        $totalRevenue = Order::whereMonth('created_at', '=', Carbon::now())
+            ->select([DB::raw('"Saat ini" as date'), DB::raw('sum(price) as total')])
             ->union(
-                OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -7 DAY)'))
-                    ->select([DB::raw('"Last 7 days"'), DB::raw('sum(price) as total')])
+                OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -1 MONTH)'))
+                    ->select([DB::raw('"Bulan lalu"'), DB::raw('sum(price) as total')])
             )
             ->union(
-                OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -30 DAY)'))
-                    ->select([DB::raw('"Last 30 days"'), DB::raw('sum(price) as total')])
+                OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -2 MONTH)'))
+                    ->select([DB::raw('"3 Bulan terakhir"'), DB::raw('sum(price) as total')])
             )
             ->get();
         $topSellings = DB::table('products')

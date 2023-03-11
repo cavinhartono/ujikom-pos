@@ -274,6 +274,47 @@ body {
     border-radius: 8px;
 }
 
+.categories .category .list {
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    background: var(--white-primary);
+    color: var(--black-primary);
+    border-radius: 4px;
+    box-shadow: var(--boxShadow-secondary);
+    transition: 0.3s;
+}
+
+.categories .list .subtitle,
+.categories .action .link {
+    color: inherit;
+}
+
+.categories .action {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 6px;
+}
+
+.categories .list:hover {
+    padding-right: var(--lg);
+    background: var(--primary-color);
+    color: var(--white-primary);
+}
+
+.categories .list:hover .action .link {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+}
+
+.categories .action .link {
+    transition: 0.5s;
+    visibility: hidden;
+    opacity: 0;
+}
+
 .label .field .input-form {
     margin: 0;
 }

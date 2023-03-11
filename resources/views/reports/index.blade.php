@@ -115,18 +115,25 @@ Laporan | Shopcube
 <?php
 $label = array();
 $series = array();
+$keyRevenue = array();
+$valRevenue = array();
 
 foreach ($topSellings as $item) {
   array_push($label, $item->name);
   array_push($series, $item->total_price);
 }
+
+foreach ($totalRevenue as $item) {
+  array_push($keyRevenue, $item->date);
+  array_push($valRevenue, $item->total);
+}
+
 ?>
 @endsection
 
 @push('js')
 <script src="{{ asset('assets/js/plugins/apexchart.min.js') }}"></script>
 <script>
-  var monthNow = <?php echo json_encode($totalRevenue) ?>;
   var topSellings = <?php echo json_encode($series) ?>;
   var seriesSellings = [];
   var labelSellings = <?php echo json_encode($label) ?>;
@@ -242,14 +249,23 @@ foreach ($topSellings as $item) {
   );
   Pie.render();
 
+  var beforeMonth = <?php echo json_encode($valRevenue) ?>;
+  var labelRevenue = <?php echo json_encode($keyRevenue) ?>;
+  var totalRevenue = [];
+
+  Object.values(beforeMonth).forEach((element) => {
+    totalRevenue.push(parseInt(element));
+  });
+
+
   var AreaOptions = {
     series: [{
-        name: "Bulan lalu",
-        data: beforeMonth,
+        name: "Saat ini",
+        data: [0, totalRevenue[0]],
       },
       {
-        name: "Saat ini",
-        data: monthNow,
+        name: "Bulan lalu",
+        data: [totalRevenue[1], totalRevenue[2]],
       },
     ],
     chart: {
@@ -263,17 +279,17 @@ foreach ($topSellings as $item) {
       curve: "smooth",
     },
     xaxis: {
-      type: "datetime",
-      categories: [
-        "2018-09-19T00:00:00.000Z",
-        "2018-09-19T01:30:00.000Z",
-        "2018-09-19T02:30:00.000Z",
-        "2018-09-19T03:30:00.000Z",
-        "2018-09-19T04:30:00.000Z",
-        "2018-09-19T05:30:00.000Z",
-        "2018-09-19T06:30:00.000Z",
-      ],
+      axisBorder: {
+        show: false,
+      },
+      axisTicks: {
+        show: false,
+      },
+      crosshairs: {
+        show: true,
+      },
     },
+    labels: labelRevenue,
     tooltip: {
       x: {
         format: "dd/MM/yy HH:mm",

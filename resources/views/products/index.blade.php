@@ -116,7 +116,7 @@ Produk | Shopcube
     </tbody>
   </table>
 </div>
-<div class="categories">
+<div class="categories" style="position: relative; margin-top: var(--md)">
   <div class="label full-content between" style="align-items: center;">
     <div class="label flex gap">
       <a href="/categories/create" class="btn primary link">Tambah</a>
@@ -127,9 +127,9 @@ Produk | Shopcube
       </div>
     </div>
   </div>
-  <ul class="category flex gap">
+  <ul class="category flex gap" style="position: relative; margin: var(--md) 0">
     @forelse($categories as $category)
-    <li class="list between gap">
+    <li class="list between gap" style="position: relative;">
       <a href="/categories/edit/{{ $category->id }}" class="link">
         <h2 class="subtitle">
           {{ $category->name }}
