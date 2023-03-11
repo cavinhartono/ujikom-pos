@@ -74,8 +74,8 @@ Route::middleware('IsLogin')->group(function () {
 
     Route::controller(ReportsController::class)->middleware('can:laporan')->group(function () {
         Route::get('/reports', 'index');
-        Route::get('/print', 'print');
-        Route::get('/export-pdf', 'export_pdf');
+        Route::get('/document', 'document');
+        Route::get('/export_pdf', 'view_pdf');
     });
 
     Route::controller(TransactionController::class)->middleware('can:transaksi')->group(function () {

@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\User;
-use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
-use DateTime;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ReportsController extends Controller
@@ -20,7 +18,6 @@ class ReportsController extends Controller
 
     public function index()
     {
-        $n = 3;
         $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
         $orders = Order::with('order_item', 'customer')->orderBy('created_at', 'DESC')->paginate(5);
         // $totalRevenue = Order::where('created_at', Carbon::now()->subMonth($n))->sum('price')->union();
@@ -62,11 +59,117 @@ class ReportsController extends Controller
         return view('reports.index', compact(['users', 'orders', 'monthNow', 'beforeMonth', 'topSellings', 'totalRevenue']));
     }
 
+    public function document()
+    {
+        $orders = Order::with('order_item', 'customer')->orderBy('created_at', 'DESC')->paginate(5);
+        $totalRevenue = Order::whereMonth('created_at', '=', Carbon::now())
+            ->select([DB::raw('"Saat ini" as date'), DB::raw('sum(price) as total')])
+            ->union(
+                OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -1 MONTH)'))
+                    ->select([DB::raw('"Bulan lalu"'), DB::raw('sum(price) as total')])
+            )
+            ->union(
+                OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -2 MONTH)'))
+                    ->select([DB::raw('"3 Bulan terakhir"'), DB::raw('sum(price) as total')])
+            )
+            ->get();
+        $topSellings = DB::table('products')
+            ->select([
+                'products.name',
+                DB::raw('SUM(order_items.qty) AS total_sales'),
+                DB::raw('SUM(products.price * order_items.qty) AS total_price'),
+            ])
+            ->join('order_items', 'order_items.product_id', '=', 'products.id')
+            ->join('orders', 'order_items.order_id', '=', 'orders.id')
+            ->groupBy('products.id')
+            ->orderByDesc('total_sales')
+            ->paginate(3);
+        $monthNow = Order::whereMonth('created_at', '=', Carbon::now())->sum('price');
+        $beforeMonth = Order::whereMonth('created_at', '=', Carbon::now()->startOfMonth()->subMonth(1))->sum('price');
+        return view('reports.document', compact([
+            'orders',
+            'totalRevenue',
+            'topSellings',
+            'monthNow',
+            'beforeMonth'
+        ]));
+    }
+
+    public function view_pdf()
+    {
+        $orders = Order::with('order_item', 'customer')->orderBy('created_at', 'DESC')->paginate(5);
+        $totalRevenue = Order::whereMonth('created_at', '=', Carbon::now())
+            ->select([DB::raw('"Saat ini" as date'), DB::raw('sum(price) as total')])
+            ->union(
+                OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -1 MONTH)'))
+                    ->select([DB::raw('"Bulan lalu"'), DB::raw('sum(price) as total')])
+            )
+            ->union(
+                OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -2 MONTH)'))
+                    ->select([DB::raw('"3 Bulan terakhir"'), DB::raw('sum(price) as total')])
+            )
+            ->get();
+        $topSellings = DB::table('products')
+            ->select([
+                'products.name',
+                DB::raw('SUM(order_items.qty) AS total_sales'),
+                DB::raw('SUM(products.price * order_items.qty) AS total_price'),
+            ])
+            ->join('order_items', 'order_items.product_id', '=', 'products.id')
+            ->join('orders', 'order_items.order_id', '=', 'orders.id')
+            ->groupBy('products.id')
+            ->orderByDesc('total_sales')
+            ->paginate(3);
+        $monthNow = Order::whereMonth('created_at', '=', Carbon::now())->sum('price');
+        $beforeMonth = Order::whereMonth('created_at', '=', Carbon::now()->startOfMonth()->subMonth(1))->sum('price');
+
+        $pdf = Pdf::loadView('reports.document', [
+            'orders' => $orders,
+            'monthNow' => $monthNow,
+            'beforeMonth' => $beforeMonth,
+            'topSellings' => $topSellings,
+            'totalRevenue' => $totalRevenue
+        ]);
+
+        return $pdf->stream();
+    }
+
     public function export_pdf()
     {
-        $orders = Order::with('order_item', 'customer')->orderBy('created_at', 'DESC')->get();
-        $fileName = 'report-' . new DateTime(Carbon::now()) . '-.pdf';
-        $pdf = PDF::loadView('reports.document', compact(['orders']));
+        $orders = Order::with('order_item', 'customer')->orderBy('created_at', 'DESC')->paginate(5);
+        $totalRevenue = Order::whereMonth('created_at', '=', Carbon::now())
+            ->select([DB::raw('"Saat ini" as date'), DB::raw('sum(price) as total')])
+            ->union(
+                OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -1 MONTH)'))
+                    ->select([DB::raw('"Bulan lalu"'), DB::raw('sum(price) as total')])
+            )
+            ->union(
+                OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -2 MONTH)'))
+                    ->select([DB::raw('"3 Bulan terakhir"'), DB::raw('sum(price) as total')])
+            )
+            ->get();
+        $topSellings = DB::table('products')
+            ->select([
+                'products.name',
+                DB::raw('SUM(order_items.qty) AS total_sales'),
+                DB::raw('SUM(products.price * order_items.qty) AS total_price'),
+            ])
+            ->join('order_items', 'order_items.product_id', '=', 'products.id')
+            ->join('orders', 'order_items.order_id', '=', 'orders.id')
+            ->groupBy('products.id')
+            ->orderByDesc('total_sales')
+            ->paginate(3);
+        $monthNow = Order::whereMonth('created_at', '=', Carbon::now())->sum('price');
+        $beforeMonth = Order::whereMonth('created_at', '=', Carbon::now()->startOfMonth()->subMonth(1))->sum('price');
+
+        $fileName = 'report.pdf';
+        $pdf = Pdf::loadView('reports.document', [
+            'orders' => $orders,
+            'monthNow' => $monthNow,
+            'beforeMonth' => $beforeMonth,
+            'topSellings' => $topSellings,
+            'totalRevenue' => $totalRevenue
+        ]);
 
         return $pdf->download($fileName);
     }

@@ -9,9 +9,12 @@ Laporan | Shopcube
 @endpush
 
 @section('overview')
-<div class="label">
-  <h2 class="title">Laporan</h2>
-  <h2 class="subtitle">{{ App\Models\Order::count() }}</h2>
+<div class="label between">
+  <div class="label">
+    <h2 class="title">Laporan</h2>
+    <h2 class="subtitle">{{ App\Models\Order::count() }}</h2>
+  </div>
+  <div class="action"><a href="/export_pdf" class="link btn primary">Print</a></div>
 </div>
 <div class="full-content gap">
   <ul class="card">
