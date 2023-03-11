@@ -260,12 +260,12 @@ foreach ($totalRevenue as $item) {
 
   var AreaOptions = {
     series: [{
-        name: "Saat ini",
-        data: [0, totalRevenue[0]],
-      },
-      {
         name: "Bulan lalu",
         data: [totalRevenue[1], totalRevenue[2]],
+      },
+      {
+        name: "Saat ini",
+        data: [0, totalRevenue[0]],
       },
     ],
     chart: {
@@ -289,7 +289,7 @@ foreach ($totalRevenue as $item) {
         show: true,
       },
     },
-    labels: labelRevenue,
+    labels: labelRevenue.reverse(),
     tooltip: {
       x: {
         format: "dd/MM/yy HH:mm",
