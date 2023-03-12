@@ -194,7 +194,7 @@
       <header class="header">
         <ul class="action">
           <li class="list btn whited rounded">
-            <a href="#" class="link">
+            <a href="/chat" class="link">
               <span class="icon center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
                   <title>Pesan</title>
