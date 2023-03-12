@@ -12,6 +12,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "milon/barcode": "^10.0",
+        "munafio/chatify": "^1.6",
         "spatie/laravel-medialibrary": "^9.6.0",
         "spatie/laravel-permission": "^5.8",
         "yajra/laravel-datatables-oracle": "~9.0"
