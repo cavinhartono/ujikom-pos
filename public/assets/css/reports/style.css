@@ -1,5 +1,45 @@
 @import url("../master.css");
 
+.gap {
+    gap: var(--sm);
+}
+
+body {
+    margin: var(--lg);
+}
+
+.card .list {
+    padding: var(--md);
+    width: calc(100% - 400px);
+    height: 180px;
+    border-radius: 4px;
+}
+
+.card .list .subtitle {
+    color: var(--white-secondary);
+    font-size: var(--md);
+}
+
+.card .list .subtitle.value {
+    color: var(--white-primary);
+    font-size: var(--lg);
+    font-weight: 600;
+}
+
+.charts {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.charts .list {
+    width: var(--width);
+    padding: var(--md);
+    background: var(--white-primary);
+    border-radius: 4px;
+}
+
 .revenue .list {
     padding: var(--md);
     width: calc(100% - 50%);
@@ -13,4 +53,10 @@
 
 .revenue .list .label {
     margin: var(--sm) 0;
+}
+
+@media print {
+    .btn.primary {
+        display: none;
+    }
 }

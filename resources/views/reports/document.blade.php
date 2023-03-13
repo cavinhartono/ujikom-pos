@@ -7,17 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{{ asset('assets/css/reports/style.css') }}">
     <title>Dokumen Harian</title>
-    <style>
-        body {
-            margin: var(--md);
-        }
-
-        @media print {
-            .btn {
-                display: none;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -26,20 +15,22 @@
             <div class="label">
                 <h2 class="title">Shop<b>cube</b></h2>
                 <h2 class="subtitle">Dokumen Harian</h2>
-                <h2 class="subtitle">Dari tanggal 10 Feb - 17 Feb 2023</h2>
+                <h2 class="subtitle">{{ \Carbon\Carbon::now()->isoFormat('dddd, D MMMM YYYY') }}</h2>
             </div>
             <div class="content">
                 <div class="label" style="text-align: end">
-                    <h2 class="subtitle">{{ Auth::user()->name }}</h2>
+                    <h2 class="subtitle">{{ $user->name }}</h2>
                     <h2 class="subtitle" style="margin-top: 4px; text-transform: capitalize;">
-                        {{ Auth::user()->roles->first()->name }}
+                        @foreach($user->roles as $role)
+                        {{ $role->name }}
+                        @endforeach
                     </h2>
                 </div>
             </div>
         </header>
         <div class="content" style="margin: var(--md) 0">
-            <div class="full-content gap">
-                <ul class="card">
+            <div class="full-content flex gap" style="flex-direction: column;">
+                <ul class="card flex gap" style="width: 100%;">
                     <li class="list" style="background: var(--fifth-color)">
                         <h2 class="subtitle">Bulan Ini</h2>
                         <h2 class="subtitle value"> {{ App\Models\Order::whereMonth('created_at', '=', Carbon\Carbon::now())->count() }} </h2>
@@ -53,7 +44,7 @@
                         <h2 class="subtitle value">{{ App\Models\Order::whereDay('created_at', '=', Carbon\Carbon::now())->count() }} </h2>
                     </li>
                 </ul>
-                <ul class="full-content charts gap">
+                <ul class="charts gap">
                     <li class="list" style="--width: calc(100% - 350px)">
                         <h2 class="subtitle">Revenue</h2>
                         <div class="full-content">
