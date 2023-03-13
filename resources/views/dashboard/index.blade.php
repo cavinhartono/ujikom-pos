@@ -70,18 +70,36 @@ Dashboard | Shopcube
 @push('js')
 <script src="{{ asset('assets/js/plugins/apexchart.min.js') }}"></script>
 <script>
-  var foods = <?php echo json_encode($foods) ?>;
-  var drinks = <?php echo json_encode($drinks) ?>;
-  var others = <?php echo json_encode($others) ?>;
+  var keyRevenue = [<?php
+                    foreach ($revenue as $item) {
+                      echo json_encode($item->date) . ", ";
+                    }
+                    ?>],
+    valRevenue = [<?php
+                  foreach ($revenue as $item) {
+                    echo json_encode((int) $item->total) . ", ";
+                  }
+                  ?>];
+
+  var labelCategories = [<?php
+                          foreach ($categories as $category) {
+                            echo json_encode($category->name) . ", ";
+                          }
+                          ?>],
+    seriesCategories = [<?php
+                        foreach ($categories as $category) {
+                          echo json_encode((int) $category->total_products) . ", ";
+                        }
+                        ?>];
 
   var AreaOptions = {
     series: [{
-        name: "series1",
-        data: [31, 40, 28, 51, 42, 109, 100],
+        name: keyRevenue[0],
+        data: [0, valRevenue[0]],
       },
       {
-        name: "series2",
-        data: [11, 32, 45, 32, 34, 52, 41],
+        name: keyRevenue[1],
+        data: [0, valRevenue[1]],
       },
     ],
     chart: {
@@ -173,7 +191,7 @@ Dashboard | Shopcube
               formatter: function(w) {
                 return w.globals.seriesTotals.reduce(
                   function(a, b) {
-                    return a + b;
+                    return Math.max(a, b);
                   },
                   0
                 );
@@ -187,8 +205,8 @@ Dashboard | Shopcube
       show: true,
       width: 25,
     },
-    series: [foods, drinks, others],
-    labels: ['Makanan', 'Minunan', 'Lain-lain'],
+    series: seriesCategories,
+    labels: labelCategories,
     responsive: [{
       breakpoint: 1599,
       options: {
