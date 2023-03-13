@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
@@ -17,7 +18,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
-        $auth = User::with('roles')->get();
+        $auth = User::with('roles')->whereNot('id', '=', Auth::user()->id)->get();
         return view('users.index', compact(['users', 'auth']));
     }
 
