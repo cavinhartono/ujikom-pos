@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->enum(3, ['success', 'failed', 'wait']);
+            $table->enum('type', ['success', 'failed', 'wait']);
             $table->text('title');
             $table->text('content');
             $table->timestamps();
