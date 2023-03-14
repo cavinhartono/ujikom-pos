@@ -55,8 +55,9 @@ class RolesSeeder extends Seeder
 
       Permission::create(['name' => 'transaksi']);
       Permission::create(['name' => 'laporan']);
-      Permission::create(['name' => 'aktivitas']);
       Permission::create(['name' => 'produk']);
+      Permission::create(['name' => 'dashboard']);
+      Permission::create(['name' => 'ruang-tunggu']);
       Permission::create(['name' => 'kasir-mode']);
       Permission::create(['name' => 'user']);
 
@@ -64,8 +65,9 @@ class RolesSeeder extends Seeder
       $kasir = Role::create(['name' => 'kasir']);
       $user = Role::create(['name' => 'user']);
 
-      $admin->givePermissionTo(['transaksi', 'laporan', 'aktivitas', 'produk', 'kasir-mode', 'user']);
-      $kasir->givePermissionTo(['kasir-mode']);
+      $admin->givePermissionTo(['dashboard', 'transaksi', 'laporan', 'produk', 'kasir-mode', 'user', 'ruang-tunggu']);
+      $kasir->givePermissionTo(['kasir-mode', 'transaksi']);
+      $user->givePermissionTo(['ruang-tunggu']);
 
       $admin1->assignRole('admin');
       $admin2->assignRole('admin');
