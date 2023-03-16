@@ -47,7 +47,34 @@ class OrderSeeder extends Seeder
             'order_id' => 2,
             'product_id' => 3,
             'qty' => 3,
-            'price' => 15000,
+            'price' => 5000,
+            'created_at' => "2023-01-25 05:01:38",
+            'updated_at' => "2023-01-25 05:01:38",
+        ]);
+
+        OrderItem::insert([
+            'order_id' => 2,
+            'product_id' => 4,
+            'qty' => 1,
+            'price' => 100000,
+            'created_at' => "2023-01-25 05:01:38",
+            'updated_at' => "2023-01-25 05:01:38",
+        ]);
+
+        Order::insert([
+            'customer_id' => 3,
+            'price' => 80000,
+            'return' => 5000,
+            'accept' => 120000,
+            'created_at' => "2023-01-25 05:01:38",
+            'updated_at' => "2023-01-25 05:01:38",
+        ]);
+
+        OrderItem::insert([
+            'order_id' => 3,
+            'product_id' => 3,
+            'qty' => 3,
+            'price' => 5000,
             'created_at' => "2023-01-25 05:01:38",
             'updated_at' => "2023-01-25 05:01:38",
         ]);
