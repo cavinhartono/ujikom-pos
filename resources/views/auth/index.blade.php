@@ -40,7 +40,7 @@
             <div class="input">
               <label for="password">Password</label>
               <div class="passwordBx">
-                <input type="password" name="password" id="password" placeholder="Minimal 8 digit" value="{{ Session::get('password') }}" />
+                <input type="password" name="password" id="password isPassword" placeholder="Minimal 8 digit" value="{{ Session::get('password') }}" />
                 <span class="lihatPassword"><span id="eye"></span></span>
               </div>
             </div>
@@ -66,14 +66,14 @@
             <div class="input">
               <label for="password2">Password</label>
               <div class="passwordBx">
-                <input type="password" name="password" id="password2" placeholder="Minimal 8 digit" />
+                <input type="password" name="password" id="password2 isPassword" placeholder="Minimal 8 digit" />
                 <span class="lihatPassword"><span id="eye"></span></span>
               </div>
             </div>
             <div class="input">
               <label for="confirmPassword">Konfirmasi Password</label>
               <div class="passwordBx">
-                <input type="password" name="password" id="confirmPassword" placeholder="Minimal 8 digit" />
+                <input type="password" name="password" id="confirmPassword isPassword" placeholder="Minimal 8 digit" />
                 <span class="lihatPassword"><span id="eye"></span></span>
               </div>
             </div>
@@ -84,8 +84,8 @@
     </div>
   </section>
   <script>
-    var eye = document.querySelectorAll("#eye");
-    var password = document.querySelectorAll("#password");
+    var eye = document.querySelectorAll(".lihatPassword");
+    var password = document.querySelectorAll("#isPassword");
 
     eye.forEach((element) => {
       element.addEventListener("click", () => {

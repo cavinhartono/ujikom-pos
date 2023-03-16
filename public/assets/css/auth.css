@@ -275,3 +275,44 @@ body.aktif {
 .line:after {
     margin-left: 10px;
 }
+
+@media (max-width: 991px) {
+    .login {
+        max-width: 400px;
+        height: 650px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login .blurBx {
+        top: 0;
+        height: 100%;
+    }
+
+    .login .loginBx {
+        top: 0;
+        width: 100%;
+        height: 500px;
+    }
+
+    .login .blurBx .box {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 150px;
+    }
+
+    .login .blurBx .box.SignIn {
+        top: 0;
+    }
+
+    .login.aktif .loginBx {
+        top: 150px;
+        left: 0;
+    }
+
+    .field.flex {
+        display: block;
+    }
+}
