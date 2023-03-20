@@ -4,10 +4,6 @@
     gap: var(--sm);
 }
 
-body {
-    margin: var(--lg);
-}
-
 .card .list {
     padding: var(--md);
     width: calc(100% - 400px);
@@ -56,6 +52,10 @@ body {
 }
 
 @media print {
+    body {
+        margin: var(--lg);
+    }
+
     .btn.primary {
         display: none;
     }

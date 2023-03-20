@@ -45,7 +45,7 @@
                     </li>
                 </ul>
                 <ul class="charts gap">
-                    <li class="list" style="--width: calc(100% - 350px)">
+                    <li class="list" style="--width: 600px">
                         <h2 class="subtitle">Revenue</h2>
                         <div class="full-content">
                             <div id="totalSales"></div>
