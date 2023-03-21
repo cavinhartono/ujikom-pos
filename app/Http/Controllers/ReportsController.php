@@ -97,48 +97,4 @@ class ReportsController extends Controller
             'beforeMonth'
         ]));
     }
-
-    public function exportPDF()
-    {
-        $user = User::find(Auth::user()->id);
-        $orders = Order::with('order_item', 'customer')->orderBy('created_at', 'DESC')->paginate(5);
-        $totalRevenue = Order::whereMonth('created_at', '=', Carbon::now())
-            ->select([DB::raw('"Saat ini" as date'), DB::raw('sum(price) as total')])
-            ->union(
-                OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -1 MONTH)'))
-                    ->select([DB::raw('"Bulan lalu"'), DB::raw('sum(price) as total')])
-            )
-            ->union(
-                OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -2 MONTH)'))
-                    ->select([DB::raw('"3 Bulan terakhir"'), DB::raw('sum(price) as total')])
-            )
-            ->get();
-        $topSellings = DB::table('products')
-            ->select([
-                'products.name',
-                DB::raw('SUM(order_items.qty) AS total_sales'),
-                DB::raw('SUM(products.price * order_items.qty) AS total_price'),
-            ])
-            ->join('order_items', 'order_items.product_id', '=', 'products.id')
-            ->join('orders', 'order_items.order_id', '=', 'orders.id')
-            ->groupBy('products.id')
-            ->orderByDesc('total_sales')
-            ->paginate(3);
-        $monthNow = Order::whereMonth('created_at', '=', Carbon::now())->sum('price');
-        $beforeMonth = Order::whereMonth('created_at', '=', Carbon::now()->startOfMonth()->subMonth(1))->sum('price');
-
-        $fileName = 'report.pdf';
-        $data = [
-            'orders' => $orders,
-            'monthNow' => $monthNow,
-            'beforeMonth' => $beforeMonth,
-            'topSellings' => $topSellings,
-            'totalRevenue' => $totalRevenue,
-            'user' => $user
-        ];
-
-        $pdf = PDF::loadView('reports.document', $data);
-
-        return $pdf->download($fileName);
-    }
 }

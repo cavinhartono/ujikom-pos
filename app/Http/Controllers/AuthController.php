@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -44,19 +45,16 @@ class AuthController extends Controller
 
         $user = User::with('roles')->findOrFail(Auth::user()->id);
 
-        $update = [
-            $user->update([
-                'name' => $request->name,
-                'password' => Hash::make($request->password),
-            ])
-        ];
+        $user->update([
+            'name' => $request->name,
+            'password' => Hash::make($request->password),
+            'updated_at' => Carbon::now()
+        ]);
 
         if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
             $user->clearMediaColletion('avatar');
             $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
         }
-
-        $user->update($update);
 
         return redirect('/dashboard')->with('success', `$request->name telah dirubah.`);
     }
