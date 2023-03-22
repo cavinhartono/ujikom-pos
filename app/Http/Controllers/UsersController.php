@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notification;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -41,12 +42,27 @@ class UsersController extends Controller
         ];
 
         $user = User::find($id);
+
         $user->syncRoles($request->role);
         $user->update([$data]);
 
         if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
             $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
         }
+
+        Notification::create([
+            'type' => 'success',
+            'user_id' => $user->id,
+            'title' => "Mengubah Roles",
+            'content' => 'oleh ' . Auth::user()->name,
+        ]);
+
+        Notification::create([
+            'type' => 'success',
+            'user_id' => Auth::user()->id,
+            'title' => "Mengubah Pengguna",
+            'content' => `$request->name sudah dirubah.`,
+        ]);
 
         return redirect('/users')->with('success', `$request->name telah diedit!`);
     }
@@ -65,12 +81,25 @@ class UsersController extends Controller
             $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
         }
 
+        Notification::create([
+            'type' => 'success',
+            'user_id' => Auth::user()->id,
+            'title' => "Menambah Pengguna",
+            'content' => `$request->name sudah ditambah.`,
+        ]);
+
         return redirect('/users')->with('success', `$request->name telah ditambahkan!`);
     }
 
     public function delete($id)
     {
         $user = User::find($id);
+        Notification::create([
+            'type' => 'success',
+            'user_id' => Auth::user()->id,
+            'title' => "Menghapus Pengguna",
+            'content' => `$user->name sudah dihapus.`,
+        ]);
         $user->delete();
         return redirect('/users')->with('success', `$user->name telah dihapus!`);
     }
