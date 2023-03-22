@@ -52,8 +52,8 @@ class AuthController extends Controller
         ]);
 
         if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
-            $user->clearMediaColletion('avatar');
-            $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
+            $now = Carbon::now();
+            $user->addMediaFromRequest('avatar')->usingFileName(`profile-$now.jpg`)->toMediaCollection('avatar');
         }
 
         return redirect('/dashboard')->with('success', `$request->name telah dirubah.`);

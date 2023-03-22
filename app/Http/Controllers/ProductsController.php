@@ -55,7 +55,6 @@ class ProductsController extends Controller
         $product->update($request->all());
 
         if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
-            $product->clearMediaCollection('avatar');
             $product->addMediaFromRequest('avatar')->toMediaCollection('avatar');
         }
 

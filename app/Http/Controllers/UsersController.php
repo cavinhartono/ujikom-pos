@@ -45,7 +45,6 @@ class UsersController extends Controller
         $user->update([$data]);
 
         if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
-            $user->clearMediaCollection('avatar');
             $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
         }
 
