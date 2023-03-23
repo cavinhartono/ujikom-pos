@@ -19,17 +19,15 @@ class UsersController extends Controller
 
     public function index()
     {
-        $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
         $auth = User::with('roles')->whereNot('id', '=', Auth::user()->id)->get();
-        return view('users.index', compact(['users', 'auth']));
+        return view('users.index', compact(['auth']));
     }
 
     public function edit($id)
     {
-        $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->get();
         $user = User::find($id);
         $roles = Role::all();
-        return view('users.edit', compact(['user', 'users', 'roles']));
+        return view('users.edit', compact(['user', 'roles']));
     }
 
     public function update(Request $request, $id)
@@ -69,8 +67,7 @@ class UsersController extends Controller
 
     public function create()
     {
-        $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->get();
-        return view('users.create', compact(['users']));
+        return view('users.create');
     }
 
     public function store(Request $request)

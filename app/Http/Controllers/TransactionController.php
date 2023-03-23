@@ -17,19 +17,17 @@ class TransactionController extends Controller
 
     public function index()
     {
-        $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
         $orders = Order::with('order_item', 'customer')->orderBy('created_at', 'DESC')->get();
 
         if (Auth::user()->roles->first()->name == 'admin') {
-            return view('orders.index', compact(['users', 'orders']));
+            return view('orders.index', compact(['orders']));
         }
         return view('cashier.transaction', compact(['orders']));
     }
 
     public function view($id)
     {
-        $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
         $orderItem = Order::with('order_item', 'customer')->find($id);
-        return view('orders.view', compact(['orderItem', 'users']));
+        return view('orders.view', compact(['orderItem']));
     }
 }

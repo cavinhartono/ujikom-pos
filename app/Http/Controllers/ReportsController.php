@@ -19,7 +19,6 @@ class ReportsController extends Controller
 
     public function index()
     {
-        $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
         $orders = Order::with('order_item', 'customer')->orderBy('created_at', 'DESC')->paginate(5);
         // $totalRevenue = Order::where('created_at', Carbon::now()->subMonth($n))->sum('price')->union();
         // $totalRevenue = OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -1 DAY)'))
@@ -57,7 +56,7 @@ class ReportsController extends Controller
             ->paginate(3);
         $monthNow = Order::whereMonth('created_at', '=', Carbon::now())->sum('price');
         $beforeMonth = Order::whereMonth('created_at', '=', Carbon::now()->startOfMonth()->subMonth(1))->sum('price');
-        return view('reports.index', compact(['users', 'orders', 'monthNow', 'beforeMonth', 'topSellings', 'totalRevenue']));
+        return view('reports.index', compact(['orders', 'monthNow', 'beforeMonth', 'topSellings', 'totalRevenue']));
     }
 
     public function document()

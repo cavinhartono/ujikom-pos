@@ -16,7 +16,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
         $orders = Order::all();
         $revenue = OrderItem::where('created_at', '>', DB::raw('DATE_ADD(CURDATE(), INTERVAL -1 YEAR)'))
             ->select([DB::raw('"Tahun lalu" as date'), DB::raw('sum(price) as total')])
@@ -36,7 +35,7 @@ class DashboardController extends Controller
         $customerLast = Customer::orderBy('created_at', 'DESC')->paginate(5);
 
         if (Auth::user()->roles->first()->name == 'admin') {
-            return view('dashboard.index', compact(['users', 'customers', 'customerLast', 'orders', 'revenue', 'categories']));
+            return view('dashboard.index', compact(['customers', 'customerLast', 'orders', 'revenue', 'categories']));
         } else if (Auth::user()->roles->first()->name == 'user') return view('dashboard.guest');
     }
 }

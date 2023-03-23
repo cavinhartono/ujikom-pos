@@ -49,4 +49,9 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->belongsTo(Cart::class);
     }
+
+    public function notification()
+    {
+        return $this->hasMany(Notification::class);
+    }
 }

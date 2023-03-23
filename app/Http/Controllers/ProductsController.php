@@ -19,25 +19,22 @@ class ProductsController extends Controller
 
     public function index()
     {
-        $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
         $products = Product::with('categories')->get();
         $categories = Categories::orderBy('created_at', 'DESC')->get();
-        return view('products.index', compact(['users', 'products', 'categories']));
+        return view('products.index', compact(['products', 'categories']));
     }
 
     public function create()
     {
-        $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
         $categories = Categories::all();
-        return view('products.create', compact(['categories', 'users']));
+        return view('products.create', compact(['categories']));
     }
 
     public function edit($id)
     {
-        $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
         $categories = Categories::all();
         $product = Product::with('categories')->find($id);
-        return view('products.edit', compact(['categories', 'product', 'users']));
+        return view('products.edit', compact(['categories', 'product']));
     }
 
     public function store(Request $request)

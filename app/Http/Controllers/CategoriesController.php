@@ -12,8 +12,7 @@ class CategoriesController extends Controller
 {
     public function create()
     {
-        $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
-        return view('categories.create', compact(['users']));
+        return view('categories.create');
     }
 
     public function store(Request $request)
@@ -31,8 +30,7 @@ class CategoriesController extends Controller
     public function edit($id)
     {
         $category = Categories::find($id);
-        $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
-        return view('categories.edit', compact(['category', 'users']));
+        return view('categories.edit', compact(['category']));
     }
 
     public function update(Request $request, $id)

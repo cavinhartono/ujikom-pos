@@ -23,9 +23,8 @@ class AuthController extends Controller
     public function settings()
     {
         $user = User::with('roles')->findOrFail(Auth::user()->id);
-        $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
         if (Auth::user()->roles->first()->name == 'admin') {
-            return view('auth.settings', compact(['user', 'users']));
+            return view('auth.settings', compact(['user']));
         }
         return view('cashier.settings', compact(['user']));
     }
