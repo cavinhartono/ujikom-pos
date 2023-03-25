@@ -4,6 +4,17 @@ body {
     background: var(--white-third);
 }
 
+.notifications {
+    transition: 0.3s;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.notifications.active {
+    visibility: visible;
+    opacity: 1;
+}
+
 .qty {
     position: absolute;
     top: 0;
