@@ -334,3 +334,15 @@ td {
         transform: translateX(100%);
     }
 }
+
+.notifications,
+.profile {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.notifications.active,
+.profile.active {
+    visibility: visible;
+    opacity: 1;
+}

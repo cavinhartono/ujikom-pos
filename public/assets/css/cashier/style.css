@@ -34,8 +34,6 @@ body {
     border-radius: 8px;
     padding: var(--md);
     transition: 0.3s;
-    visibility: hidden;
-    opacity: 0;
 }
 
 .nav .list,
@@ -49,11 +47,6 @@ body {
 
 .list.active .link {
     color: var(--primary-color);
-}
-
-.profile.active {
-    visibility: visible;
-    opacity: 1;
 }
 
 .nav .photo {
