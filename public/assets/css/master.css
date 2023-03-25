@@ -335,8 +335,23 @@ td {
     }
 }
 
+.notifications {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 200px;
+    transform: translate(-24px, 80px);
+    overflow: scroll;
+}
+
 .notifications,
 .profile {
+    padding: var(--md);
+    background: var(--white-primary);
+    box-shadow: var(--boxShadow-primary);
+    border-radius: 8px;
+    transition: 0.3s;
     visibility: hidden;
     opacity: 0;
 }

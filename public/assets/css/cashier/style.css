@@ -29,11 +29,6 @@ body {
     top: 0;
     left: 0;
     transform: translate(124px, 50px);
-    background: var(--white-primary);
-    box-shadow: var(--boxShadow-primary);
-    border-radius: 8px;
-    padding: var(--md);
-    transition: 0.3s;
 }
 
 .nav .list,
