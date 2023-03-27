@@ -9,7 +9,7 @@
     <title>Dokumen Harian</title>
 </head>
 
-<body>
+<body onload="window.print()">
     <section class="container">
         <header class="header between center">
             <div class="label">

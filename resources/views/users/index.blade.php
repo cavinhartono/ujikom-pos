@@ -20,7 +20,14 @@ Pengguna | Shopcube
 </div>
 <div class="users" style="margin: var(--md) 0">
   <div class="label full-content between" style="align-items: center;">
-    <a href="/users/create" class="link btn primary">Tambah</a>
+    <a href="/users/create" class="link btn primary">
+      <span class="icon center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="auto" height="auto" fill="currentColor" viewBox="0 0 512 512">
+          <line x1="256" y1="112" x2="256" y2="400" style="fill:none;stroke:#fff;stroke-linecap:square;stroke-linejoin:round;stroke-width:32px" />
+          <line x1="400" y1="256" x2="112" y2="256" style="fill:none;stroke:#fff;stroke-linecap:square;stroke-linejoin:round;stroke-width:32px" />
+        </svg>
+      </span>
+    </a>
     <div class="field" style="width: 300px;">
       <div class="input">
         <input type="text" id="search" class="input-form" placeholder="Pencarian">

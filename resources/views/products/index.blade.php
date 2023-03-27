@@ -15,7 +15,15 @@ Produk | Shopcube
 <div class="products">
   <div class="label full-content between" style="align-items: center;">
     <div class="label flex gap">
-      <a href="/products/create" class="btn primary link">Tambah</a>
+      <a href="/products/create" class="link btn primary">
+        <span class="icon center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="auto" height="auto" fill="currentColor" viewBox="0 0 512 512">
+            <title>Tambah</title>
+            <line x1="256" y1="112" x2="256" y2="400" style="fill:none;stroke:#fff;stroke-linecap:square;stroke-linejoin:round;stroke-width:32px" />
+            <line x1="400" y1="256" x2="112" y2="256" style="fill:none;stroke:#fff;stroke-linecap:square;stroke-linejoin:round;stroke-width:32px" />
+          </svg>
+        </span>
+      </a>
       <a href="/products/print" class="btn secondary link">Cetak</a>
     </div>
     <div class="field" style="width: 300px;">
@@ -136,7 +144,7 @@ Produk | Shopcube
         </h2>
         <div class="action">
           <a href="/categories/delete/{{ $category->id }}" class="link">
-            <span class="icon">
+            <span class="icon center">
               <svg xmlns="http://www.w3.org/2000/svg" width="auto" fill="currentColor" height="auto" viewBox="0 0 512 512">
                 <title>Delete</title>
                 <polygon points="337.46 240 312 214.54 256 270.54 200 214.54 174.54 240 230.54 296 174.54 352 200 377.46 256 321.46 312 377.46 337.46 352 281.46 296 337.46 240" style="fill: none" />

@@ -14,7 +14,7 @@ Laporan | Shopcube
     <h2 class="title">Laporan</h2>
     <h2 class="subtitle">{{ App\Models\Order::count() }}</h2>
   </div>
-  <div class="action"><a href="/document" target="_blank" class="link btn primary">Print</a></div>
+  <div class="action"><a href="/document" target="_blank" class="link btn primary">Dokumen</a></div>
 </div>
 <div class="full-content gap">
   <ul class="card">
