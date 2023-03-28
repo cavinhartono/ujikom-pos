@@ -56,6 +56,13 @@
         margin: var(--lg);
     }
 
+    .revenue .list {
+        display: flex;
+        justify-content: space-between;
+        background: none;
+        padding: 0;
+    }
+
     .btn.primary {
         display: none;
     }
