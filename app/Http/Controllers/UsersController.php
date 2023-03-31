@@ -59,20 +59,22 @@ class UsersController extends Controller
             'type' => 'success',
             'user_id' => Auth::user()->id,
             'title' => "Mengubah Pengguna",
-            'content' => `$request->name sudah dirubah.`,
+            'content' => "$request->name sudah dirubah.",
         ]);
 
-        return redirect('/users')->with('success', `$request->name telah diedit!`);
+        return redirect('/users')->with('success', "$request->name telah diedit!");
     }
 
     public function create()
     {
-        return view('users.create');
+        $roles = Role::all();
+        return view('users.create', compact(['roles']));
     }
 
     public function store(Request $request)
     {
         $user = User::create($request->all());
+        $user->syncRoles($request->role);
 
         if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
             $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
@@ -82,10 +84,10 @@ class UsersController extends Controller
             'type' => 'success',
             'user_id' => Auth::user()->id,
             'title' => "Menambah Pengguna",
-            'content' => `$request->name sudah ditambah.`,
+            'content' => "$request->name sudah ditambah",
         ]);
 
-        return redirect('/users')->with('success', `$request->name telah ditambahkan!`);
+        return redirect('/users')->with('success', "$request->name telah ditambahkan!");
     }
 
     public function delete($id)
@@ -95,10 +97,10 @@ class UsersController extends Controller
             'type' => 'success',
             'user_id' => Auth::user()->id,
             'title' => "Menghapus Pengguna",
-            'content' => `$user->name sudah dihapus.`,
+            'content' => "$user->name sudah dihapus.",
         ]);
         $user->delete();
-        return redirect('/users')->with('success', `$user->name telah dihapus!`);
+        return redirect('/users')->with('success', "$user->name telah dihapus!");
     }
 
     public function search(Request $request)

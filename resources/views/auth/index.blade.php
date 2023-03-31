@@ -10,13 +10,19 @@
 </head>
 
 <body>
-  @if(Session::get('failed'))
-  <div class="alert danger between">
-    <span class="icon"></span>
-    <h2 class="subtitle">{{ Session::get('failed') }}</h2>
-  </div>
-  @endif
   <section class="login">
+    @if(Session::get('failed'))
+    <div class="alert danger between">
+      <span class="icon">
+        <span class="icon kotak">
+          <svg xmlns="http://www.w3.org/2000/svg" width="auto" height="auto" fill="currentColor" viewBox="0 0 512 512">
+            <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
+          </svg>
+        </span>
+      </span>
+      <h2 class="subtitle">{{ Session::get('failed') }}</h2>
+    </div>
+    @endif
     <div class="blurBx">
       <div class="box SignIn">
         <h1>Sudah punya akun?</h1>

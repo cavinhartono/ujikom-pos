@@ -36,6 +36,12 @@ body {
     height: 24px;
 }
 
+.kotak {
+    background: inherit;
+    display: inline-block;
+    border-radius: 4px;
+}
+
 .navbar-side.active {
     background: var(--white-primary);
 }

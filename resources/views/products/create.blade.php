@@ -1,5 +1,9 @@
 @extends('layouts.master')
 
+@push('title')
+Buat Produk | Shopcube
+@endpush
+
 @section('overview')
 <div class="products">
   <div class="full-content">

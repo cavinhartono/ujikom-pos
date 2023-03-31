@@ -35,6 +35,7 @@ Route::middleware('IsLogin')->group(function () {
     Route::controller(KasirController::class)->group(function () {
         Route::get('/', 'index')->middleware('can:kasir-mode');
         Route::post('/transaction/store', 'store');
+        Route::put('/auth/settings/update', 'updateSettings')->middleware('IsLogin');
         Route::get('/struck/{id}', 'print_struck')->name('struck');
     });
 
@@ -52,6 +53,7 @@ Route::middleware('IsLogin')->group(function () {
     });
 
     Route::controller(CategoriesController::class)->middleware('can:produk')->group(function () {
+        Route::post('/products/category/search', 'search');
         Route::get('/categories/create', 'create');
         Route::post('/categories/store', 'store');
         Route::get('/categories/edit/{id}', 'edit');
@@ -80,5 +82,6 @@ Route::middleware('IsLogin')->group(function () {
     Route::controller(TransactionController::class)->middleware('can:transaksi')->group(function () {
         Route::get('/transactions', 'index');
         Route::get('/transaction/{id}/view', 'view');
+        Route::post('/transactions/search', 'search');
     });
 });

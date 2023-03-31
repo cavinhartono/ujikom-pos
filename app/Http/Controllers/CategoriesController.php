@@ -22,7 +22,7 @@ class CategoriesController extends Controller
             'type' => 'success',
             'user_id' => Auth::user()->id,
             'title' => "Membuat Kategori",
-            'content' => `$request->name sudah dibuat`,
+            'content' => "$request->name sudah dibuat",
         ]);
         return redirect('/products')->with('success', `$request->name telah ditambahkan`);
     }
@@ -41,10 +41,10 @@ class CategoriesController extends Controller
             'type' => 'success',
             'user_id' => Auth::user()->id,
             'title' => "Mengubah Kategori",
-            'content' => `$request->name sudah dirubah`,
+            'content' => "$request->name sudah dirubah",
         ]);
 
-        return redirect('/products')->with('success', `$request->name telah diedit`);
+        return redirect('/products')->with('success', "$request->name telah diedit");
     }
 
     public function delete($id)
@@ -54,9 +54,17 @@ class CategoriesController extends Controller
             'type' => 'success',
             'user_id' => Auth::user()->id,
             'title' => "Menghapus Kategori",
-            'content' => `$category->name sudah dihapus`,
+            'content' => "$category->name sudah dihapus",
         ]);
         $category->delete();
         return redirect('/products')->with('primary', 'Sudah dihapus!');
+    }
+
+    public function search(Request $request)
+    {
+        $category = Categories::where('name', 'LIKE', '%' . $request->search . '%')
+            ->get();
+
+        return json_encode($category);
     }
 }

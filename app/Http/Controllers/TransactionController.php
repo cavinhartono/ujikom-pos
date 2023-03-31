@@ -30,4 +30,18 @@ class TransactionController extends Controller
         $orderItem = Order::with('order_item', 'customer')->find($id);
         return view('orders.view', compact(['orderItem']));
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $order = Order::with('customer', 'order_item')
+            ->whereHas('customer', function ($query) use ($search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+            })->orWhereHas('order_item', function ($query) use ($search) {
+                $query->where('price', 'LIKE', '%' . $search . '%');
+                $query->where('accept', 'LIKE', '%' . $search . '%');
+            })->get();
+
+        return json_encode($order);
+    }
 }

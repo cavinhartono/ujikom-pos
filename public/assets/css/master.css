@@ -278,6 +278,10 @@ td {
     color: var(--white-primary);
 }
 
+.success.kotak {
+    background: hsl(171, 93%, 88%);
+}
+
 .alert.danger {
     background: hsl(344, 99%, 62%);
 }
@@ -360,4 +364,8 @@ td {
 .profile.active {
     visibility: visible;
     opacity: 1;
+}
+
+.notification {
+    padding: var(--md) var(--lg);
 }

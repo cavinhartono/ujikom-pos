@@ -7,9 +7,12 @@ use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class KasirController extends Controller
 {
@@ -24,6 +27,23 @@ class KasirController extends Controller
 
         if (Auth::user()->roles->first()->name == 'user') return "Maaf tidak dapat diakses";
         return view('cashier.dashboard', compact(['products']));
+    }
+
+    public function updateSettings(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+
+        $user->update([
+            'name' => $request->name,
+            'password' => Hash::make($request->password),
+            'updated_at' => Carbon::now()
+        ]);
+
+        if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
+            $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
+        }
+
+        return redirect('/')->with('success', "$request->name telah dirubah");
     }
 
     public function store(Request $request)

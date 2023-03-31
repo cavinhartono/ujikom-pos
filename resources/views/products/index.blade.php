@@ -12,7 +12,52 @@ Produk | Shopcube
 <div class="label" style="margin-bottom: var(--md);">
   <h2 class="title">Produk</h2>
 </div>
-<div class="products">
+<div class="categories">
+  <div class="label full-content between" style="align-items: center;">
+    <div class="label flex gap">
+      <a href="/categories/create" class="btn primary link">
+        <span class="icon center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="auto" height="auto" fill="currentColor" viewBox="0 0 512 512">
+            <line x1="256" y1="112" x2="256" y2="400" style="fill:none;stroke:#fff;stroke-linecap:square;stroke-linejoin:round;stroke-width:32px" />
+            <line x1="400" y1="256" x2="112" y2="256" style="fill:none;stroke:#fff;stroke-linecap:square;stroke-linejoin:round;stroke-width:32px" />
+          </svg>
+        </span>
+      </a>
+    </div>
+    <div class="field" style="width: 300px;">
+      <div class="input">
+        <input type="text" class="input-form" id="search_category" placeholder="Pencarian">
+      </div>
+    </div>
+  </div>
+  <ul class="category flex gap" style="position: relative; margin: var(--md) 0">
+    @forelse($categories as $category)
+    <li class="list between gap" style="position: relative;">
+      <a href="/categories/edit/{{ $category->id }}" class="link">
+        <h2 class="subtitle">
+          {{ $category->name }}
+        </h2>
+        <div class="action">
+          <a href="/categories/delete/{{ $category->id }}" class="link">
+            <span class="icon center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="auto" fill="currentColor" height="auto" viewBox="0 0 512 512">
+                <title>Delete</title>
+                <polygon points="337.46 240 312 214.54 256 270.54 200 214.54 174.54 240 230.54 296 174.54 352 200 377.46 256 321.46 312 377.46 337.46 352 281.46 296 337.46 240" style="fill: none" />
+                <polygon points="337.46 240 312 214.54 256 270.54 200 214.54 174.54 240 230.54 296 174.54 352 200 377.46 256 321.46 312 377.46 337.46 352 281.46 296 337.46 240" style="fill: none" />
+                <path d="M64,160,93.74,442.51A24,24,0,0,0,117.61,464H394.39a24,24,0,0,0,23.87-21.49L448,160ZM312,377.46l-56-56-56,56L174.54,352l56-56-56-56L200,214.54l56,56,56-56L337.46,240l-56,56,56,56Z" />
+                <rect x="32" y="48" width="448" height="80" rx="12" ry="12" />
+              </svg>
+            </span>
+          </a>
+        </div>
+      </a>
+    </li>
+    @empty
+    <li class="list">Tidak ada</li>
+    @endforelse
+  </ul>
+</div>
+<div class="products" style="position: relative; margin-top: var(--md)">
   <div class="label full-content between" style="align-items: center;">
     <div class="label flex gap">
       <a href="/products/create" class="link btn primary">
@@ -28,7 +73,7 @@ Produk | Shopcube
     </div>
     <div class="field" style="width: 300px;">
       <div class="input">
-        <input type="text" class="input-form" id="search" placeholder="Pencarian">
+        <input type="text" class="input-form" id="search_product" placeholder="Pencarian">
       </div>
     </div>
   </div>
@@ -124,58 +169,13 @@ Produk | Shopcube
     </tbody>
   </table>
 </div>
-<div class="categories" style="position: relative; margin-top: var(--md)">
-  <div class="label full-content between" style="align-items: center;">
-    <div class="label flex gap">
-      <a href="/categories/create" class="btn primary link">
-        <span class="icon center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="auto" height="auto" fill="currentColor" viewBox="0 0 512 512">
-            <line x1="256" y1="112" x2="256" y2="400" style="fill:none;stroke:#fff;stroke-linecap:square;stroke-linejoin:round;stroke-width:32px" />
-            <line x1="400" y1="256" x2="112" y2="256" style="fill:none;stroke:#fff;stroke-linecap:square;stroke-linejoin:round;stroke-width:32px" />
-          </svg>
-        </span>
-      </a>
-    </div>
-    <div class="field" style="width: 300px;">
-      <div class="input">
-        <input type="text" class="input-form" id="search" placeholder="Pencarian">
-      </div>
-    </div>
-  </div>
-  <ul class="category flex gap" style="position: relative; margin: var(--md) 0">
-    @forelse($categories as $category)
-    <li class="list between gap" style="position: relative;">
-      <a href="/categories/edit/{{ $category->id }}" class="link">
-        <h2 class="subtitle">
-          {{ $category->name }}
-        </h2>
-        <div class="action">
-          <a href="/categories/delete/{{ $category->id }}" class="link">
-            <span class="icon center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="auto" fill="currentColor" height="auto" viewBox="0 0 512 512">
-                <title>Delete</title>
-                <polygon points="337.46 240 312 214.54 256 270.54 200 214.54 174.54 240 230.54 296 174.54 352 200 377.46 256 321.46 312 377.46 337.46 352 281.46 296 337.46 240" style="fill: none" />
-                <polygon points="337.46 240 312 214.54 256 270.54 200 214.54 174.54 240 230.54 296 174.54 352 200 377.46 256 321.46 312 377.46 337.46 352 281.46 296 337.46 240" style="fill: none" />
-                <path d="M64,160,93.74,442.51A24,24,0,0,0,117.61,464H394.39a24,24,0,0,0,23.87-21.49L448,160ZM312,377.46l-56-56-56,56L174.54,352l56-56-56-56L200,214.54l56,56,56-56L337.46,240l-56,56,56,56Z" />
-                <rect x="32" y="48" width="448" height="80" rx="12" ry="12" />
-              </svg>
-            </span>
-          </a>
-        </div>
-      </a>
-    </li>
-    @empty
-    <li class="list">Tidak ada</li>
-    @endforelse
-  </ul>
-</div>
 @endsection
 
 @push('js')
 <script src="{{ asset('assets/js/plugins/jquery.js') }}"></script>
 <script>
   $(document).ready(function() {
-    $(document).on('keyup', '#search', function() {
+    $(document).on('keyup', '#search_product', function() {
       const search = $(this).val();
 
       $.ajaxSetup({
@@ -212,7 +212,7 @@ Produk | Shopcube
                   ${product.price}
                 </td>
                 <td style="text-align: center;">
-                  <a href="#" class="link btn primary">
+                  <a href="/products/edit/${product.id}" class="link btn primary">
                     <span class="icon">
                       <svg xmlns="http://www.w3.org/2000/svg" width="auto" fill="currentColor" height="auto" viewBox="0 0 512 512">
                         <title>Edit</title>
@@ -223,7 +223,7 @@ Produk | Shopcube
                       </svg>
                     </span>
                   </a>
-                  <a href="#" class="link btn danger">
+                  <a href="/products/delete/${product.id}" class="link btn danger">
                     <span class="icon">
                       <svg xmlns="http://www.w3.org/2000/svg" width="auto" fill="currentColor" height="auto" viewBox="0 0 512 512">
                         <title>Delete</title>
@@ -236,6 +236,52 @@ Produk | Shopcube
                   </a>
                 </td>
               </tr>
+            `)
+          });
+        }
+      })
+    })
+
+    $(document).on('keyup', '#search_category', function() {
+      const search = $(this).val();
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
+      $.ajax({
+        type: 'post',
+        url: `/products/category/search`,
+        data: {
+          search
+        },
+        dataType: 'json',
+        success: function(response) {
+          $('.category').html("");
+          $.each(response, function(key, category) {
+            $('.category').append(`
+              <li class="list between gap" style="position: relative;">
+                <a href="/categories/edit/${category.id}" class="link">
+                  <h2 class="subtitle">
+                    ${category.name}
+                  </h2>
+                  <div class="action">
+                    <a href="/categories/delete/${category.id}" class="link">
+                      <span class="icon center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="auto" fill="currentColor" height="auto" viewBox="0 0 512 512">
+                          <title>Delete</title>
+                          <polygon points="337.46 240 312 214.54 256 270.54 200 214.54 174.54 240 230.54 296 174.54 352 200 377.46 256 321.46 312 377.46 337.46 352 281.46 296 337.46 240" style="fill: none" />
+                          <polygon points="337.46 240 312 214.54 256 270.54 200 214.54 174.54 240 230.54 296 174.54 352 200 377.46 256 321.46 312 377.46 337.46 352 281.46 296 337.46 240" style="fill: none" />
+                          <path d="M64,160,93.74,442.51A24,24,0,0,0,117.61,464H394.39a24,24,0,0,0,23.87-21.49L448,160ZM312,377.46l-56-56-56,56L174.54,352l56-56-56-56L200,214.54l56,56,56-56L337.46,240l-56,56,56,56Z" />
+                          <rect x="32" y="48" width="448" height="80" rx="12" ry="12" />
+                        </svg>
+                      </span>
+                    </a>
+                  </div>
+                </a>
+              </li>
             `)
           });
         }

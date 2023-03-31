@@ -46,11 +46,10 @@ class AuthController extends Controller
         ]);
 
         if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
-            $now = Carbon::now();
-            $user->addMediaFromRequest('avatar')->usingFileName(`profile-$now.jpg`)->toMediaCollection('avatar');
+            $user->addMediaFromRequest('avatar')->toMediaCollection('avatar');
         }
 
-        return redirect('/dashboard')->with('success', `$request->name telah dirubah.`);
+        return redirect('/dashboard')->with('success', "$request->name telah dirubah.");
     }
 
     public function login(Request $request)
@@ -78,7 +77,7 @@ class AuthController extends Controller
             }
             return redirect('/')->with('success', "Selamat kembali, $name.");
         } else {
-            return redirect('/auth')->with('failed', 'Email dan Password harus disesuaikan');
+            return redirect('/auth')->with('failed', "Email dan Password harus disesuaikan");
         }
     }
 

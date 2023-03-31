@@ -1,29 +1,25 @@
 @extends('layouts.master')
 
 @push('title')
-Edit User | {{ $user->name }}
+Buat Pengguna | Shopcube
 @endpush
 
 @section('overview')
 <div class="full-content">
   <div class="label" style="margin-bottom: var(--md);">
-    <h2 class="title">{{ $user->name }}</h2>
-    <h2 class="subtitle">Mengedit seorang pengguna</h2>
+    <h2 class="title">Pengguna</h2>
+    <h2 class="subtitle">Membuat akun pengguna</h2>
   </div>
-  <form action="/users/{{ $user->id }}/update" method="POST" class="form full-content" enctype="multipart/form-data">
+  <form action="/users/store" method="POST" class="form full-content" enctype="multipart/form-data">
     @csrf
-    @method('PUT')
-    <div class="img">
-      <img src="{{ $user->getFirstMediaUrl('avatar', 'thumb') }}" class="photo" />
-    </div>
     <div class="field flex gap">
       <div class="input">
         <label for="name">Nama</label>
-        <input class="input-form" type="text" name="name" id="name" placeholder="John Doe" value="{{ $user->name }}" />
+        <input class="input-form" type="text" name="name" id="name" placeholder="John Doe" />
       </div>
       <div class="input">
         <label for="email">Email</label>
-        <input class="input-form" type="email" name="email" id="email" placeholder="johndoe@example.com" value="{{ $user->email }}" />
+        <input class="input-form" type="email" name="email" id="email" placeholder="johndoe@example.com" />
       </div>
     </div>
     <div class="field flex gap">

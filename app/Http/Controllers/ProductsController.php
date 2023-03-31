@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categories;
+use App\Models\Notification;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
@@ -43,7 +45,15 @@ class ProductsController extends Controller
         if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
             $product->addMediaFromRequest('avatar')->toMediaCollection('avatar');
         }
-        return redirect('/products')->with('success', `$request->name telah ditambahkan`);
+
+        Notification::create([
+            'type' => 'success',
+            'user_id' => Auth::user()->id,
+            'title' => "Membuat Produk",
+            'content' => "$product->name sudah ditambah.",
+        ]);
+
+        return redirect('/products')->with('success', "$request->name telah ditambahkan");
     }
 
     public function update(Request $request, $id)
@@ -55,14 +65,27 @@ class ProductsController extends Controller
             $product->addMediaFromRequest('avatar')->toMediaCollection('avatar');
         }
 
-        return redirect('/products')->with('success', `$request->name telah diedit`);
+        Notification::create([
+            'type' => 'success',
+            'user_id' => Auth::user()->id,
+            'title' => "Mengubah Produk",
+            'content' => "$product->name sudah dirubah.",
+        ]);
+
+        return redirect('/products')->with('success', "$request->name telah diedit");
     }
 
     public function delete(Request $request, $id)
     {
         $product = Product::find($id);
+        Notification::create([
+            'type' => 'success',
+            'user_id' => Auth::user()->id,
+            'title' => "Menghapus Pengguna",
+            'content' => "$product->name sudah dihapus.",
+        ]);
         $product->delete();
-        return redirect('/products')->with('success', `$request->name telah dihapus`);
+        return redirect('/products')->with('success', "$request->name telah dihapus");
     }
 
     public function search(Request $request)

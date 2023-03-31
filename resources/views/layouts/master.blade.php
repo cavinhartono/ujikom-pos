@@ -18,7 +18,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 $users = User::with('roles')->whereNotNull('last_seen')->orderBy('last_seen', "DESC")->paginate(5);
-$notifications = Notification::with('users')->where('user_id', '=', Auth::user()->id)->get();
+$notifications = Notification::with('user')->where('user_id', '=', Auth::user()->id)->orderBy('created_at', "DESC")->get();
 
 ?>
 
@@ -172,7 +172,7 @@ $notifications = Notification::with('users')->where('user_id', '=', Auth::user()
 
         @if(Session::get('primary'))
         <div class="alert primary between">
-          <span class="icon">
+          <span class="icon kotak">
             <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
               <path d="M48,48V464H464V48ZM218,360.38,137.4,270.81l23.79-21.41,56,62.22L350,153.46,374.54,174Z" />
             </svg>
@@ -195,7 +195,11 @@ $notifications = Notification::with('users')->where('user_id', '=', Auth::user()
 
         @if(Session::get('failed'))
         <div class="alert flex between">
-          <span class="icon"></span>
+          <span class="icon kotak">
+            <svg xmlns="http://www.w3.org/2000/svg" width="auto" height="auto" fill="currentColor" viewBox="0 0 512 512">
+              <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
+            </svg>
+          </span>
           <h2 class="subtitle">{{ Session::get('failed') }}</h2>
         </div>
         @endif
@@ -225,11 +229,28 @@ $notifications = Notification::with('users')->where('user_id', '=', Auth::user()
             </span>
             <ul class="notifications">
               @forelse($notifications as $notification)
-              <li class="list">
-                <div class="notification">
-                  <span class="icon {{ $notification->type }} ">
+              <li class="list notification" style="margin: (--md); padding: (--md) (--lg) !important">
+                <div class="" style="gap: var(--md)">
+                  <span class="icon {{ $notification->type }} kotak">
+                    @if($notification->type == 'success')
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
+                      <polyline points="416 128 192 384 96 288" style="fill:none;stroke:hsl(171, 93%, 32%);stroke-linecap:square;stroke-miterlimit:10;stroke-width:44px" />
+                    </svg>
+                    @endif
+                    @if($notification->icon == 'failed')
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
+                      <polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49" />
+                    </svg>
+                    @endif
+                    @if($notification->icon == 'wait')
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
+                      <polyline points="196 220 260 220 260 392" style="fill:none;stroke:#000;stroke-linecap:square;stroke-miterlimit:10;stroke-width:40px" />
+                      <line x1="187" y1="396" x2="325" y2="396" style="fill:none;stroke:#000;stroke-linecap:square;stroke-miterlimit:10;stroke-width:40px" />
+                      <path d="M256,160a32,32,0,1,1,32-32A32,32,0,0,1,256,160Z" />
+                    </svg>
+                    @endif
                   </span>
-                  <div class="content">
+                  <div class="content_notification">
                     <h2 class="subtitle"> {{ $notification->title }} </h2>
                     <p class="subtitle"> {{ $notification->content }} </p>
                   </div>
@@ -239,9 +260,8 @@ $notifications = Notification::with('users')->where('user_id', '=', Auth::user()
               <li class="list">
                 <div class="notification">
                   <span class="icon info">
-
                   </span>
-                  <div class="content">
+                  <div class="notification">
                     <h2 class="subtitle">Tidak ada informasi</h2>
                     <h2 class="subtitle">-</h2>
                   </div>
