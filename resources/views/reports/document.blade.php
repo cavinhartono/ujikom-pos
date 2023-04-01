@@ -87,43 +87,17 @@
                         </tbody>
                     </table>
                     <ul class="revenue flex gap">
-                        <li class="list success">
-                            <span class="icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
-                                    <rect x="48" y="368" width="416" height="32" />
-                                    <rect x="80" y="416" width="352" height="32" />
-                                    <path d="M480,176a96.11,96.11,0,0,1-96-96V64H128V80a96.11,96.11,0,0,1-96,96H16v64H32a96.11,96.11,0,0,1,96,96v16H384V336a96.11,96.11,0,0,1,96-96h16V176ZM256,304a96,96,0,1,1,96-96A96.11,96.11,0,0,1,256,304Z" />
-                                    <path d="M96,80V64H16v80H32A64.07,64.07,0,0,0,96,80Z" />
-                                    <path d="M32,272H16v80H96V336A64.07,64.07,0,0,0,32,272Z" />
-                                    <path d="M480,144h16V64H416V80A64.07,64.07,0,0,0,480,144Z" />
-                                    <path d="M416,336v16h80V272H480A64.07,64.07,0,0,0,416,336Z" />
-                                    <circle cx="256" cy="208" r="64" />
-                                </svg>
-                            </span>
+                        <li class="list">
                             <div class="label">
                                 <h2 class="title"> IDR. <?php echo number_format($monthNow, '0', ",", "."); ?> </h2>
                                 <h2 class="subtitle">Total Penghasilan</h2>
                             </div>
                         </li>
-                        <li class="list {{ $monthNow <= $beforeMonth ? 'danger' : 'success' }}">
-                            @if ($monthNow <= $beforeMonth) <span class="icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
-                                    <polyline points="352 368 464 368 464 256" style="fill:none;stroke:#000;stroke-linecap:square;stroke-miterlimit:10;stroke-width:32px" />
-                                    <polyline points="48 144 192 288 288 192 448 352" style="fill:none;stroke:#000;stroke-linecap:square;stroke-miterlimit:10;stroke-width:32px" />
-                                </svg>
-                                </span>
-                                @else
-                                <span class="icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
-                                        <polyline points="352 144 464 144 464 256" style="fill:none;stroke:#000;stroke-linecap:square;stroke-miterlimit:10;stroke-width:32px" />
-                                        <polyline points="48 368 192 224 288 320 448 160" style="fill:none;stroke:#000;stroke-linecap:square;stroke-miterlimit:10;stroke-width:32px" />
-                                    </svg>
-                                </span>
-                                @endif
-                                <div class="label">
-                                    <h2 class="title"> {{ $monthNow <= $beforeMonth ? "-" . number_format((($monthNow / $beforeMonth) * 100), 1) : number_format((($beforeMonth / $monthNow) * 100), 1) }}% </h2>
-                                    <h2 class="subtitle"> Persentase </h2>
-                                </div>
+                        <li class="list">
+                            <div class="label">
+                                <h2 class="title"> {{ $monthNow <= $beforeMonth ? "-" . number_format((($monthNow / $beforeMonth) * 100), 1) : number_format((($beforeMonth / $monthNow) * 100), 1) }}% </h2>
+                                <h2 class="subtitle"> Persentase </h2>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -146,7 +120,6 @@
 
             ?>
         </div>
-        <footer class="footer">&COPY; Shopcube | 2023</footer>
     </section>
     <script src="{{ asset('assets/js/plugins/apexchart.min.js') }}"></script>
     <script>

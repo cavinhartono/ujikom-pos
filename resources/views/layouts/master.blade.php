@@ -230,7 +230,7 @@ $notifications = Notification::with('user')->where('user_id', '=', Auth::user()-
             <ul class="notifications">
               @forelse($notifications as $notification)
               <li class="list notification" style="margin: (--md); padding: (--md) (--lg) !important">
-                <div class="" style="gap: var(--md)">
+                <div class="flex" style="align-items: center; gap: var(--md)">
                   <span class="icon {{ $notification->type }} kotak">
                     @if($notification->type == 'success')
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="auto" height="auto" viewBox="0 0 512 512">
@@ -251,8 +251,8 @@ $notifications = Notification::with('user')->where('user_id', '=', Auth::user()-
                     @endif
                   </span>
                   <div class="content_notification">
-                    <h2 class="subtitle"> {{ $notification->title }} </h2>
-                    <p class="subtitle"> {{ $notification->content }} </p>
+                    <h2 class="subtitle" style="font-weight: 700"> {{ $notification->title }} </h2>
+                    <p class="subtitle" style="font-size: var(--sm);"> {{ $notification->content }} </p>
                   </div>
                 </div>
               </li>
